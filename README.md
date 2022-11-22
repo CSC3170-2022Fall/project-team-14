@@ -20,7 +20,7 @@ Our team consists of the following members, listed in the table below (the team 
 | ---------- | ------------ | ------------------------- |
 | 118010246  | 秦兰 🚩      | 118010246@link.cuhk.edu.cn|       
 | 120090564  | 魏诗云       | 120090564@link.cuhk.edu.cn|
-| 123030245  | 王五         | wuwang@foxmail.com        |
+| 119010445  | 张新宇       | 119010445@link.cuhk.edu.cn|
 | 123020245  | 陈六         | liuchen@qq.com            |
 | 123010249  | 朱九         | jiuzhu@163.com            |
 
