@@ -18,8 +18,8 @@ Our team consists of the following members, listed in the table below (the team 
 
 | Student ID | Student Name | GitHub Account (in Email) |
 | ---------- | ------------ | ------------------------- |
-| 118010246  | 秦兰 🚩      | 118010246@link.cuhk.edu.cn|        |
-| 123010345  | 李四         | sili@outlook.com          |
+| 118010246  | 秦兰 🚩      | 118010246@link.cuhk.edu.cn|       
+| 120090564  | 魏诗云       | 120090564@link.cuhk.edu.cn|
 | 123030245  | 王五         | wuwang@foxmail.com        |
 | 123020245  | 陈六         | liuchen@qq.com            |
 | 123010249  | 朱九         | jiuzhu@163.com            |
