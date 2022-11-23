@@ -34,8 +34,8 @@ After thorough discussion, our team made the choice and the specification inform
 - Our branch choice is: **Branch 1**
 - The difficulty level is: **Normal**
 
-As for Option 2, our topic background specification can be found in [background-specification.md](background-specification.md).
 
+Our project structure and implementation can be found in [material/todo-list.md](./material/todo-list.md).
 ## Project Abstract
 
 <!-- TODO -->
