@@ -1,3 +1,16 @@
+# Work Distribution
+
+| Student ID | Student Name | Work                      |
+| ---------- | ------------ | ------------------------- |
+| 118010246  | 秦兰         | Web page(Frond end)       |       
+| 119010445  | 张新宇       | Web page(Frond end)       |
+|            |              | Document edit             |
+|            |              | ER Diagram and schema     |
+|            |              | Database(back end)        |
+|            |              | Database(back end)        |
+
+
+
 # Project Structure
 ## Major Functionalities
 - Register the package information that is released by some consumer
