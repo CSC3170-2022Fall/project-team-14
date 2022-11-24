@@ -5,7 +5,7 @@
 | 118010246  | 秦兰         | Web page(Frond end)       |       
 | 119010445  | 张新宇       | Web page(Frond end)       |
 |            |              | Document edit             |
-|            |              | ER Diagram and schema     |
+| 120090171  | 张梦瑶       | ER Diagram and schema     |
 |            |              | Database(back end)        |
 |            |              | Database(back end)        |
 
