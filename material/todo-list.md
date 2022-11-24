@@ -2,10 +2,10 @@
 
 | Student ID | Student Name | Work                      |
 | ---------- | ------------ | ------------------------- |
-| 118010246  | 秦兰         | Web page(Frond end)       |       
-| 119010445  | 张新宇       | Web page(Frond end)       |
-|            |              | Document edit             |
-| 120090171  | 张梦瑶       | ER Diagram and schema     |
+| 118010246  | 秦兰          | Web page(Frond end)       |       
+| 119010445  | 张新宇        | Web page(Frond end)       |
+| 120090322  | 陈琳          | Document edit             |
+| 120090171  | 张梦瑶        | ER Diagram and schema     |
 | 120090702  | 李亿芊        | Database(back end)        |
 |            |              | Database(back end)        |
 
