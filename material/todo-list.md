@@ -6,7 +6,7 @@
 | 119010445  | 张新宇       | Web page(Frond end)       |
 |            |              | Document edit             |
 | 120090171  | 张梦瑶       | ER Diagram and schema     |
-|            |              | Database(back end)        |
+| 120090702  | 李亿芊        | Database(back end)        |
 |            |              | Database(back end)        |
 
 
