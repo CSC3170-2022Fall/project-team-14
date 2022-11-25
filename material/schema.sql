@@ -44,7 +44,7 @@ CREATE TABLE Machine(
     operation_type varchar(20) NOT NULL,
     status varchar(10),
     PRIMARY KEY (machine_id)
-    -- FOREIGN KEY (plant_id) REFERENCES Plant(plant_id)
+    -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id)
 );
 CREATE TABLE Operation_machine_cost(
     machine_id varchar(50) NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE Packages(
     plant_id varchar(50) NOT NULL,
     consumer_id varchar(20) NOT NULL,
     PRIMARY KEY (package_id)
-    -- FOREIGN KEY (plant_id) REFERENCES Plant(plant_id),
+    -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id),
     -- FOREIGN KEY (consumer_id) REFERENCES Consumer(consumer_id)
 );
 CREATE TABLE Handler_record(
@@ -70,7 +70,7 @@ CREATE TABLE Handler_record(
     expense float(8,2) NOT NULL,
     plant_id varchar(50) NOT NULL,
     PRIMARY KEY (package_id)
-    -- FOREIGN KEY (plant_id) REFERENCES Plant(plant_id)
+    -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id)
 );
 CREATE TABLE Process_record(
     package_id varchar(50) NOT NULL,
