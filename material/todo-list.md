@@ -68,11 +68,21 @@ __proc_record__(<u>package_ID</u>, <u>operation_Type</u>, <u>machine_ID</u>, sta
 
 __consumer_appoint_plant__(<u>consumer_ID</u>, <u>package_ID</u>, plant_ID )
 
-__plant_assign_op_to_machine__(<u>plant_ID</u>,operation_Type, manager_ID, start_Time)
+__plant_assign_op_to_machine__(<u>plant_ID</u>,operation_Type, machine_ID, start_Time)
 
 <br></br>
 
 ## Schema Design: Bank System
+
+### Entity
+
+__Account__(account_ID, passward, balance)
+
+### Relationship
+
+__Transfers__(transfer_ID, from_account_ID, to_account_ID, amount)
+
+
 
 <br></br>
 
