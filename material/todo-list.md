@@ -47,13 +47,21 @@ __plant__(<u>plant_ID</u>, passward, machine_ID)
 
 __package__(<u>package_ID</u>, consumer_ID, plant_ID, chip_Type, chip_Num)
 
-__chip__(<u>chip_Type</u>)
-
 __machine_type__(<u>machine_Type</u>, <u>operation_Type</u>, feasibility, time, expense, quota)
 
 __machine__(<u>machine_ID</u>, machine_Type, plant_ID, status)
 
+__chip_type__(number, precedency, operation_Type)
+
+__chip__(<u>chip_Type</u>, plant_ID, machine_Type)
+
+__operation_type__(feasibility, time, expense)
+
 __operation__(<u>operation_Type</u>)
+
+__handle_record__(<u>package_ID</u>, start_Time, end_Time, expense)
+
+__proc_record__(<u>package_ID</u>, <u>operation_Type</u>, <u>machine_ID</u>, start_time, end_time, expense)
 <br></br>
 
 
@@ -61,10 +69,6 @@ __operation__(<u>operation_Type</u>)
 ### Relationship
 
 __chip_require_operation__(<u>chip_Type</u>, <u>operation_Type</u>, precedency)
-
-__handle_record__(<u>package_ID</u>, start_Time, end_Time, expense)
-
-__proc_record__(<u>package_ID</u>, <u>operation_Type</u>, <u>machine_ID</u>, start_time, end_time, expense)
 
 __consumer_appoint_plant__(<u>consumer_ID</u>, <u>package_ID</u>, plant_ID )
 
@@ -87,6 +91,7 @@ __Transfers__(transfer_ID, from_account_ID, to_account_ID, amount)
 <br></br>
 
 ## ER Diagram
+![image](https://user-images.githubusercontent.com/83419532/204088784-8308afd6-6382-4187-8fed-b271aca43bab.png)
 
 <br></br>
 
