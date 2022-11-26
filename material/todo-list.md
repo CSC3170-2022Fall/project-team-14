@@ -49,7 +49,7 @@ __package__(<u>package_ID</u>, consumer_ID, plant_ID, chip_Type, chip_Num)
 
 __chip__(<u>chip_Type</u>)
 
-__machine_type__(<u>machine_Type</u>, <u>operation_Type</u>, feasibility, time, expense, capacity)
+__machine_type__(<u>machine_Type</u>, <u>operation_Type</u>, feasibility, time, expense, quota)
 
 __machine__(<u>machine_ID</u>, machine_Type, plant_ID, status)
 
