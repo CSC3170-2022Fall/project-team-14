@@ -9,7 +9,7 @@
 | 120090702  | 李亿芊        | Database(back end)        |
 |            |              | Database(back end)        |
 
-
+# workline
 
 # Project Structure
 ## Major Functionalities
@@ -31,6 +31,7 @@
 7. If consumer doesn't appoint plant, our system will allocate one plant for him.
 8. All processes(operations) of one package will be finished in the same plant, which means that the machine type of this plant will change after all chips finishes some process(operation).
 9. If all the plants are busy, packages will be put in the waiting list. As soon as there is a free plant, package will be appoint.
+10.  A plant can belong to only one plant owner, but one plant owner could have multiple plants. Both the consumer and the plant owner both has (for simplification, only one) bank account.
 <br></br>
 
 ## Schema Design: Chip Manufacture (__need to polish!!!__)
