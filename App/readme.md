@@ -9,7 +9,7 @@
 3. 进入虚拟环境
     `.venv\Scripts\activate`
     ![alt text](/material/images/vitual_create.png)
-4. 虚拟环境如下：
+4. 虚拟环境如下, 输入`pip install Flask`
     ![alt text](/material/images/vitual_env.png)
 5. 打开VS code，使用快捷键：
     `Ctrl+Shift+P`
