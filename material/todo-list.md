@@ -7,7 +7,7 @@
 | 120090322  | 陈琳          | Document edit             |
 | 120090171  | 张梦瑶        | ER Diagram and schema     |
 | 120090702  | 李亿芊        | Database(back end)        |
-|            |              | Database(back end)        |
+| 120090564  | 魏诗云        | Database(back end)        |
 
 # workline
 
