@@ -1,6 +1,6 @@
 #template
 #number. page_name
-# functions(input variables' names)
+#functions(input variables' names)
 
 1.log in page
   register(username, password)
