@@ -632,8 +632,10 @@ pre code {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
+  /* background-clip: content-box; */
   margin-right: auto;
   margin-left: auto;
+  /* margin:0 auto; */
 }
 
 @media (min-width: 576px) {
@@ -10027,6 +10029,7 @@ button.bg-dark:focus {
   .pt-lg-5,
   .py-lg-5 {
     padding-top: 3rem !important;
+    /* transform: translate(-50%, -50%); */
   }
 
   .pr-lg-5,
@@ -14499,6 +14502,7 @@ button.navbar-toggler.collapsed .icon-expand {
 
 .header-w3l header {
   background: transparent;
+  background-color: black;
   padding: 0px;
   transition: all 0.4s ease 0s;
   height: 90px;
@@ -17448,6 +17452,9 @@ form.signin-form {
 /*--/footer--*/
 .footer-28 {
   background: var(--footer-bg);
+  /* padding-bottom: 2.5rem;
+  bottom: 0; */
+  /* position: absolute; */
 }
 
 .footer-28 h6.footer-title-28 {
