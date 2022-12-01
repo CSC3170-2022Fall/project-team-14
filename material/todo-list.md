@@ -83,18 +83,14 @@ __plant_assign_op_to_machine__(<u>plant_ID</u>,operation_Type, machine_ID, start
 
 __Account__(account_ID, passward, balance)
 
-### Relationship
-
-__Transfers__(transfer_ID, from_account_ID, to_account_ID, amount)
 
 
 
 <br></br>
 
 ## ER Diagram
-![image](https://user-images.githubusercontent.com/83419532/204088784-8308afd6-6382-4187-8fed-b271aca43bab.png)
+![image](https://user-images.githubusercontent.com/83419532/204967932-d6405bfc-a35a-4663-a913-5ef5928cd434.png)
 
-<br></br>
 
 # Implementation
 
