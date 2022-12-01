@@ -34,9 +34,12 @@
     
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mx-lg-auto">
-                  <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home.index') }}">Home</a>
+                    </li>
+                     <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
-                  </li>
+                    </li>
                 </ul>
               </div>
              

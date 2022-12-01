@@ -15,105 +15,145 @@
 </head>
 
 <body>
+    <!-- header -->
     <div class="header-w3l">
-        <!--header-->
         <header id="site-header" class="header-w3l fixed-top">
           <div class="container">
             <nav class="navbar navbar-expand-lg stroke">
-              <a class="navbar-brand" href="urlfor(index.html)">
+              <div class="navbar-brand">
                 Chip Manufacture
-              </a>
-              <!-- if logo is image enable this   
-                <a class="navbar-brand" href="#index.html">
-                    <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-                </a> -->
-              <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+              </div>
+              
+              <!-- <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
                 data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
                 <span class="navbar-toggler-icon fa icon-close fa-times"></span>
                 </span>
-              </button>
+              </button> -->
     
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mx-lg-auto">
-                  <li class="nav-item active">
-                    <a class="nav-link" href="{{url_for('register.html')}}">Register</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('login.html') }}">Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="services.html">Services</a>
-                  </li>
-                 
-                  <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
-                  </li>
-                  <li class="nav-item mr-lg-3 mr-4" title="Search"><a href="#search" class="search-btn">
-                      <span class="fa fa-search" aria-hidden="true"></span></a></li>
-                  <!--/search-right-->
-                  <!-- search popup -->
-                  <div id="search" class="pop-overlay">
-                    <div class="popup">
-                      <form action="#" method="GET" class="w3l-hnyform d-sm-flex">
-                        <input type="search" placeholder="Search.." name="search" required="required" autofocus>
-                        <button type="submit">Search</button>
-                        <a class="close" href="#url">&times;</a>
-                      </form>
-                    </div>
-                  </div>
-                  <!-- /search popup -->
-                  <!--//search-right-->
-    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home.index') }}">Home</a>
+                    </li>
+                     <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
                 </ul>
-    
               </div>
-              <!-- toggle switch for light and dark theme -->
-              <div class="mobile-position">
-                <nav class="navigation">
-                  <div class="theme-switch-wrapper">
-                    <label class="theme-switch" for="checkbox">
-                      <input type="checkbox" id="checkbox">
-                      <div class="mode-container">
-                        <i class="gg-sun"></i>
-                        <i class="gg-moon"></i>
-                      </div>
-                    </label>
-                  </div>
-                </nav>
-              </div>
-              <!-- //toggle switch for light and dark theme -->
-
-              <div class = "mobile-position">
-
-              </div>
+             
             </nav>
           </div>
         </header>
-        <!--header-->
     </div>
+    <!-- header -->
+
     <!-- login -->
-    <div class = "form-25-main py-5">
-        <div class="container py-lg-5">
-            <div id="forms-25-info">
+    <div class="w3l-middle py-5">
+        <div class="container py-lg-5 py-md-4">
+        <div class="row no-gutters">
+            <div class="welcome-left pr-lg-5">
+            <h6 class="title-subhny two mb-2"><span>More Info</span></h6>
+            <h3 class="title-w3l two mb-4">Welcome to use our website.</h3>
+            <p class="pr-lg-5">Please login.
+            
+            </p>
+            
+            </div>
+            <div class="welcome-left-frm pr-lg-5 mt-lg-0 mt-5">
+            <div class="w3request-form">
+                <form action="register" method="post">
+                <h4 class="title-w3l">
+                    Register Information</h4>
                 
-                <form action="#" method="POST" class="signin-form mt-4 mb-2"></form>
-                    <div>
-                        <span>User Name</span>
-                        <br />
-                        <input type="text" name="username" id="username">
-                    </div>
-                    <div>
-                        <span>Password</span>
-                        <br />
-                        <input type="password" id="password" name="password">
-                    </div>
-                    <br />
-                    <button class="btn btn-style btn-primary">Login</button>
+                    
+                <div class="form-style-w3ls mt-4">
+    
+                    <input type="text" name="username" placeholder="User name" required="required" id="username">
+                    <input type="password" name="password" placeholder="password" id="password" required="required">
+                    <input type="password" name="password2" placeholder="password" id="password2" required="required">
+                    <button class="btn btn-style btn-primary w-100 mt-3" type="submit">Register as Consumer</button>
+                    <button class="btn btn-style btn-primary w-100 mt-3" type="submit">Register as Plant Owner</button>
+                    
+    
+                </div>
+    
                 </form>
+                </div>
             </div>
         </div>
+
+        </div>
     </div>
-    <!-- login -->
+    <!-- //login -->
+
+    
+
+     <!-- footer-28 block -->
+    <footer class="footer-28  position-relative py-5">
+    <div class="container">
+      <div class="row footer-top-28">
+        <div class="col-lg-5 footer-list-28 pr-lg-5 mt-5">
+          <h6 class="footer-title-28">Quick Contact</h6>
+          <p class="pr-lg-5">
+            <a href="118010246@link.cuhk.edu.cn">118010246@link.cuhk.edu.cn</a> 
+          </p>
+
+          <div class="main-social-footer-28 mt-4">
+            <ul class="social-icons">
+              <li class="facebook">
+                <a href="#link" title="Facebook">
+                  <span class="fa fa-facebook" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="twitter">
+                <a href="#link" title="Twitter">
+                  <span class="fa fa-twitter" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="dribbble">
+                <a href="#link" title="Dribbble">
+                  <span class="fa fa-dribbble" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="google">
+                <a href="#link" title="Google">
+                  <span class="fa fa-google" aria-hidden="true"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="row">
+            
+            <div class="col-md-5 col-sm-6 footer-list-28 mt-5">
+              <h6 class="footer-title-28">Our Services</h6>
+              <ul>
+                <li><a href="#reserch"><span class="fa fa-angle-double-right mr-2" aria-hidden="true"></span> Register packages</a></li>
+                <li><a href="#construction"><span class="fa fa-angle-double-right mr-2" aria-hidden="true"></span>
+                    Appoint plants</a></li>
+                <li><a href="#agricultural"><span class="fa fa-angle-double-right mr-2" aria-hidden="true"></span>
+                    Arrange packages</a></li>
+                
+              </ul>
+            </div>
+            
+
+          </div>
+        </div>
+      </div>
+      <div class="midd-footer-28 align-center py-2 mt-5">
+        <p class="copy-footer-28 text-center">Copyright &copy; 2021.Company name All rights reserved.
+            
+        </p>
+      </div>
+    </div>
+
+
+     
+    <!-- //footer-28 block-->
+  </footer>
+  <!--//footer-->
 </body>

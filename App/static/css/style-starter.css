@@ -286,10 +286,14 @@ button::-moz-focus-inner,
   padding: 0;
   border-style: none;
 }
-
+.input-radio{
+  width: 18px;
+  height: 18px;
+}
 input[type="radio"],
 input[type="checkbox"] {
-  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
   padding: 0;
 }
 
