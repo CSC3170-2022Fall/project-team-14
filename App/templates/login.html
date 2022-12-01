@@ -35,7 +35,7 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mx-lg-auto">
                   <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
+                    <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
                   </li>
                 </ul>
               </div>
@@ -46,36 +46,44 @@
     </div>
     <!-- header -->
 
-
     <!-- login -->
-    <div class="form-25-main py-5">
-        <!-- <center> -->
-            <div class="container py-lg-5 position-relative">
-                <div class="forms-25-info">
-                    <form action="#" method="POST" class="signin-form mt-4 mb-2"></form>
-                        <div>
-                            <span>User Name</span>
-                            <br />
-                            <input type="text" name="username" id="username">
-                        </div>
-                        <br />
-                        <div>
-                            <span>Password</span>
-                            <br />
-                            <input type="password" id="password" name="password">
-                        </div>
-                        <br />
-                        <button class="btn btn-style btn-primary">Login</button>
-                    </form>
+    <div class="w3l-middle py-5">
+        <div class="container py-lg-5 py-md-4">
+        <div class="row no-gutters">
+            <div class="welcome-left pr-lg-5">
+            <h6 class="title-subhny two mb-2"><span>More Info</span></h6>
+            <h3 class="title-w3l two mb-4">Welcome to use our website.</h3>
+            <p class="pr-lg-5">Login as a Consumer or Plant owner. </p>
+            
+            </div>
+            <div class="welcome-left-frm pr-lg-5 mt-lg-0 mt-5">
+            <div class="w3request-form">
+                <form action="" method="post">
+                <h4 class="title-w3l">
+                    LOGIN</h4>
+    
+                <div class="form-style-w3ls mt-4">
+    
+                    <input type="text" name="username" placeholder="User name" required="required" id="username">
+                    <input type="password" name="password" placeholder="password" id="password" required="required">
+    
+                    <button class="btn btn-style btn-primary w-100 mt-3">Login</button>
+    
+                </div>
+    
+                </form>
                 </div>
             </div>
-        <!-- </center> -->
-        
+        </div>
+
+        </div>
     </div>
-    <!-- login -->
+    <!-- //login -->
+
+    
 
      <!-- footer-28 block -->
-    <footer class="footer-28 fixed-bottom py-5">
+    <footer class="footer-28  position-relative py-5">
     <div class="container">
       <div class="row footer-top-28">
         <div class="col-lg-5 footer-list-28 pr-lg-5 mt-5">

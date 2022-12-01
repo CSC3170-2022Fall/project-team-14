@@ -1,7 +1,10 @@
+
 from flask import Flask, render_template
 
-app = Flask(__name__)
+import auth
 
-@app.route('/')
-def hello():
-    return render_template('login.html')
+app = Flask(__name__)
+app.register_blueprint(auth.bp)
+
+if __name__ == '__main__':
+    app.run(debug = True)
