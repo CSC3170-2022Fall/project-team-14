@@ -1,5 +1,5 @@
 # Work Distribution
-
+## 前期
 | Student ID | Student Name | Work                      |
 | ---------- | ------------ | ------------------------- |
 | 118010246  | 秦兰          | Web page(Frond end)       |       
@@ -8,6 +8,17 @@
 | 120090171  | 张梦瑶        | ER Diagram and schema     |
 | 120090702  | 李亿芊        | Database(back end)        |
 | 120090564  | 魏诗云        | Database(back end)        |
+
+## 中后期 See implementation part for details
+| Student ID | Student Name | Work                      |
+| ---------- | ------------ | ------------------------- |
+| 118010246  | 秦兰          | Web page(Frond end)-consumer(include bank)       |       
+| 119010445  | 张新宇        | Web page(Frond end)-plantowner       |
+| 120090322  | 陈琳          | Database(back end)             |
+| 120090171  | 张梦瑶        | Database(back end)     |
+| 120090702  | 李亿芊        | Database(back end)        |
+| 120090564  | 魏诗云        | Database(back end)        |
+
 
 # workline
 
@@ -127,5 +138,16 @@ __Account__(account_ID, passward, balance)
 
 
 ## Database (back end)
+
+app.py - for app running
+
+db.py - for database
+
+auth.py - for register and login
+
+consumer.py - for consumer
+
+plant.py - for plant owner
+
 
 
