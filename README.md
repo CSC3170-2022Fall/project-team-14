@@ -23,7 +23,7 @@ Our team consists of the following members, listed in the table below (the team 
 | 119010445  | 张新宇       | 119010445@link.cuhk.edu.cn| [@Zxy119010445](https://github.com/Zxy119010445) |
 | 120090171  | 张梦瑶       | 120090171@link.cuhk.edu.cn| [@Exxcbt](https://github.com/Zmysjwgj)       |
 | 120090702  | 李亿芊       | 120090702@link.cuhk.edu.cn| [@Lee-7102](https://github.com/Lee-7102)       |
-| 120090322  | 陈琳         | 120090322@link.cuhk.edu.cn| [@iaaaaaamgood](https://github.com/iaaaaaamgood) |
+| 120090322  | 陈琳         | 120090322@link.cuhk.edu.cn| [@EMILYcodingVER]](https://github.com/EMILYcodingVER) |
 
 ## Project Specification
 
@@ -102,7 +102,7 @@ have multiple plants.
 only one) bank account.
 <br></br>
 
-> <font size = 4> 3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
+> <font size = 4>3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
 #### (1)Chip Manufacture (__need to polish!!!__)
 > Entity Sets
 
