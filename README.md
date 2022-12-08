@@ -38,5 +38,124 @@ After thorough discussion, our team made the choice and the specification inform
 
 Our project structure and implementation can be found in [material/todo-list.md](./material/todo-list.md).
 ## Project Abstract
+> <font size = 4>Here is the main structure of our designed database：</font>
+### 1. Major Functionalities
+- Register the package information that is 
+released by some consumer
+- Allow the consumer to appoint some plant for 
+some package manually
+- The assignment and the start-time of some 
+operation with some machine could be further set 
+under the constraint of plant appointment
+- Once some operation is successfully finished, 
+the processing record in end-time and expense 
+could be written back.
+- The production information, like manufacture 
+capacity of some plant, or the demand changes of 
+some consumer within some period of time can be 
+calculated.
+- Construct a bank system for consumers to complete their payments to the plant owner. Meanwhile, both consumers and plant owners can check their account balance through system websites.
+<br></br>
 
-<!-- TODO -->
+### 2. Function Assumption
+> <font size = 3.5>Request:</font>
+- Relation between consumer and package possession:  
+one-to-many relation  
+One consumer can have multiple packages.
+
+- Random allocation:  
+If consumer doesn't appoint plant, our system will allocate one plant 
+for him.
+
+- Relation between packages and chips:
+one-to-one relation  
+One package refers to one type of chip. 
+
+> <font size = 3.5>Production:</font> 
+- Relation between plant and machine types:  
+One plant holds one to many machines of the same type.
+
+- No parallism for a single machine:  
+One machine can process one operation at the same time.
+
+- Relation between operation type and plant:  
+One operation in a package can be assigned to only one plant.
+
+- Consistency of plants for a single package:  
+All processes(operations) of one package will be finished in the same plant, which means that the machine type of this plant will change after all chips finishes some process(operation).
+
+> <font size = 3.5>Output:</font>
+- Processing record:  
+Processing record involves the start time, end time and expense of 
+one operation processed on one machine.
+
+- Waiting condition(test for demands):  
+If all the plants are busy at certain time period, packages will be 
+put in the waiting list. As soon as there is a free plant, package will be appointted.  
+
+> <font size = 3.5>Possession and bank system:</font>
+- Relation between plant and plant owners:  
+A plant can belong to only one plant owner, but one plant owner could 
+have multiple plants. 
+
+- Both the consumer and the plant owner both has (for simplification, 
+only one) bank account.
+<br></br>
+
+> <font size = 4>### 3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
+#### (1)Chip Manufacture (__need to polish!!!__)
+> Entity Sets
+
++ __consumer__(<u>consumer_ID</u>, package_ID)
+
++ __plant__(<u>plant_ID</u>, plant_name, machine_ID)
+
++ __package__(<u>package_ID</u>, consumer_ID, plant_ID, chip_Type, 
+chip_Num, overall_time, expense_budget)
+
++ __operation_type__(operation_ID, precedency)
+
++ __machine__(<u>machine_ID</u>, machine_Type, plant_ID, feasibility)
+
++ __chip_type__(<u>chip_Type</u>, operation_id)
+
++ *__handle_record__*(<u>package_ID</u>, start_Time, end_Time, 
+expense)
+
++ *__proc_record__*(<u>package_ID</u>, <u>operation_Type</u>, 
+<u>machine_ID</u>, start_time, end_time, expense)
+<br></br>
+
+
+> Relationship
+
++ __consumer_appoint_plant__(<u>consumer_ID</u>, 
+<u>package_ID</u>)
+
++ __plant_pocess_machine__(<u>plant_ID</u>,
+<u>machine_ID</u>)
+
++ __machine_on_operation__(<u>machine_ID</u>,<u>operation_ID</u>, 
+feasibility, running_time, expense)
+
++ __chip_require_operation__(<u>chip_Type</u>, <u>operation_id</u>)
+
+<br></br>
+
+## (2) Bank System
+
+### Entity
+
+__consumer__(account_ID, passward, balance)
+__plant_owner__(account_ID, passward, balance)
+
+### Relationship
+
+__Payment__(<u>consumer.account_ID</u>,<u>plant_owner.account_ID</u>)
+
+<br></br>
+
+## ER Diagram(need be replaced later)
+![image](https://user-images.githubusercontent.com/83419532/204967932-d6405bfc-a35a-4663-a913-5ef5928cd434.png)
+<br></br>
+
