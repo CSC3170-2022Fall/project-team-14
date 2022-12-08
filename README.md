@@ -142,16 +142,16 @@ feasibility, running_time, expense)
 
 <br></br>
 
-## (2) Bank System
+#### (2) Bank System
 
-### Entity
++ Entity
 
-__consumer__(account_ID, passward, balance)
-__plant_owner__(account_ID, passward, balance)
+    __consumer__(account_ID, passward, balance)
+    __plant_owner__(account_ID, passward, balance)
 
-### Relationship
++ Relationship
 
-__Payment__(<u>consumer.account_ID</u>,<u>plant_owner.account_ID</u>)
+    __Payment__(<u>consumer.account_ID</u>,<u>plant_owner.account_ID</u>)
 
 <br></br>
 
