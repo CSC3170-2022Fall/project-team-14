@@ -155,7 +155,7 @@ __Payment__(<u>consumer.account_ID</u>,<u>plant_owner.account_ID</u>)
 
 <br></br>
 
-## ER Diagram(need be replaced later)
+## ER Diagram(need be replaced soon later)
 ![image](https://user-images.githubusercontent.com/83419532/204967932-d6405bfc-a35a-4663-a913-5ef5928cd434.png)
 <br></br>
 
