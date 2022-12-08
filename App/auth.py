@@ -10,21 +10,24 @@ bp = Blueprint('auth', __name__, url_prefix='/', template_folder='templates', st
 @bp.route('/')
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        id = request.form['id']
         password = request.form['password']
         db = db.get_db()
         error = None
         cursor = db.cursor()
-        if username.strip() == '':
-            error = 'Username is required.'
+        if id.strip() == '':
+            error = 'Id is required.'
         elif password.strip() == '':
             error = 'Password is required.'
         if error is None:
-            cursor.execute("SELECT * FROM User WHERE user_name = %s", (username))
+            # if user == "consumer":
+            #   cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (id))
+            # elif user == "plant owner":
+            #   cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (id))
             user = cursor.fetchone()
 
             if user is None:
-                error = 'Incorrect username.'
+                error = 'Incorrect id.'
             elif not check_password_hash(user['password'], password):
                 error = 'Incorrect password.'
 
@@ -44,15 +47,15 @@ def login():
 @bp.route('/register', methods = ('GET','POST'))
 def register():
     if request.method == 'POST':
-        username = request.form['username']
+        id = request.form['id']
         # email = request.form['email']
         password = request.form['password']
         password2 = request.form['password2']
-        # db = db.get_db()
+        db = db.get_db()
         error = None
-        # cursor = db.cursor()
-        if not username:
-            error = 'Username is required.'
+        cursor = db.cursor()
+        if not id:
+            error = 'Id is required.'
         # elif not email:
         #     error = 'Email is required.'
         elif not password:
@@ -61,16 +64,20 @@ def register():
             error = 'Please repeat password.'
         elif password != password2:
             error = 'Password is inconsistent.'
-        # else:
-        #     # TODO: change the sql
-        #     cursor.execute("SELECT user_name FROM User WHERE user_name = %s", (username))
-        #     if cursor.fetchone() is not None:
-        #         error = 'User {} is already registered.'.format(username)
+        else:
+            # if user == "consumer":
+            #   cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (id))
+            # elif user == "plant owner":
+            #   cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (id))
+            if cursor.fetchone() is not None:
+                error = 'User {} is already registered.'.format(id)
 
         if error is None:
-            # TODO: change the sql
-            # cursor.execute("INSERT INTO User(user_name, password, email) VALUES (%s, %s, %s)", (username, generate_password_hash(password), email))
-            # db.commit()
+            # if user == "consumer":
+            #    cursor.execute("INSERT INTO Consumer(consumer_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
+            # elif user == "plant owner":
+            #    cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
+            db.commit()
             return redirect(url_for('auth.login'))
 
         print('register page error is: ', error)

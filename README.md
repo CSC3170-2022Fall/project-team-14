@@ -16,14 +16,14 @@ Our team consists of the following members, listed in the table below (the team 
 
 <!-- change the info below to be the real case -->
 
-| Student ID | Student Name | GitHub Account (in Email) |
-| ---------- | ------------ | ------------------------- |
-| 118010246  | 秦兰 🚩      | 118010246@link.cuhk.edu.cn|       
-| 120090564  | 魏诗云       | 120090564@link.cuhk.edu.cn|
-| 119010445  | 张新宇       | 119010445@link.cuhk.edu.cn|
-| 120090171  | 张梦瑶       | 120090171@link.cuhk.edu.cn|
-| 120090702  | 李亿芊       | 120090702@link.cuhk.edu.cn|
-| 120090322  | 陈琳         | 120090322@link.cuhk.edu.cn           |
+| Student ID | Student Name | GitHub Account (in Email) | GitHub username |
+| ---------- | ------------ | ------------------------- |-----------------|
+| 118010246  | 秦兰 🚩      | 118010246@link.cuhk.edu.cn|[@QinLan18](https://github.com/QinLan18)        |
+| 120090564  | 魏诗云       | 120090564@link.cuhk.edu.cn| [@Jane-912](https://github.com/Jane-912)        |
+| 119010445  | 张新宇       | 119010445@link.cuhk.edu.cn| [@Zxy119010445](https://github.com/Zxy119010445) |
+| 120090171  | 张梦瑶       | 120090171@link.cuhk.edu.cn| [@Exxcbt](https://github.com/Zmysjwgj)       |
+| 120090702  | 李亿芊       | 120090702@link.cuhk.edu.cn| [@Lee-7102](https://github.com/Lee-7102)       |
+| 120090322  | 陈琳         | 120090322@link.cuhk.edu.cn| [@iaaaaaamgood](https://github.com/iaaaaaamgood) |
 
 ## Project Specification
 
