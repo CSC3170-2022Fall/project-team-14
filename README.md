@@ -102,7 +102,7 @@ have multiple plants.
 only one) bank account.
 <br></br>
 
-> <font size = 4>### 3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
+> <font size = 4> 3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
 #### (1)Chip Manufacture (__need to polish!!!__)
 > Entity Sets
 
