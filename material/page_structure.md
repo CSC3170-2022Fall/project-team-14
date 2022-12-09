@@ -4,7 +4,7 @@
 - '->' means jump to that page
 
 ## 1.log in page
-- login_plant_owner(username, password) -> 7.plant_owner home page
+- login_plant(username, password) -> 7.plant_owner home page
 - login_customer(username, password) -> 3. customer home page
 - register() -> 2. register page
 
