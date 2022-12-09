@@ -103,7 +103,7 @@ only one) bank account.
 <br></br>
 
 > <font size = 4>3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
-#### (1)Chip Manufacture (__need to polish!!!__)
+#### (1) Chip Manufacture (__need to polish!!!__)
 > Entity Sets
 
 + __consumer__(<u>consumer_ID</u>, package_ID)
