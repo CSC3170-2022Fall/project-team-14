@@ -4,8 +4,8 @@ from flask import (
 from werkzeug.exceptions import abort
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from App.auth import login_required
-from App.db import get_db
+from auth import login_required
+from db import get_db
 import db
 
 bp = Blueprint('consumer', __name__)

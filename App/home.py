@@ -9,5 +9,11 @@ from auth import login_required
 bp = Blueprint('home', __name__)
 
 @bp.route('/index_consumer')
-def index():
+def index_consumer():
     return render_template('index_consumer.html')
+
+bp = Blueprint('home', __name__)
+
+@bp.route('/index_plant')
+def index_consumer():
+    return render_template('index_plant.html')
