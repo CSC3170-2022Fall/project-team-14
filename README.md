@@ -1,7 +1,7 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=9422486&assignment_repo_type=AssignmentRepo)
 # CSC3170 Course Project
 
-## Project Overall Description
+## 1. Project Overall Description
 
 This is our implementation for the course project of CSC3170, 2022 Fall, CUHK(SZ). For details of the project, you can refer to [project-description.md](project-description.md). In this project, we will utilize what we learned in the lectures and tutorials in the course, and implement either one of the following major job:
 
@@ -10,7 +10,7 @@ This is our implementation for the course project of CSC3170, 2022 Fall, CUHK(SZ
 - [x] **Application with Database System(s)**
 - [ ] **Implementation of a Database System**
 
-## Team Members
+## 2. Team Members
 
 Our team consists of the following members, listed in the table below (the team leader is shown in the first row, and is marked with 🚩 behind his/her name):
 
@@ -25,7 +25,7 @@ Our team consists of the following members, listed in the table below (the team 
 | 120090702  | 李亿芊       | 120090702@link.cuhk.edu.cn| [@Lee-7102](https://github.com/Lee-7102)       |
 | 120090322  | 陈琳         | 120090322@link.cuhk.edu.cn| [@EMILYcodingVer](https://github.com/EMILYcodingVER)   |
 
-## Project Specification
+## 3. Project Specification
 
 <!-- You should remove the terms/sentence that is not necessary considering your option/branch/difficulty choice -->
 
@@ -37,9 +37,9 @@ After thorough discussion, our team made the choice and the specification inform
 
 
 Our project structure and implementation can be found in [material/todo-list.md](./material/todo-list.md).
-## Project Abstract
+## 4. Project Abstract
 > <font size = 4>Here is the main structure of our designed database：</font>
-### 1. Major Functionalities
+### (1). Major Functionalities
 - Register the package information that is 
 released by some consumer
 - Allow the consumer to appoint some plant for 
@@ -57,7 +57,7 @@ calculated.
 - Construct a bank system for consumers to complete their payments to the plant owner. Meanwhile, both consumers and plant owners can check their account balance through system websites.
 <br></br>
 
-### 2. Function Assumption
+### (2). Function Assumption
 > <font size = 3.5>Request:</font>
 - Relation between consumer and package possession:  
 one-to-many relation  
@@ -103,7 +103,7 @@ only one) bank account.
 <br></br>
 
 > <font size = 4>3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
-#### (1) Chip Manufacture (__need to polish!!!__)
+#### (i) Chip Manufacture (__need to polish!!!__)
 > Entity Sets
 
 + __consumer__(<u>consumer_ID</u>, package_ID)
@@ -142,7 +142,7 @@ feasibility, running_time, expense)
 
 <br></br>
 
-#### (2) Bank System
+#### (ii) Bank System
 
 + Entity
 
@@ -155,7 +155,14 @@ feasibility, running_time, expense)
 
 <br></br>
 
-## ER Diagram(need be replaced soon later)
+## 5. ER Diagram(need be replaced soon later)
 ![image](https://user-images.githubusercontent.com/83419532/204967932-d6405bfc-a35a-4663-a913-5ef5928cd434.png)
 <br></br>
+
+
+# 6. How to run
+In VScode terminal, under directory App:
+`set FLASK_APP=App`
+`flask run`
+
 
