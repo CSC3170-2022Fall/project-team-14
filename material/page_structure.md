@@ -1,6 +1,7 @@
 ## Remark
 - any words followed '()' is a button / function, inside '()' are input variables
 - if without '()', they are just variables that need to show 
+- '->' means jump to that page
 
 ## 1.log in page
 - login_plant_owner(username, password) -> 7.plant_owner home page
