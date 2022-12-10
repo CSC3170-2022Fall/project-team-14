@@ -95,7 +95,7 @@ BEGIN
     END WHILE;
 END;
 
-CALL `machine_info`(20);
+CALL `machine_info`(50);
 SELECT count(*) FROM `machine_info`;
 INSERT INTO `Machine` SELECT * FROM `machine_info`;
 
@@ -105,23 +105,30 @@ INSERT INTO `Machine` SELECT * FROM `machine_info`;
 -- Dumping data for table `Operation_machine_cost`
 --
 
-DROP PROCEDURE IF EXISTS `peration_machine`
-CREATE PROCEDURE `insert_machine_operation`(IN n INT)
+DROP PROCEDURE IF EXISTS `operation_machine_info`
+CREATE PROCEDURE `operation_machine_info`(IN n INT)
 BEGIN
-    opList = ['design-import', 'etch', 'bond', 'drill', 'test']
-    DECLARE i INT DEFAULT 1;
-    DECLARE machine_id INT DEFAULT 0;
+    $LISTBUILD('design-import', 'etch_A', 'etch_B', 'bond_A','bond_B' 'drill', 'test') AS opList;
+    DECLARE i INT DEFAULT 1; --# of machine:50-- 
+    DECLARE j INT DEFAULT 1; --index of the operation--
+    DECLARE machine_id INT DEFAULT 1;
     DECLARE operation_type varchar DEFAULT 0;
     DECLARE time FLOAT(8,2) DEFAULT 0;
     DECLARE expense FLOAT(8,2) DEFAULT 0;
-    WHILE i <0 DO
-        
-        INSERT INTO `insert_plant_owner` VALUES(owner_id
+    WHILE i <n DO
+        while j<8 DO
+            SET `machine_id` = i;
+            SET `operation_type` = $LIST(`oplist`,j);
+            SET `time` = RAND()*10  --time per unit chip per operation
+            SET `expense` = RAND() --expense per unit chip per operation
+            SET j = j+1;
         SET i = i+1;
     END WHILE;
-END
-INSERT INTO `Operation_machine_cost` (`machine_id`, `operation_type`, `time`, `expense`) VALUES
+END;
 
+CALL `operation_machine_info`(50);
+SELECT count(*) FROM `operation_machine_info`;
+INSERT INTO `Operation_machine_cost` SELECT * FROM `operation_machine_info`;
 
 -- --------------------------------------------------------
 
@@ -129,22 +136,83 @@ INSERT INTO `Operation_machine_cost` (`machine_id`, `operation_type`, `time`, `e
 -- Dumping data for table `Packages`
 --
 
-INSERT INTO `Packages` (`package_id`, `chip_number`, `chip_type`, `plant_id`, `consumer_id`, `total_expense`, `price`) VALUE
-
 -- --------------------------------------------------------
 
 --
 -- Dumping data for table `Process_record`
 --
 
-INSERT INTO `Process_record` (`package_id`, `operation_type`, `machine_id`, `start_time`, `end_time`, `plant_id`, `status`) VALUES
-
 -- --------------------------------------------------------
 
+--
+-- Dumping data for table `Chip_expense`
+--
+DROP PROCEDURE IF EXISTS `chip_expense_info`
+CREATE PROCEDURE `chip_expense_info`(IN n INT) --# of chip types = 6--
+BEGIN
+    $LISTBUILD("A","B","C","D","E","F") AS `type_list`;
+    DECLARE i INT DEFAULT 1;
+    DECLARE `chip_type` varchar(20) DEFAULT " ";
+    DECLARE `price` float(8,2) DEFAULT;
+    WHILE i<n DO
+        SET `chip_type` = $LIST(`type_list`,i);
+        SET `price` = RAND()*10000;
+        SET i = i+1;
+    END WHILE;
+END;
+
+CALL`chip_expense_info`(6);
+SELECT count(*) FROM `chip_expense_info`;
+INSERT INTO `Chip_expense` SELECT * FROM `chip_expense_info`;
+
+
+-- --------------------------------------------------------
+--
 -- Dumping data for table `Chip_requires_operation`
 --
-
-INSERT INTO `Chip_requires_operation` (`chip_type`, `operation_type`, `precedency`, `expense`)
+INSERT `Chip_requires_operation`(`chip_type`,`operation_type`,`precedency`) VALUES
+("A", "design-import", 0);
+("A", "etch_A",1);
+("A","etch_B",2);
+("A","bond_A",3);
+("A","bond_B",4);
+("A","drill",5);
+("A","test",6);
+("B", "design-import", 0);
+("B", "etch_A",1);
+("B","etch_B",2);
+("B","bond_A",3);
+("B","bond_B",4);
+("B","drill",5);
+("B","test",6);
+("C", "design-import", 0);
+("C", "etch_A",1);
+("C","etch_B",2);
+("C","bond_A",3);
+("C","bond_B",4);
+("C","drill",5);
+("C","test",6);
+("D", "design-import", 0);
+("D", "etch_A",1);
+("D","etch_B",2);
+("D","bond_A",3);
+("D","bond_B",4);
+("D","drill",5);
+("D","test",6);
+("E", "design-import", 0);
+("E", "etch_A",1);
+("E","etch_B",2);
+("E","bond_A",3);
+("E","bond_B",4);
+("E","drill",5);
+("E","test",6);
+("F", "design-import", 0);
+("F", "etch_A",1);
+("F","etch_B",2);
+("F","bond_A",3);
+("F","bond_B",4);
+("F","drill",5);
+("F","test",6);
 
 -- --------------------------------------------------------
 
