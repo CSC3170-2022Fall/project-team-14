@@ -33,8 +33,7 @@ CREATE TABLE Own(
 CREATE TABLE Machine(
     machine_id varchar(50) NOT NULL,
     plant_id varchar(50) NOT NULL,
-    operation_type varchar(20) NOT NULL,
-    status varchar(10),
+    status varchar(20) DEFAULT 'Finished',
     quota int NOT NULL,
     PRIMARY KEY (machine_id)
     -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id)
@@ -66,7 +65,7 @@ CREATE TABLE Process_record(
     start_time TIMESTAMP NOT NULL DEFAULT now(),
     end_time TIMESTAMP NOT NULL,
     plant_id varchar(50) NOT NULL,
-    status varchar(10),
+    status varchar(20)DEFAULT 'Finished',
     PRIMARY KEY (package_id, operation_type, machine_id)
     -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id)
 );

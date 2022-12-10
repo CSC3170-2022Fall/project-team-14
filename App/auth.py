@@ -4,28 +4,30 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-import db
+from db import get_db
 bp = Blueprint('auth', __name__, url_prefix='/', template_folder='templates', static_folder='static')
 
 @bp.route('/', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        id = request.form['username']
+        username = request.form['username']
         password = request.form['password']
+        # consumer = request.form['login_consumer']
+        # plant = request.form['login_plant']
         login_character = request.form.get('login_character')
-        # db = db.get_db()
+        db = get_db()
         error = None
-        # cursor = db.cursor()
-        if id.strip() == '':
-            error = 'Id is required.'
+        cursor = db.cursor()
+        if username.strip() == '':
+            error = 'Ysername is required.'
         elif password.strip() == '':
             error = 'Password is required.'
         if error is None:
-            # if user == "consumer":
-            #   cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (id))
-            # elif user == "plant owner":
-            #   cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (id))
-            # user = cursor.fetchone()
+            if login_character=="consumer":
+              cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (username))
+            elif login_character=="plant":
+              cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (username))
+            user = cursor.fetchone()
 
             # if user is None:
             #     error = 'Incorrect id.'
@@ -50,12 +52,19 @@ def login():
 @bp.route('/register', methods = ('GET','POST'))
 def register():
     if request.method == 'POST':
-        id = request.form['username']
+        username = request.form['username']
         password = request.form['password']
         password2 = request.form['password2']
-        # db = db.get_db()
+        # consumer = request.form['register_consumer']
+        # plant = request.form['register_plant']
+        register_character = request.form.get('register_character')
+        if register_character=="consumer":
+            consumer = register_character
+        if register_character=="plant":
+            plant = register_character
+        db = get_db()
         error = None
-        # cursor = db.cursor()
+        cursor = db.cursor()
         if not id:
             error = 'Id is required.'
         elif not password:
@@ -64,20 +73,20 @@ def register():
             error = 'Please repeat password.'
         elif password != password2:
             error = 'Password is inconsistent.'
-        # else:
-            # if user == "consumer":
-            #   cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (id))
-            # elif user == "plant owner":
-            #   cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (id))
-            # if cursor.fetchone() is not None:
-            #     error = 'User {} is already registered.'.format(id)
+        else:
+            if consumer is not None:
+              cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (username))
+            elif plant is not None:
+              cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (username))
+            if cursor.fetchone() is not None:
+                error = 'User {} is already registered.'.format(id)
 
         if error is None:
-            # if user == "consumer":
-            #    cursor.execute("INSERT INTO Consumer(consumer_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
-            # elif user == "plant owner":
-            #    cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
-            # db.commit()
+            if consumer is not None:
+               cursor.execute("INSERT INTO Consumer(consumer_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
+            elif plant is not None:
+               cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
+            db.commit()
             return redirect(url_for('auth.login'))
 
         print('register page error is: ', error)
