@@ -1,6 +1,5 @@
 
 from flask import Flask, render_template
-
 import auth
 import consumer
 import plant
