@@ -36,16 +36,22 @@ def parse_sql(filename):
 
 
 def get_db():
-    if 'db' not in g:
-        g.db = pymysql.connect(host= 'localhost',
-                               user = 'root',
-                               port = 3306,
-                               password='root',
-                               db='App',
-                               charset='utf8',
-                               conv=pymysql.converters.conversions,
-                               cursorclass=pymysql.cursors.DirctCursor)
-    return g.db
+
+    db = pymysql.connect(host= 'localhost',
+                            user = 'root',
+                            port = 3306,
+                            password='root',
+                         )
+    # 创建游标
+    cursor = db.cursor()
+    # 创建数据的sql语句
+    sql = 'create database if not exists Chip default charset utf8 default collate utf8_general_ci;'
+    # 执行sql语句
+    cursor.execute(sql)
+    # 指定使用数据库
+    cursor.execute('use Chip;')
+
+    return db
     
 def close_db(e=None):
     db = g.pop('db', None)
