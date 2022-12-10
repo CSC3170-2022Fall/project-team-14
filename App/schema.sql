@@ -1,4 +1,4 @@
--- Active: 1663820260624@@127.0.0.1@3306@chip
+
 DROP SCHEMA IF EXISTS Chip;
 CREATE SCHEMA IF NOT EXISTS Chip DEFAULT CHARACTER SET utf8;
 
@@ -35,6 +35,7 @@ CREATE TABLE Own(
 CREATE TABLE Machine(
     machine_id INT NOT NULL,
     plant_id INT NOT NULL,
+    operation_type varchar(20) NOT NULL,
     status varchar(20) DEFAULT 'Idle',
     quota int NOT NULL,
     PRIMARY KEY (machine_id)
@@ -53,7 +54,7 @@ CREATE TABLE Packages(
     chip_type varchar(20) NOT NULL,
     plant_id INT NOT NULL,
     consumer_id varchar(20) NOT NULL,
-    total_expense float(8,2) NOT NULL,
+    total_expense float(8,2) NOT NULL DEFAULT 0.00,
     price float(8,2) NOT NULL,
     PRIMARY KEY (package_id)
     -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id),
@@ -67,13 +68,13 @@ CREATE TABLE Process_record(
     start_time INT NOT NULL,
     end_time INT NOT NULL,
     plant_id INT NOT NULL,
-    status varchar(20)DEFAULT 'Idle',
+    status varchar(20),
     PRIMARY KEY (package_id, operation_type, machine_id)
     -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id)
 );
 CREATE TABLE Chip_expense(
     chip_type varchar(20) NOT NULL,
-    total_expense float(8,2) NOT NULL,
+    price float(8,2) NOT NULL,
     PRIMARY KEY (chip_type)
 );
 CREATE TABLE Chip_requires_operation(
