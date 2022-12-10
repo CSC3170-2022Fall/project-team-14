@@ -10,7 +10,10 @@ bp = Blueprint('consumer', __name__)
 
 @bp.route('/index_consumer')
 def index_consumer():
-    return render_template('index_consumer.html')
+    if(g.user):
+        return render_template('index_consumer.html')
+    return redirect(url_for('auth.login'))
+    # return render_template('index_consumer.html')
 
 
 @bp.route('/', methods=('GET', 'POST'))

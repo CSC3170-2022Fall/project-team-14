@@ -41,7 +41,7 @@ def login():
             #         return redirect(url_for('index'))
             #     else:
             #         return  redirect(url_for('admin.admin'))
-            
+            session['user_id'] = username
             return redirect(url_for(login_character+'.index_'+login_character))
             
             # return render_template('login.html', error = error)
