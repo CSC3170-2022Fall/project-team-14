@@ -34,9 +34,7 @@
     
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mx-lg-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('home.index_consumer') }}">Home Consumer</a>
-                    </li>
+                   
                      <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
                     </li>
@@ -61,20 +59,17 @@
             </div>
             <div class="welcome-left-frm pr-lg-5 mt-lg-0 mt-5">
             <div class="w3request-form">
-                <form action="" method="post">
+                <form action="{{ url_for('auth.login') }}" method="POST">
                 <h4 class="title-w3l">
                     LOGIN</h4>
     
                 <div class="form-style-w3ls mt-4">
-    
                     <input type="text" name="username" placeholder="User name" required="required" id="username">
                     <input type="password" name="password" placeholder="password" id="password" required="required">
-    
-                    <button class="btn btn-style btn-primary w-100 mt-3" name="login_consumer" id="login_consumer">Login Consumer</button>
-                    <button class="btn btn-style btn-primary w-100 mt-3" name="login_consumer" id="login_plant">Login Plant</button>
-    
+                    <button type="submit" class="btn btn-style btn-primary w-100 mt-3" name="login_character" value="consumer">Login Consumer</button>
+                    <button type="submit" class="btn btn-style btn-primary w-100 mt-3" name="login_character" value="plant">Login Plant</button>
                 </div>
-    
+                
                 </form>
                 </div>
             </div>

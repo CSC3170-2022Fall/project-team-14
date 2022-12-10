@@ -15,5 +15,5 @@ def index_consumer():
 bp = Blueprint('home', __name__)
 
 @bp.route('/index_plant')
-def index_consumer():
+def index_plant():
     return render_template('index_plant.html')

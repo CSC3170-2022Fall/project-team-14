@@ -10,6 +10,11 @@ import db
 
 bp = Blueprint('consumer', __name__)
 
+
+@bp.route('/index_consumer')
+def index_consumer():
+    return render_template('index_consumer.html')
+
 @bp.route('/<string:id>/registerpackage', methods=('GET', 'POST'))
 def registerpackage():
     if (g.user):
