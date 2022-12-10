@@ -2,23 +2,23 @@ import queue
 import time
 import queue
 import random
-from db import get_db
+from .db import get_db
 #[[time,op,pack_id or mac_id, pred or opr_type or pred)]]
 #op=1:allocate, pack_id,pred
 #op=2:change_start_time, mac_id,opr_type
 #op=3:package stage end, pack_id,pred
 #op=4:machine end, mac_id
 
-global_start_time = int(time.time)
+global_start_time = int(time.time())
 time_queue = queue.PriorityQueue()
 
 def change_start_call(machine_id, start_time, operation_type):
-    time_queue.put([int(time.time)-global_start_time+start_time,2,machine_id,operation_type])
+    time_queue.put([int(time.time())-global_start_time+start_time,2,machine_id,operation_type])
 
 def allocate_package_call(package_id, chip_type, chip_number, plant_id=-1):
     db = get_db()
     cursor = db.cursor()
-    cur_time = int(time.time) - global_start_time
+    cur_time = int(time.time()) - global_start_time
 
     if(plant_id != -1):
         #modify package
@@ -94,7 +94,7 @@ def allocate_package_call(package_id, chip_type, chip_number, plant_id=-1):
 def main():
     db = get_db()
     cursor = db.cursor()
-    cur_time = int(time.time) - global_start_time
+    cur_time = int(time.time()) - global_start_time
     while(True):
         next_exe = time_queue.get()
         while(next_exe[0] <= cur_time):
@@ -184,4 +184,7 @@ def main():
             time_queue.put(next_exe)
 
         time.sleep(1)
+
+if __name__ == "__main__":
+    main()
 
