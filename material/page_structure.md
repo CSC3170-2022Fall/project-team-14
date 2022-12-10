@@ -33,7 +33,7 @@
 ## API in alg.py
 - these are functions in alg.py, which you can call in your branch
 - change_start_call(machine_id, start_time, operation_type)
-- allocate_package_call(package_id) // when register package
+- allocate_package_call(package_id, chip_type, chip_number, plant_id) // when register package
 
 
 
