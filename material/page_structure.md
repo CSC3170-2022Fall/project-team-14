@@ -27,7 +27,7 @@
 
 ## 7.plant_owner home page
 - package_id, chip_type, chip_number, customer_id, start_time, status    // status = operation_type or finished or waiting
-- machine_id, status    // status = operation_type or idle
+- machine_id, status, start_time, estimated_end_time    // status = operation_type or idle
 - change_start_time(machine_id, start_time, operation_type) -> 7.plant_owner home page    // need to check if can change, the quota for one type need to satisfy all waiting package in the plant!
 
 ## API in alg.py
