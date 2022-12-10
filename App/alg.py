@@ -2,7 +2,7 @@ import queue
 import time
 import queue
 import random
-from .db import get_db
+from db import get_db
 #[[time,op,pack_id or mac_id, pred or opr_type or pred)]]
 #op=1:allocate, pack_id,pred
 #op=2:change_start_time, mac_id,opr_type
