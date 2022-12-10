@@ -30,6 +30,11 @@
 - machine_id, status    // status = operation_type or idle
 - change_start_time(machine_id, start_time, operation_type) -> 7.plant_owner home page self-refresh
 
+## API in alg.py
+- these are functions in alg.py, which you can call in your branch
+- change_start_call(machine_id, start_time, operation_type)
+- allocate_package_call(package_id) // when register package
+
 
 
   
