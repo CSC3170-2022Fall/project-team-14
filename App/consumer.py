@@ -46,7 +46,7 @@ def registerpackage():
         if request.method == 'POST':           
             package_id = generate_packageid()
             chip_type =  request.form['chip_type']
-            chip_number = request.form['chip_number']
+            chip_number = request.form.get('chip_number')
             plant_id = request.form['plant_id']
 
             error = None
@@ -69,7 +69,7 @@ def registerpackage():
                     "INSERT INTO Package(package_id, chip_number, chip_type, plant_id, consumer_id, price) VALUES (%s, %d, %s, %s, %s)",(package_id,chip_number,chip_type, plant_id,g.user['consumer_id'], price)
                     ) 
                 db.commit()  
-                return redirect(url_for('/payment'))
+                return redirect(url_for('consumer.payment'))
                   
         return render_template('consumer/registerpackage.html')
    
