@@ -12,7 +12,7 @@
 - register(username, password, password2) -> 1. log in page    // need to check if 2 passwords equal
   
 ## 3.customer home page
-- package_id, chip_type, chip_number, status, start_time, expense
+- package_id, chip_type, chip_number, status, expense
 - register_package() -> 4.register package page
 
 ## 4.register package page
