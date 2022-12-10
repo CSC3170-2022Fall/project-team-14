@@ -5,8 +5,6 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="keywords"
-    content="Induz Responsive web template, Bootstrap Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
   <title>Chip Manufacture | Home</title>
   <link href="http://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap"
     rel="stylesheet">
@@ -37,35 +35,8 @@
 
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mx-lg-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="services.html">Services</a>
-              </li>
-             
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact</a>
-              </li>
-              <li class="nav-item mr-lg-3 mr-4" title="Search"><a href="#search" class="search-btn">
-                  <span class="fa fa-search" aria-hidden="true"></span></a></li>
-              <!--/search-right-->
-              <!-- search popup -->
-              <div id="search" class="pop-overlay">
-                <div class="popup">
-                  <form action="#" method="GET" class="w3l-hnyform d-sm-flex">
-                    <input type="search" placeholder="Search.." name="search" required="required" autofocus>
-                    <button type="submit">Search</button>
-                    <a class="close" href="#url">&times;</a>
-                  </form>
-                </div>
-              </div>
-              <!-- /search popup -->
-              <!--//search-right-->
-
+                <a class="nav-link" href="{{ url_for('auth.logout') }}">Log out</a >
             </ul>
 
           </div>
@@ -116,6 +87,8 @@
                 <th>Chip Number</th>
                 <th>Chip Type</th>
                 <th>Comsumer</th>
+                <th>Start Time</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -124,19 +97,19 @@
                 <td>10</td>
                 <td>ipsum</td>
                 <td>dolor</td>
+                <td>ipsum</td>
+                <td>dolor</td>
               </tr>
+              {%- for package in package_list %}
               <tr>
-                <td>1,002</td>
-                <td>10</td>
-                <td>consectetur</td>
-                <td>adipiscing</td>
+                <td>{{ package['package_id'] }}</td>
+                <td>{{ package['chip_number'] }}</td>
+                <td>{{ package['chip_type'] }}</td>
+                <td>{{ package['consumer_id'] }}</td>
+                <td>{{ package['start_time'] }}</td>
+                <td>{{ package['status'] }}</td>
               </tr>
-              <tr>
-                <td>1,003</td>
-                <td>10</td>
-                <td>nec</td>
-                <td>odio</td>
-              </tr>
+              {%- endfor %}
             </tbody>
           </table>
         </div>
@@ -157,8 +130,9 @@
             <thead>
               <tr>
                 <th>Machine ID</th>
-                <th>Operation Type</th>
                 <th>Status</th>
+                <th>Start Time</th>
+                <th>Estimated End Time</th>
               </tr>
             </thead>
             <tbody>
@@ -166,17 +140,16 @@
                 <td>1,001</td>
                 <td>ipsum</td>
                 <td>ipsum</td>
+                <td>ipsum</td>
               </tr>
+              {%- for status in status_list %}
               <tr>
-                <td>1,002</td>
-                <td>consectetur</td>
-                <td>consectetur</td>
+                <td>{{ status['machine_id'] }}</td>
+                <td>{{ status['status'] }}</td>
+                <td>{{ status['start_time'] }}</td>
+                <td>{{ status['end_time'] }}</td>
               </tr>
-              <tr>
-                <td>1,003</td>
-                <td>nec</td>
-                <td>nec</td>
-              </tr>
+              {%- endfor %}
             </tbody>
           </table>
         </div>
@@ -189,105 +162,34 @@
     <div class="container py-lg-5 py-md-4 py-2">
       <div class="col-lg-12">
         <h6 class="title-subhny mb-2"><span></span></h6>
-        <h3 class="title-w3l mb-4">Process Record Check</h3>
-        <p class="para-sub pr-lg-5 mt-md-4 mt-3 mx-auto">You can check the record of a certain package.
+        <h3 class="title-w3l mb-4">Change Start Time / Operation Type</h3>
+        <p class="para-sub pr-lg-5 mt-md-4 mt-3 mx-auto">You can change the start time or the operation type of a machine.
         </p>
         <div class="form-inner-cont pt-lg-5">
-          <form action="{ { url_for('plant.search') }}" method="post" class="signin-form">
-            <div class="form-grids">
-              <div class="form-input">
-                <input type="text" name="packageID" id="packageID" placeholder="Enter package ID*" required />
+          <form action="{ { url_for('plant.change_start_operation') }}" method="post" class="signin-form">
+            <div class="form-group">
+              <label for="machine_id">Select Machine ID*</label>
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                {%- for status in status_list %}
+                <option>{{ status['machine_id'] }}</option>
+                {%- endfor %}
+              </select>
+              <label for="start_time">Select Start Time*</label>
+              <div class="form-grids">
+                <div class="form-input">
+                  <input type="text" name="packageID" id="packageID" placeholder="Enter package ID*" required />
+                </div>
               </div>
-            </div>
-            <div class="text-right">
-              <button class="btn btn-style btn-effect">Search</button>
-            </div>
-          </form>
-        </div>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Operation Type</th>
-                <th>Machine ID</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Expense</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1,001</td>
-                <td>10</td>
-                <td>0</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>1,002</td>
-                <td>10</td>
-                <td>0</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>1,003</td>
-                <td>10</td>
-                <td>0</td>
-                <td>1</td>
-                <td>10</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--//w3l-content-1-->
-  <!--/w3l-content-->
-  <div class="w3l-content-2 w3l-progressblock py-5">
-    <div class="container py-lg-5 py-md-4 py-2">
-      <div class="col-lg-12">
-        <h6 class="title-subhny mb-2"><span></span></h6>
-        <h3 class="title-w3l mb-4">Change Start Time</h3>
-        <p class="para-sub pr-lg-5 mt-md-4 mt-3 mx-auto">You can change the start time of a machine.
-        </p>
-        <div class="form-inner-cont pt-lg-5">
-          <form action="{ { url_for('plant.change_start_time') }}" method="post" class="signin-form">
-            <div class="form-grids">
-              <div class="form-input">
-                <input type="text" name="machineID" id="machineID" placeholder="Enter machine ID*" required />
-              </div>
-              <div class="form-input">
-                <input type="text" name="startTime" id="startTime" placeholder="Enter Start Time*" required />
-              </div>
-            </div>
-            <div class="text-right">
-              <button class="btn btn-style btn-effect">Apply</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--//w3l-content-1-->
-  <!--/w3l-content-->
-  <div class="w3l-content-2 w3l-progressblock py-5">
-    <div class="container py-lg-5 py-md-4 py-2">
-      <div class="col-lg-12">
-        <h6 class="title-subhny mb-2"><span></span></h6>
-        <h3 class="title-w3l mb-4">Change Operation Type</h3>
-        <p class="para-sub pr-lg-5 mt-md-4 mt-3 mx-auto">You can change the operation type of a machine.
-        </p>
-        <div class="form-inner-cont pt-lg-5">
-          <form action="{ { url_for('plant.change_operation_type') }}" method="post" class="signin-form">
-            <div class="form-grids">
-              <div class="form-input">
-                <input type="text" name="machineID" id="machineID" placeholder="Enter machine ID*" required />
-              </div>
-              <div class="form-input">
-                <input type="text" name="operationType" id="operationType" placeholder="Enter Operation Type*" required />
-              </div>
+              <label for="operation_type">Select Operation Type*</label>
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                {%- for operation_type in operation_type_list %}
+                <option>{{ operation_type['operation_type'] }}</option>
+                {%- endfor %}
+              </select>
             </div>
             <div class="text-right">
               <button class="btn btn-style btn-effect">Apply</button>
