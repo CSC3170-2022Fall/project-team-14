@@ -8,7 +8,12 @@ from db import get_db
 
 bp = Blueprint('consumer', __name__)
 
-@bp.route('/')
+@bp.route('/index_consumer')
+def index_consumer():
+    return render_template('index_consumer.html')
+
+
+@bp.route('/', methods=('GET', 'POST'))
 def packagelist():
     if (g.user):
         if request.method == 'POST':
