@@ -3,7 +3,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 from auth import login_required
-from alg import generate_packageid, allocate_package_call
+from alg import generate_packageid
 from db import get_db
 
 bp = Blueprint('consumer', __name__)
@@ -29,14 +29,14 @@ def packagelist():
             db = get_db()
             error = None
             cursor = db.cursor()
-            cursor.execute("SELECT package_id, chip_type, chip_number, total_expense FROM Packages WHERE package_id = %s", (package_id))
+            cursor.execute("SELECT package_id, chip_type, chip_number, price FROM Packages WHERE package_id = %s", (package_id))
             if cursor.fetchone() is not None:
                 error = 'Package {} does not exist.'.format(package_id)
-                return render_template('/consumer/packagelist.html', error = error)
+                return render_template('consumer/packagelist.html', error = error)
             else:
-                info1 = cursor.fetchone()
+                info1 = cursor.fetchall()
                 cursor.execute("SELECT package_id, start_time, status FROM Process_record WHERE package_id = %s", package_id)
-                info2 = cursor.fetchone()
+                info2 = cursor.fetchall()
                 return render_template('consumer/packagelist.html', info1 = info1, info2 = info2)
 
 @bp.route('/registerpackage', methods=('GET', 'POST'))
@@ -62,13 +62,11 @@ def registerpackage():
             if error is not None:
                 flash(error)
             else:
+                price = cursor.execute(
+                    "SELECT price From Chip_expense WHERE chip_type = %s", chip_type
+                    ).fetchone()
                 cursor.execute(
-                    "SELECT expense From Chip_requires_operation WHERE chip_type = %s", chip_type
-                    )
-                total_expense = cursor.fetchone()*chip_number
-                price = allocate_package_call(package_id, chip_type, chip_number, plant_id) 
-                cursor.execute(
-                    "INSERT INTO Package(package_id, chip_number, chip_type, plant_id, consumer_id, total_expense, price) VALUES (%s, %d, %s, %s, %s)",(package_id,chip_number,chip_type, plant_id,g.user[id],total_expense, price)
+                    "INSERT INTO Package(package_id, chip_number, chip_type, plant_id, consumer_id, price) VALUES (%s, %d, %s, %s, %s)",(package_id,chip_number,chip_type, plant_id,g.user['consumer_id'], price)
                     ) 
                 db.commit()  
                 return redirect(url_for('/payment'))
@@ -79,7 +77,6 @@ def registerpackage():
 @login_required
 def payment():
     if (g.user):
-        status = "fail"
         db = get_db()
         cursor = db.cursor()
         cursor.execute("SELECT total_expense FROM Package WHERE package_id = %s", g.user['package_id'])
@@ -93,11 +90,15 @@ def payment():
         if balance - price > 0:
             cursor.execute("UPDATE FROM Consumer SET balance = %f WHERE consumer_id = %s", (balance-price, g.user["consumer_id"]))
             db.commit()
-            status = 'success'
+            print("payment successful.")
+            return redirect(url_for('index_consumer'))
         else: 
-            status = "fail"
-        if status == 'success':
-            return render_template('consumer/payment.html')
-        else:
-            return redirect(url_for("/consumer"))
+            error = "Your balance is not available, payment fails."
+        print("Your payment error is:", error)
+        flash(error)
+        return render_template('payment.html', error = error)
+    return render_template('payment.html')
+
+# def return_button():
+#     return redirect(url_for('index_consumer'))
         

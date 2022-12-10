@@ -35,7 +35,7 @@ CREATE TABLE Own(
 CREATE TABLE Machine(
     machine_id INT NOT NULL,
     plant_id INT NOT NULL,
-    operation_type varchar(20) NOT NULL,
+    operation_type varchar(20) DEFAULT NULL,
     status varchar(20) DEFAULT 'Idle',
     quota int NOT NULL,
     PRIMARY KEY (machine_id)
@@ -43,7 +43,7 @@ CREATE TABLE Machine(
 );
 CREATE TABLE Operation_machine_cost(
     machine_id INT NOT NULL,
-    operation_type varchar(20) NOT NULL,
+    operation_type varchar(20) DEFAULT NULL,
     time INT NOT NULL,
     expense float(8,2) NOT NULL,
     PRIMARY KEY (machine_id, operation_type)
@@ -79,8 +79,7 @@ CREATE TABLE Chip_expense(
 );
 CREATE TABLE Chip_requires_operation(
     chip_type varchar(20) NOT NULL,
-    plant_id INT NOT NULL,
     operation_type varchar(20) NOT NULL,
     precedency int NOT NULL DEFAULT 0,
-    PRIMARY KEY (chip_type, plant_id, operation_type)
+    PRIMARY KEY (chip_type, operation_type)
 );
