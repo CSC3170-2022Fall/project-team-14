@@ -162,7 +162,12 @@ def main():
                 if pred_num < next_exe[3]:
                     print("ERROR! OUT OF STAGE")
                 elif pred_num == next_exe[3]:#reach end
-                    pass #finish! Yeah!
+                    #get total_expense and price
+                    cursor.execute("SELECT * FROM Packages WHERE Packages.package_id = %d",next_exe[2])
+                    Packages_info = cursor.fetchall()
+                    income = Packages_info[0]['price'] - Packages_info[0]['total_expense']
+                    #modify Own
+                    cursor.execute("UPDATE Own SET Own.income = %d WHERE Own.plant_id = %d",income,next_exe[2])
                 else:#need to allocate next step
                     next_exe[3] += 1
                     next_exe[1] = 1
