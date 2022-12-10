@@ -27,9 +27,7 @@ CREATE TABLE Own(
     plant_id varchar(50) NOT NULL,
     owner_id varchar(20) NOT NULL,
     income float(8,2),
-    PRIMARY KEY (plant_id, owner_id)
-    -- FOREIGN KEY (type_name) REFERENCES Machine_type(type_name),
-    -- FOREIGN KEY (owner_id) REFERENCES Plant_owner(owner_id)
+    PRIMARY KEY (plant_id)
 );
 
 CREATE TABLE Machine(
@@ -54,6 +52,8 @@ CREATE TABLE Packages(
     chip_type varchar(20) NOT NULL,
     plant_id varchar(50) NOT NULL,
     consumer_id varchar(20) NOT NULL,
+    total_expense float(8,2) NOT NULL,
+    price float(8,2) NOT NULL,
     PRIMARY KEY (package_id)
     -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id),
     -- FOREIGN KEY (consumer_id) REFERENCES Consumer(consumer_id)
@@ -66,14 +66,15 @@ CREATE TABLE Process_record(
     start_time TIMESTAMP NOT NULL DEFAULT now(),
     end_time TIMESTAMP NOT NULL,
     plant_id varchar(50) NOT NULL,
-    expense float(8,2) NOT NULL,
     status varchar(10),
     PRIMARY KEY (package_id, operation_type, machine_id)
     -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id)
 );
 CREATE TABLE Chip_requires_operation(
     chip_type varchar(20) NOT NULL,
+    plant_id varchar(50) NOT NULL,
     operation_type varchar(20) NOT NULL,
     precedency int NOT NULL DEFAULT 0,
-    PRIMARY KEY (chip_type, operation_type)
+    expense float(8,2) NOT NULL,
+    PRIMARY KEY (chip_type, plant_id, operation_type)
 );
