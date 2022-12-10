@@ -43,6 +43,27 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+.register-package .pop-overlay {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  right: 0;
+  transition: opacity 0ms;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 99;
+  background: #000000ba;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+  height: 100%;
+  width: 100%;
+}
+
+.register-package .pop-overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 article,
 aside,
 figcaption,
@@ -10658,6 +10679,7 @@ button.bg-dark:focus {
 
 .text-right {
   text-align: right !important;
+  height: inherit;
 }
 
 .text-center {

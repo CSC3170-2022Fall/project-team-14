@@ -15,12 +15,17 @@ def index_consumer():
     return redirect(url_for('auth.login'))
     # return render_template('index_consumer.html')
 
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('auth.login'))
+
 
 @bp.route('/', methods=('GET', 'POST'))
 def packagelist():
     if (g.user):
         if request.method == 'POST':
-            package_id = request.form["package_id"]
+            package_id = request.form.get("package_id")
             db = get_db()
             error = None
             cursor = db.cursor()
