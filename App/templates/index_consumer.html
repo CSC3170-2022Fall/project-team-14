@@ -23,14 +23,6 @@
           <a class="navbar-brand">
             Chip Manufacture
           </a>
-          
-          <!-- <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
-            data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-            <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-            </span>
-          </button> -->
 
           <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mx-lg-auto">
@@ -96,7 +88,9 @@
 
   <!-- register package -->
   <div class="w3l-middle py-5">
-    <div class="container">
+    <div class="container py-lg-5 py-md-4 py-2">
+      <h6 class="title-subhny mb-2"><span></span></h6>
+        <h3 class="title-w3l mb-4">Register your package</h3>
     <div class="form-inner-cont pt-lg-5">
       <form action="{{  url_for('consumer.registerpackage')}}" method="post" class="signin-form">
           <div class="form-grids">
@@ -106,15 +100,15 @@
                 <option value="1"> 2</option>
                 <option value="1"> 3</option>
               </select>
-              <input type="text" name="chip-number" class="form-control" placeholder="Enter number " required />
+              <input type="text" name="chip_number" class="form-control" placeholder="Enter number " required />
               <select name="plant_id" class="form-control" required>
-                <option value="1" hidden> Choose one plant if you want</option>
+                <option value="1" hidden> Choose one plant</option>
                 <option value="1"> 1</option>
                 <option value="1"> 2</option>
                 <option value="1"> 3</option>
               </select>
             <div class="text-right">
-              <button class="btn btn-style btn-effect">Registre Package</button>
+              <button class="btn btn-style btn-effect">Register Package</button>
             </div>
           </div>
       </form>
