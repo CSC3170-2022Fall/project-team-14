@@ -78,7 +78,7 @@ def register_owner():
         username = request.form['username']
         password = request.form['password']
         password2 = request.form['password2']
-        plant_id_list = request.form.getlist("plant_id")
+        plant_id_list = request.values.getlist("plant_id")
         plant = None
         db = get_db()
         error = None
