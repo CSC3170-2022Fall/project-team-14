@@ -44,7 +44,7 @@ CREATE TABLE `Machine`(
 );
 CREATE TABLE `Operation_machine_cost`(
     `machine_id` INT NOT NULL,
-    `operation_type` varchar(20) DEFAULT NULL,
+    `operation_type` varchar(20) DEFAULT "None",
     `time` INT NOT NULL,
     `expense` float(8,2) NOT NULL,
     PRIMARY KEY (`machine_id`, `operation_type`)
@@ -63,7 +63,7 @@ CREATE TABLE `Packages`(
 );
 
 CREATE TABLE `Process_record`(
-    `package_id `INT NOT NULL,
+    `package_id` INT NOT NULL,
     `operation_type`varchar(20) NOT NULL,
     `machine_id` INT NOT NULL,
     `start_time` INT NOT NULL,
