@@ -60,10 +60,13 @@
             <div class="welcome-left-frm pr-lg-5 mt-lg-0 mt-5">
             <div class="w3request-form">
                 <form action="{{ url_for('auth.login') }}" method="POST">
-                <h4 class="title-w3l">LOGIN</h4>
+                <h4 class="title-w3l">
+                    LOGIN</h4>
+    
                 <div class="form-style-w3ls mt-4">
                     <input type="text" name="username" placeholder="User name" required="required" id="username">
                     <input type="password" name="password" placeholder="password" id="password" required="required">
+                    <p class="pr-lg-5" style="color:#f00">{{ error }}</p>
                     <button type="submit" class="btn btn-style btn-primary w-100 mt-3" name="login_character" value="consumer">Login Consumer</button>
                     <button type="submit" class="btn btn-style btn-primary w-100 mt-3" name="login_character" value="plant">Login Plant</button>
                 </div>

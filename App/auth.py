@@ -18,10 +18,6 @@ def login():
         db = get_db()
         error = None
         cursor = db.cursor()
-        if username.strip() == '':
-            error = 'Username is required.'
-        elif password.strip() == '':
-            error = 'Password is required.'
         if error is None:
             if login_character=="consumer":
               cursor.execute("SELECT consumer_id, password FROM Consumer WHERE consumer_id = %s", (username))
@@ -64,13 +60,7 @@ def register():
         db = get_db()
         error = None
         cursor = db.cursor()
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif not password2:
-            error = 'Please repeat password.'
-        elif password != password2:
+        if password != password2:
             error = 'Password is inconsistent.'
         else:
             if consumer is not None:
