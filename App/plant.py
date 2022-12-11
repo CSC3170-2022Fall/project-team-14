@@ -15,7 +15,7 @@ def index_plant():
     return render_template('index_plant.html')
 
 @bp.route('/', methods=('GET', 'POST'))
-def packagelist():
+def plant_html():
     if (g.user):
         if request.method == 'POST':
             package_id = request.form["package_id"]
@@ -65,33 +65,48 @@ def packagelist():
             cursor = db.cursor()
             cursor.execute("SELECT package_id, chip_type, chip_number, customer_id, start_time, status FROM Packages WHERE plant_id = %s", plant_id)
             package_list = cursor.fetchall()
-        
-            return render_template('/index_plant.html',package_list=package_list)
 
-def machinelist():
-    if (g.user):
-        if request.method == 'POST':
+
             machine_id = request.form["machine_id"]
             db = get_db()
             error = None
             cursor = db.cursor()
             cursor.execute("SELECT machine_id, status, start_time, end_time FROM Process_record WHERE machine_id = %s", (machine_id))
             machine_list = cursor.fetchone()
-            return render_template('/index_plant.html',machine_list=machine_list)
+            
 
-def change_start_time(): 
-    if(g.user):
-        db = get_db()
-        cursor = db.cursor()
-        machine_id=request.form["machine_id"]
-        cursor.execute("SELECT operation_type FROM Machine WHERE machine_id =%s", (machine_id))
-        operation_list = cursor.fetchall() 
-        start_time = request.form["start_time"]
-        operation_type=request.form["operation_type"]
-        cursor.execute(
-                        "INSERT INTO Process_record(machine_id, start_time, operation_type) VALUES (%s, %d, %s)",(machine_id, start_time, operation_type)
-                        )
-        
-        new_time = cursor.fetchall() 
-        db.commit()  
-        return render_template('/index_plant.html',new_time=new_time)
+
+
+            return render_template('/index_plant.html', package_list=package_list, machine_list=machine_list)
+
+
+
+@bp.route('/change_start_operation', methods=('GET', 'POST'))
+def change_start_time():
+    if (g.user):
+        if request.method == 'POST':
+            db = get_db()
+            cursor = db.cursor()
+            machine_id=request.form["machine_id"]
+            start_time = request.form["start_time"]
+            operation_type=request.form["operation_type"]
+            cursor.execute(
+                            "INSERT INTO Process_record(machine_id, start_time, operation_type) VALUES (%s, %d, %s)",(machine_id, start_time, operation_type)
+                            )    
+            db.commit()  
+            plant_id = request.form["plant_id"]
+            db = get_db()
+            error = None
+            cursor = db.cursor()
+            cursor.execute("SELECT package_id, chip_type, chip_number, customer_id, start_time, status FROM Packages WHERE plant_id = %s", plant_id)
+            package_list = cursor.fetchall()
+
+
+            machine_id = request.form["machine_id"]
+            db = get_db()
+            error = None
+            cursor = db.cursor()
+            cursor.execute("SELECT machine_id, status, start_time, end_time FROM Process_record WHERE machine_id = %s", (machine_id))
+            machine_list = cursor.fetchone()
+            return render_template('/index_plant.html', package_list=package_list, machine_list=machine_list)
+
