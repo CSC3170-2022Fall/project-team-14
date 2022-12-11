@@ -23,9 +23,15 @@ def packagelist():
             db = get_db()
             error = None
             cursor = db.cursor()
-            cursor.execute("SELECT package_id, chip_type, chip_number, customer_id, start_time, status FROM Packages WHERE plant_id = %s", plant_id)
-            package_list = cursor.fetchall()
+            packagelist=[]
+            cursor.execute("SELECT package_id, chip_type, chip_number, customer_id FROM Packages WHERE plant_id = %s", plant_id)
+            package_list_1 = cursor.fetchall()
+            packagelist.append(package_list_1)
+            cursor.execute("SELECT start_time, status FROM Process_record WHERE package_id = SELECT package_id FROM Packages WHERE plant_id = %s", plant_id)
+            package_list_2 = cursor.fetchall()
+            packagelist.append(package_list_2)
 
+            
 
             machine_id = request.form["machine_id"]
             db = get_db()
@@ -37,7 +43,7 @@ def packagelist():
 
 
 
-            return render_template('/index_plant.html', package_list=package_list, machine_list=machine_list)
+            return render_template('/index_plant.html', package_list_1=package_list_1,package_list_2=package_list_2, machine_list=machine_list)
 
 
 
@@ -53,11 +59,18 @@ def change_start_operation():
             machine_id=request.form['machine_id']
             start_time = request.form["start_time"]
             operation_type=request.form["operation_type"]
-            print(machine_id,start_time,operation_type)
-            cursor.execute(
-                            "UPDATE Process_record SET start_time = %s WHERE machine_id = %s", (start_time, machine_id)
-                            )    
-            db.commit()  
+            cursor.execute("SELECT operation_type FROM Operation_machine_cost WHERE machine_id = %s", machine_id)
+            operation_list = cursor.fetchall()
+            if operation_type in operation_list:
+                cursor.execute(
+                                "UPDATE Process_record SET operation_type=%s, start_time = %s WHERE machine_id = %s", (operation_type,start_time, machine_id)
+                                )    
+                db.commit()  
+            else:
+                return redirect(url_for('plant.index_plant'))
+                # error="This operation_type is unavaliable, please choose again!"
+                # return render_template('/index_plant.html', error = error)
+                
             # plant_id = request.form["plant_id"]
             # db = get_db()
             # error = None
