@@ -17,115 +17,184 @@ USE Chip;
 --
 -- Dumping data for table `Plant_owner`
 -- WAIT FOR insertion
-
-DROP PROCEDURE IF EXISTS `insert_plant_owner`;
-CREATE PROCEDURE `insert_plant_owner`(IN n INT)
-BEGIN
-    $LISTBUILD("Qin Lan","Zhang Xinyu","Li Qianyi","Wei Shiyun","Zhang Mengyao","Emily","TOM","JERRY") AS `owner_list`;
-    DECLARE i INT DEFAULT 1;
-    DECLARE `owner_id` VARCHAR(20) DEFAULT 0;
-    DECLARE `owner_name` VARCHAR(1500) DEFAULT " ";
-    DECLARE `password` INT DEFAULT 0;
-    WHILE i < n DO
-        SET `owner_id` = STRING(i);
-        SET `owner_name` = $LIST(`owner_list`,i);
-        SET `password` = STRING(FLOOR(RAND()*100000));
-        INSERT INTO `insert_plant_owner` VALUES(`owner_id`, `owner_name`,`password`);
-        SET i = i+1;
-    END WHILE;
-END;
-
-CALL `insert_plant_owner`(8);
-SELECT count(*) FROM `insert_plant_owner`;
-INSERT INTO `plant_owner` SELECT * FROM `insert_plant_owner`;
-
+INSERT `Plant_owner`(`owner_id`,`password`) VALUES
+("Qin Lan","123456"),
+("Zhang Xinyu","654321"),
+("Li Xianyi","123654");
 -- --------------------------------------------------------
 
 --
 -- Dumping data for table `Own`
 --
-DROP PROCEDURE IF EXISTS `own_info`;
-CREATE PROCEDURE `own_info`(IN n INT)
-BEGIN
-    DECLARE i INT DEFAULT 1;
-    DECLARE `plant_id` VARCHAR(50) DEFAULT 0;
-    DECLARE `owner_id` VARCHAR(50) DEFAULT 1;
-    DECLARE `UPPER` INT;
-    SET `UPPER` = 12;
-    DECLARE `LOWER` INT;
-    SET `LOWER` = 1;
-    DECLARE `income` float(8,2) DEFAULT 0;
-    WHILE i < n DO
-        SET `plant_id` = "PLANT"+STRING(i);
-        SET `owner_id` = STRING(ROUND(((`UPPER`-`LOWER`-1)*RAND()+`LOWER`),0));
-        INSERT INTO `own_info` VALUES(`plant_id`,`owner_id`,`income`);
-        set i = i+1;
-    END WHILE;
-END;
-
-CALL `own_info`(12);
-SELECT count(*) FROM `own_info`;
-INSERT INTO `Own` SELECT * FROM `own_info`;
-
+INSERT `Own`(`plant_id`,`owner_id`,`income`) VALUES
+("Plant 1","Qin Lan",0),
+("Plant 2","Qin Lan",0),
+("Plant 3","Qin Lan",0),
+("Plant 4","Qin Lan",0),
+("Plant 5","Qin Lan",0),
+("Plant 6","Qin Lan",0),
+("Plant 7","Zhang Xinyu",0),
+("Plant 8","Zhang Xinyu",0),
+("Plant 9","Zhang Xinyu",0),
+("Plant 10","Li Xianyi",0),
+("Plant 11","Li Xianyi",0),
+("Plant 12","Li Xianyi",0);
 -- -------------------------------------------------------
 
 --
 -- Dumping data for table `Machine`
-DROP PROCEDURE IF EXISTS `machine_info`;
-CREATE PROCEDURE `machine_info`(IN n INT)
-BEGIN
-    DECLARE i INT DEFAULT 1;
-    DECLARE `machine_id` DEFAULT 1;
-    DECLARE `plant_id` DEFAULT 1;
-    DECLARE `UPPER` INT;
-    SET `UPPER` = 12;
-    DECLARE `LOWER` INT;
-    SET `LOWER` = 1;
-    DECLARE `status` varchar(20) DEFAULT 'Finished';
-    DECLARE `quota` int DEFAULT 0;
-    WHILE i < n DO
-        SET `machine_id` = i;
-        SET `plant_id` = ROUND(((`UPPER`-`LOWER`-1)*RAND()+`LOWER`),0);
-        SET `quota` = ROUND(100+RAND()*100);
-        INSERT INTO `machine_info` VALUES(`machine_id`,`plant_id`,`status`,`quota`);
-        SET i = i+1;
-    END WHILE;
-END;
-
-CALL `machine_info`(50);
-SELECT count(*) FROM `machine_info`;
-INSERT INTO `Machine` SELECT * FROM `machine_info`;
+INSERT `Machine`(`machine_id`,`plant_id`,`operation_type`,`status`,`quota`) VALUES
+(1,"Plant 1",NULL,"IDLE",10000),
+(2,"Plant 12",NULL,"IDLE",20000),
+(3,"Plant 10",NULL,"IDLE",30000),
+(4,"Plant 7",NULL,"IDLE",50000),
+(5,"Plant 6",NULL,"IDLE",10500),
+(6,"Plant 4",NULL,"IDLE",26000),
+(7,"Plant 2",NULL,"IDLE",20000),
+(8,"Plant 4",NULL,"IDLE",18000),
+(9,"Plant 3",NULL,"IDLE",16000),
+(10,"Plant 2",NULL,"IDLE",20400),
+(11,"Plant 5",NULL,"IDLE",20000),
+(12,"Plant 8",NULL,"IDLE",20600),
+(13,"Plant 9",NULL,"IDLE",10600),
+(14,"Plant 1",NULL,"IDLE",10800),
+(15,"Plant 2",NULL,"IDLE",19000),
+(16,"Plant 6",NULL,"IDLE",18500),
+(17,"Plant 11",NULL,"IDLE",17000),
+(18,"Plant 9",NULL,"IDLE",14000),
+(19,"Plant 8",NULL,"IDLE",16000),
+(20,"Plant 7",NULL,"IDLE",20000);
 
 -- --------------------------------------------------------
 
 --
 -- Dumping data for table `Operation_machine_cost`
 --
-
-DROP PROCEDURE IF EXISTS `operation_machine_info`;
-CREATE PROCEDURE `operation_machine_info`(IN n INT)
-BEGIN
-    $LISTBUILD('design-import', 'etch_A', 'etch_B', 'bond_A','bond_B' 'drill', 'test') AS opList;
-    DECLARE i INT DEFAULT 1; --# of machine:50-- 
-    DECLARE j INT DEFAULT 1; --index of the operation--
-    DECLARE machine_id INT DEFAULT 1;
-    DECLARE operation_type varchar DEFAULT 0;
-    DECLARE time FLOAT(8,2) DEFAULT 0;
-    DECLARE expense FLOAT(8,2) DEFAULT 0;
-    WHILE i <n DO
-        while j<8 DO
-            SET `machine_id` = i;
-            SET `operation_type` = $LIST(`oplist`,j);
-            SET `time` = RAND()*10  --time per unit chip per operation
-            SET `expense` = RAND() --expense per unit chip per operation
-            SET j = j+1;
-        SET i = i+1;
-    END WHILE;
-END;
-
-CALL `operation_machine_info`(50);
-SELECT count(*) FROM `operation_machine_info`;
-INSERT INTO `Operation_machine_cost` SELECT * FROM `operation_machine_info`;
+INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) VALUES
+(1,"design-import",10,10),
+(1,"etch",15,15),
+(1,"bond_A",13,15),
+(1,"bond_B",12,12),
+(1,"drill_A",12,12),
+(1,"drill_B",12,12),
+(1,"test",10,10),
+(2,"design-import",5,5),
+(2,"etch",10,10),
+(2,"bond_A",8,8),
+(2,"drill_A",12,12),
+(2,"test",7,7),
+(3,"design-import",8,8),
+(3,"etch",15,15),
+(3,"bond_A",20,20),
+(3,"bond_B",12,12),
+(3,"drill_A",18,18),
+(3,"drill_B",12,12),
+(3,"test",10,10),
+(4,"design-import",7,7),
+(4,"etch",15,15),
+(4,"bond_A",10,10),
+(4,"drill_A",12,12),
+(4,"test",6,6),
+(5,"design-import",5,5),
+(5,"etch",15,15),
+(5,"bond_A",15,15),
+(5,"bond_B",12,12),
+(5,"drill_A",15,15),
+(5,"drill_B",12,12),
+(5,"test",10,10),
+(6,"design-import",12,12),
+(6,"etch",15,15),
+(6,"bond_A",13,13),
+(6,"drill_A",12,12),
+(6,"test",10,10),
+(7,"design-import",10,10),
+(7,"etch",15,15),
+(7,"bond_A",13,15),
+(7,"bond_B",12,12),
+(7,"drill_A",12,12),
+(7,"drill_B",12,12),
+(7,"test",10,10),
+(8,"design-import",10,10),
+(8,"etch",15,15),
+(8,"bond_A",13,15),
+(8,"bond_B",12,12),
+(8,"drill_A",12,12),
+(8,"drill_B",12,12),
+(8,"test",10,10),
+(9,"design-import",10,10),
+(9,"etch",15,15),
+(9,"bond_A",13,15),
+(9,"bond_B",12,12),
+(9,"drill_A",12,12),
+(9,"test",10,10),
+(10,"design-import",10,10),
+(10,"etch",15,15),
+(10,"bond_A",13,15),
+(10,"bond_B",12,12),
+(10,"drill_A",12,12),
+(10,"drill_B",12,12),
+(10,"test",10,10),
+(11,"design-import",10,10),
+(11,"etch",15,15),
+(11,"bond_A",13,15),
+(11,"bond_B",12,12),
+(11,"drill_A",12,12),
+(11,"drill_B",12,12),
+(11,"test",10,10),
+(12,"design-import",10,10),
+(12,"etch",15,15),
+(12,"bond_A",13,15),
+(12,"drill_A",12,12),
+(12,"test",10,10),
+(13,"design-import",10,10),
+(13,"etch",15,15),
+(13,"bond_A",13,15),
+(13,"bond_B",12,12),
+(13,"drill_A",12,12),
+(13,"drill_B",12,12),
+(13,"test",10,10),
+(14,"design-import",10,10),
+(14,"etch",15,15),
+(14,"bond_A",13,15),
+(14,"drill_A",12,12),
+(14,"drill_B",12,12),
+(14,"test",10,10),
+(15,"design-import",10,10),
+(15,"etch",15,15),
+(15,"bond_A",13,15),
+(15,"drill_A",12,12),
+(15,"test",10,10),
+(16,"design-import",10,10),
+(16,"etch",15,15),
+(16,"bond_A",13,15),
+(16,"bond_B",12,12),
+(16,"drill_A",12,12),
+(16,"drill_B",12,12),
+(16,"test",10,10),
+(17,"design-import",10,10),
+(17,"etch",15,15),
+(17,"bond_A",13,15),
+(17,"drill_A",12,12),
+(17,"test",10,10),
+(18,"design-import",10,10),
+(18,"etch",15,15),
+(18,"bond_A",13,15),
+(18,"bond_B",12,12),
+(18,"drill_A",12,12),
+(18,"drill_B",12,12),
+(18,"test",10,10),
+(19,"design-import",10,10),
+(19,"etch",15,15),
+(19,"bond_A",13,15),
+(19,"bond_B",12,12),
+(19,"drill_A",12,12),
+(19,"test",10,10),
+(20,"design-import",10,10),
+(20,"etch",15,15),
+(20,"bond_A",13,15),
+(20,"bond_B",12,12),
+(20,"drill_A",12,12),
+(20,"test",10,10);
 
 -- --------------------------------------------------------
 
@@ -144,24 +213,13 @@ INSERT INTO `Operation_machine_cost` SELECT * FROM `operation_machine_info`;
 --
 -- Dumping data for table `Chip_expense`
 --
-DROP PROCEDURE IF EXISTS `chip_expense_info`;
-CREATE PROCEDURE `chip_expense_info`(IN n INT) -- # of chip types = 6--
-BEGIN
-    $LISTBUILD("A","B","C","D","E","F") AS `type_list`;
-    DECLARE i INT DEFAULT 1;
-    DECLARE `chip_type` varchar(20) DEFAULT " ";
-    DECLARE `price` float(8,2) DEFAULT;
-    WHILE i<n DO
-        SET `chip_type` = $LIST(`type_list`,i);
-        SET `price` = RAND()*10000;
-        SET i = i+1;
-    END WHILE;
-END;
-
-CALL`chip_expense_info`(6);
-SELECT count(*) FROM `chip_expense_info`;
-INSERT INTO `Chip_expense` SELECT * FROM `chip_expense_info`;
-
+INSERT `Chip_expense`(`chip_type`,`price`) VALUES
+("a",10),
+("b",15),
+("c",20),
+("d",25),
+("e",30),
+("f",35);
 
 -- --------------------------------------------------------
 --
@@ -216,4 +274,3 @@ INSERT `Chip_requires_operation`(`chip_type`,`operation_type`,`precedency`) VALU
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
--- 啊啊啊啊啊啊啊啊啊啊--

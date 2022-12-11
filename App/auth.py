@@ -18,14 +18,10 @@ def login():
         db = get_db()
         error = None
         cursor = db.cursor()
-        if username.strip() == '':
-            error = 'Username is required.'
-        elif password.strip() == '':
-            error = 'Password is required.'
         if error is None:
             if login_character=="consumer":
               cursor.execute("SELECT consumer_id, password FROM Consumer WHERE consumer_id = %s", (username))
-            elif login_character=="plant_owner":
+            elif login_character=="plant":
               cursor.execute("SELECT owner_id, password FROM Plant_owner WHERE owner_id = %s", (username))
             user = cursor.fetchone()
 
@@ -39,7 +35,7 @@ def login():
                 session['user_id'] = user[0]
                 if login_character=="consumer":
                     return redirect(url_for('consumer.index_consumer'))
-                elif login_character=="plant_owner":
+                elif login_character=="plant":
                     return redirect(url_for('plant.index_plant'))
             session['user_id'] = username
             # return redirect(url_for(login_character+'.index_'+login_character))
@@ -49,50 +45,62 @@ def login():
     return render_template('login.html')
 
 
-@bp.route('/register', methods = ('GET','POST'))
-def register():
+@bp.route('/register_consumer', methods = ('GET','POST'))
+def register_consumer():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         password2 = request.form['password2']
-        register_character = request.form.get('register_character')
         consumer = None
-        if register_character=="consumer":
-            consumer = register_character
-        if register_character=="plant_owner":
-            plant_owner = register_character
         db = get_db()
         error = None
         cursor = db.cursor()
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif not password2:
-            error = 'Please repeat password.'
-        elif password != password2:
+        if password != password2:
             error = 'Password is inconsistent.'
         else:
-            if consumer is not None:
-              cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (username))
-            elif plant_owner is not None:
-              cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (username))
+            cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (username))
             if cursor.fetchone() is not None:
                 error = 'User {} is already registered.'.format(username)
 
         if error is None:
-            if consumer is not None:
-               ttt =  generate_password_hash(password)
-               cursor.execute("INSERT INTO Consumer(consumer_id, password, balance) VALUES (%s, %s, %s)", (username, generate_password_hash(password),0))
-            elif plant_owner is not None:
-               cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s)", (username, generate_password_hash(password)))
+            cursor.execute("INSERT INTO Consumer(consumer_id, password, balance) VALUES (%s, %s, %s)", (username, generate_password_hash(password),0))
             db.commit()
             return redirect(url_for('auth.login'))
 
         print('register page error is: ', error)
         flash(error)
-        return render_template('register.html', error = error)
-    return render_template('register.html')
+        return render_template('register_consumer.html', error = error)
+    return render_template('register_consumer.html')
+
+@bp.route('/register_owner', methods = ('GET','POST'))
+def register_owner():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        password2 = request.form['password2']
+        plant_id_list = request.values.getlist("plant_id")
+        plant = None
+        db = get_db()
+        error = None
+        cursor = db.cursor()
+        if password != password2:
+            error = 'Password is inconsistent.'
+        else:
+            cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (username))
+            if cursor.fetchone() is not None:
+                error = 'User {} is already registered.'.format(username)
+
+        if error is None:
+            cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s)", (username, generate_password_hash(password)))
+            for i in range(len(plant_id_list)):
+                cursor.execute("UPDATE Own SET owner_id = %s WHERE plant_id = %s", (username, plant_id_list[i]))
+            db.commit()
+            return redirect(url_for('auth.login'))
+
+        print('register page error is: ', error)
+        flash(error)
+        return render_template('register_owner.html', error = error)
+    return render_template('register_owner.html')
 
 @bp.before_app_request
 def load_logged_in_user():

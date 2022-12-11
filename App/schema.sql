@@ -28,7 +28,6 @@ CREATE TABLE `Plant_owner`(
 CREATE TABLE `Own`(
     `plant_id` varchar(50) NOT NULL,
     `owner_id` varchar(20) NOT NULL,
-    `type_name` varchar(50) NOT NULL,
     `income` float(8,2),
     PRIMARY KEY (`plant_id`)
 );
