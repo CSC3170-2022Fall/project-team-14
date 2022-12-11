@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import queue
 import time
 import queue
@@ -56,7 +55,7 @@ def allocate_package_call(package_id, chip_type, chip_number, plant_id=-1):
                     for one_can in range(len(one_machine_can_opr)):
                         if(one_machine_can_opr[one_can]['operation_type'] == operation_type[o]['operation_type']):
                             count_can += int(machine[m]['quota'])
-                            if (machine[m]['status'] == 'Idle'and (machine[m]['operation_type'] == NULL or machine[m]['operation_type'] == first_operation_type)):
+                            if (machine[m]['status'] == 'Idle'and (machine[m]['operation_type'] == None or machine[m]['operation_type'] == first_operation_type)):
                                 count_now += int(machine[m]['quota'])
 
                     if count_now >= chip_number:#one operation can now
