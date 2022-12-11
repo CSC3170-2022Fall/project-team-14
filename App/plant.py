@@ -42,7 +42,7 @@ def packagelist():
 
 
 @bp.route('/change_start_operation', methods=('GET', 'POST'))
-def change_start_time():
+def change_start_operation():
     if (g.user):
         if request.method == 'POST':
             db = get_db()
