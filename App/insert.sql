@@ -12,7 +12,6 @@ USE Chip;
 -- WAIT FOR insertion
 --
 
-INSERT INTO `Consumer` (`consumer_id`, `password`, `balance`) VALUES
 
 -- --------------------------------------------------------
 
@@ -25,13 +24,13 @@ CREATE PROCEDURE `insert_plant_owner`(IN n INT)
 BEGIN
     $LISTBUILD("Qin Lan","Zhang Xinyu","Li Qianyi","Wei Shiyun","Zhang Mengyao","Emily","TOM","JERRY") AS `owner_list`;
     DECLARE i INT DEFAULT 1;
-    DECLARE `owner_id` INT DEFAULT 0;
-    DECLARE `owner_name` VARCHAR(20) DEFAULT " ";
+    DECLARE `owner_id` VARCHAR(20) DEFAULT 0;
+    DECLARE `owner_name` VARCHAR(1500) DEFAULT " ";
     DECLARE `password` INT DEFAULT 0;
     WHILE i < n DO
-        SET `owner_id` = i;
+        SET `owner_id` = STRING(i);
         SET `owner_name` = $LIST(`owner_list`,i);
-        SET `password` = FLOOR(RAND()*100000);
+        SET `password` = STRING(FLOOR(RAND()*100000));
         INSERT INTO `insert_plant_owner` VALUES(`owner_id`, `owner_name`,`password`);
         SET i = i+1;
     END WHILE;
@@ -50,16 +49,16 @@ DROP PROCEDURE IF EXISTS `own_info`
 CREATE PROCEDURE `own_info`(IN n INT)
 BEGIN
     DECLARE i INT DEFAULT 1;
-    DECLARE `plant_id` INT DEFAULT 0;
-    DECLARE `owner_id` INT DEFAULT 1;
+    DECLARE `plant_id` VARCHAR(50) DEFAULT 0;
+    DECLARE `owner_id` VARCHAR(50) DEFAULT 1;
     DECLARE `UPPER` INT;
     SET `UPPER` = 12;
     DECLARE `LOWER` INT;
     SET `LOWER` = 1;
     DECLARE `income` float(8,2) DEFAULT 0;
     WHILE i < n DO
-        SET `plant_id` = i;
-        SET `owner_id` = ROUND(((`UPPER`-`LOWER`-1)*RAND()+`LOWER`),0);
+        SET `plant_id` = "PLANT"+STRING(i);
+        SET `owner_id` = STRING(ROUND(((`UPPER`-`LOWER`-1)*RAND()+`LOWER`),0));
         INSERT INTO `own_info` VALUES(`plant_id`,`owner_id`,`income`);
         set i = i+1;
     END WHILE;
@@ -73,7 +72,6 @@ INSERT INTO `Own` SELECT * FROM `own_info`;
 
 --
 -- Dumping data for table `Machine`
---
 DROP PROCEDURE IF EXISTS `machine_info`
 CREATE PROCEDURE `machine_info`(IN n INT)
 BEGIN
