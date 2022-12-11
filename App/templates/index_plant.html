@@ -166,10 +166,10 @@
         <p class="para-sub pr-lg-5 mt-md-4 mt-3 mx-auto">You can change the start time or the operation type of a machine.
         </p>
         <div class="form-inner-cont pt-lg-5">
-          <form action="{ { url_for('plant.change_start_operation') }}" method="post" class="signin-form">
+          <form action="{{ url_for('plant.change_start_operation') }}" method="post" class="signin-form">
             <div class="form-group">
               <label for="machine_id">Select Machine ID*</label>
-              <select class="form-control" id="machine_id">
+              <select class="form-control" name="machine_id">
                 <option>1</option>
                 <option>2</option>
                 {%- for status in machine_list %}
@@ -183,7 +183,7 @@
                 </div>
               </div>
               <label for="operation_type">Select Operation Type*</label>
-              <select class="form-control" id="operation_type">
+              <select class="form-control" name="operation_type">
                 <option>1</option>
                 <option>2</option>
                 {%- for operation in operation_list %}
