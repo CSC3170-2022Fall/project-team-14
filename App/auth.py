@@ -25,7 +25,7 @@ def login():
         if error is None:
             if login_character=="consumer":
               cursor.execute("SELECT consumer_id, password FROM Consumer WHERE consumer_id = %s", (username))
-            elif login_character=="plant":
+            elif login_character=="plant_owner":
               cursor.execute("SELECT owner_id, password FROM Plant_owner WHERE owner_id = %s", (username))
             user = cursor.fetchone()
 
@@ -39,7 +39,7 @@ def login():
                 session['user_id'] = user[0]
                 if login_character=="consumer":
                     return redirect(url_for('consumer.index_consumer'))
-                elif login_character=="plant":
+                elif login_character=="plant_owner":
                     return redirect(url_for('plant.index_plant'))
             session['user_id'] = username
             # return redirect(url_for(login_character+'.index_'+login_character))
@@ -59,8 +59,8 @@ def register():
         consumer = None
         if register_character=="consumer":
             consumer = register_character
-        if register_character=="plant":
-            plant = register_character
+        if register_character=="plant_owner":
+            plant_owner = register_character
         db = get_db()
         error = None
         cursor = db.cursor()
@@ -75,7 +75,7 @@ def register():
         else:
             if consumer is not None:
               cursor.execute("SELECT consumer_id FROM Consumer WHERE consumer_id = %s", (username))
-            elif plant is not None:
+            elif plant_owner is not None:
               cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (username))
             if cursor.fetchone() is not None:
                 error = 'User {} is already registered.'.format(username)
@@ -84,7 +84,7 @@ def register():
             if consumer is not None:
                ttt =  generate_password_hash(password)
                cursor.execute("INSERT INTO Consumer(consumer_id, password, balance) VALUES (%s, %s, %s)", (username, generate_password_hash(password),0))
-            elif plant is not None:
+            elif plant_owner is not None:
                cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s)", (username, generate_password_hash(password)))
             db.commit()
             return redirect(url_for('auth.login'))
