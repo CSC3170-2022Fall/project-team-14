@@ -22,7 +22,7 @@ def allocate_package_call(package_id, chip_type, chip_number, plant_id=-1):
 
     if(plant_id != -1):
         #modify package
-        cursor.execute("UPDATE Packages SET Packages.plant_id  = %d WHERE Packages.package_id  = %d",plant_id,package_id)
+        cursor.execute("UPDATE Packages SET Packages.plant_id  = %s WHERE Packages.package_id  = %s",plant_id,package_id)
         time_queue.put(-1,1,package_id,0)
         
     else:
@@ -81,12 +81,12 @@ def allocate_package_call(package_id, chip_type, chip_number, plant_id=-1):
 
         if now_plant_id != -1:
             #modify plant_id in package
-            cursor.execute("UPDATE Packages SET Packages.plant_id  = %d WHERE Packages.package_id  = %d",now_plant_id,package_id)
+            cursor.execute("UPDATE Packages SET Packages.plant_id  = %s WHERE Packages.package_id  = %s",now_plant_id,package_id)
             time_queue.put([-1,1,package_id,0])
             
         elif can_plant_id != -1:
             #modify package
-            cursor.execute("UPDATE Packages SET Packages.plant_id  = %d WHERE Packages.package_id  = %d",can_plant_id,package_id)
+            cursor.execute("UPDATE Packages SET Packages.plant_id  = %s WHERE Packages.package_id  = %s",can_plant_id,package_id)
             time_queue.put([-1,1,package_id,0])
 
         else:
@@ -106,14 +106,14 @@ def main():
             if(next_exe[1] == 1): #package exe next operation
                 exe_time,op,package_id,pred  = next_exe
                 #select plant_id, chip_number, total_expense  from package where package_id
-                cursor.execute("SELECT * from Packages where Packages.package_id = %d",package_id)
+                cursor.execute("SELECT * from Packages where Packages.package_id = %s",package_id)
                 package_info = cursor.fetchall()
                 # select next_opr from c_r_o where chip_type and pred
-                cursor.execute("SELECT operation_type FROM Chip_requires_operation WHERE (Chip_requires_operation.chip_type = %s and Chip_requires_operation.precedency  = %d)",package_info[0]['chip_type'],pred)
+                cursor.execute("SELECT operation_type FROM Chip_requires_operation WHERE (Chip_requires_operation.chip_type = %s and Chip_requires_operation.precedency  = %s)",package_info[0]['chip_type'],pred)
                 next_operation_type_tuple = cursor.fetchall()
                 next_operation_type = next_operation_type_tuple[0]['operation_type']
                 # select mac_id, quota from machine where plant_id, opr_type, status
-                cursor.execute("SELECT * FROM Machine WHERE (Machine.plant_id = %d and Machine.status = %s and (Machine.operation_type = Null or Machine.operation_type = %s))",package_info[0]['plant_id'],'Idle',next_operation_type)
+                cursor.execute("SELECT * FROM Machine WHERE (Machine.plant_id = %s and Machine.status = %s and (Machine.operation_type = Null or Machine.operation_type = %s))",package_info[0]['plant_id'],'Idle',next_operation_type)
                 machine_info = cursor.fetchall()
                 sum = 0
                 for cd in range(len(machine_info)):# sum quota up to see if enough
@@ -137,7 +137,7 @@ def main():
                         if remain_number <= 0: 
                             break
                         # modify status, expense, start_time, end_time in proc_record for a machine
-                        cursor.execute("UPDATE Process_record set Process_record.status = %s and Process_record.expense = %f and Process_record.start_time = %d and Process_record.end_time = %d WHERE (Process_record.package_id = %d and Process_record.operation_type = %s and Process_record.machine_id = %d)",'Running',machine_info[i]['expense'],cur_time,estimated_end_time, package_id,next_operation_type,machine_info[i]['machine_id'])
+                        cursor.execute("UPDATE Process_record set Process_record.status = %s and Process_record.expense = %s and Process_record.start_time = %s and Process_record.end_time = %s WHERE (Process_record.package_id = %s and Process_record.operation_type = %s and Process_record.machine_id = %s)",'Running',machine_info[i]['expense'],cur_time,estimated_end_time, package_id,next_operation_type,machine_info[i]['machine_id'])
                         time_queue.put([actual_end_time_machine,4,machine_info[i]['machine_id']])
                     
                     time_queue.put([actual_end_time,3,package_id,pred])
@@ -149,10 +149,10 @@ def main():
             if(next_exe[1] == 2): #change operation 
                 #modify machine
                 #check if Idle
-                cursor.execute("SELECT * FROM Machine WHERE Machine.machine_id = %d",next_exe[2])
+                cursor.execute("SELECT * FROM Machine WHERE Machine.machine_id = %s",next_exe[2])
                 machine_status = cursor.fetchall()
                 if(machine_status[0]['status'] == 'Idle'):
-                    cursor.execute("UPDATE Machine SET Machine.operation_type = %s WHERE Machine.machine_id = %d",next_exe[3],next_exe[2])
+                    cursor.execute("UPDATE Machine SET Machine.operation_type = %s WHERE Machine.machine_id = %s",next_exe[3],next_exe[2])
                 else:
                     #print("CANNOT change start time as expected!")
                     next_exe[0] = 0
@@ -160,7 +160,7 @@ def main():
 
 
             if(next_exe[1] == 3):#package end one step
-                cursor.execute("SELECT * FROM Packages WHERE Packages.package_id = %d",next_exe[2])
+                cursor.execute("SELECT * FROM Packages WHERE Packages.package_id = %s",next_exe[2])
                 Packages_info = cursor.fetchall()
                 cursor.execute("SELECT * FROM Chip_requires_operation WHERE Chip_requires_operation.chip_type  = %s",Packages_info[0]['chip_type'])
                 chip_info = cursor.fetchall()
@@ -170,11 +170,11 @@ def main():
                     print("ERROR! OUT OF STAGE")
                 elif pred_num == next_exe[3]:#reach end
                     #get total_expense and price
-                    cursor.execute("SELECT * FROM Packages WHERE Packages.package_id = %d",next_exe[2])
+                    cursor.execute("SELECT * FROM Packages WHERE Packages.package_id = %s",next_exe[2])
                     Packages_info = cursor.fetchall()
                     package_income = Packages_info[0]['price'] - Packages_info[0]['total_expense']
                     #modify Own
-                    cursor.execute("UPDATE Own SET Own.income = Own.income+%d WHERE Own.plant_id = %d",package_income,next_exe[2])
+                    cursor.execute("UPDATE Own SET Own.income = Own.income+%s WHERE Own.plant_id = %s",package_income,next_exe[2])
                 else:#need to allocate next step
                     next_exe[3] += 1 #pred
                     next_exe[1] = 1 #allocate type
@@ -183,7 +183,7 @@ def main():
 
             if(next_exe[1] == 4):#machine end
                 #modify machine's status and operation_type
-                cursor.execute("UPDATE Machine SET Machine.status = 'Idle' and Machine.operation_type = NULL WHERE Machine.machine_id = %d",next_exe[2])
+                cursor.execute("UPDATE Machine SET Machine.status = 'Idle' and Machine.operation_type = NULL WHERE Machine.machine_id = %s",next_exe[2])
 
 
             next_exe = time_queue.get()
