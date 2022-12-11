@@ -3,7 +3,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 from auth import login_required
-from alg import generate_packageid
+from rand import generate_packageid
 from db import get_db
 
 bp = Blueprint('consumer', __name__)
@@ -21,7 +21,7 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-@bp.route('/', methods=('GET', 'POST'))
+@bp.route('/')
 def packagelist():
     if (g.user):
         if request.method == 'POST':
@@ -34,9 +34,11 @@ def packagelist():
                 error = 'Package {} does not exist.'.format(package_id)
                 return render_template('consumer/packagelist.html', error = error)
             else:
-                info1 = cursor.fetchall()
+                list1 = cursor.fetchall()
+                info1 = [i for i in range(len(list1))]
                 cursor.execute("SELECT package_id, start_time, status FROM Process_record WHERE package_id = %s", package_id)
-                info2 = cursor.fetchall()
+                list2 = cursor.fetchall()
+                info2 = [i for i in range(len(list2))]
                 return render_template('consumer/packagelist.html', info1 = info1, info2 = info2)
 
 @bp.route('/registerpackage', methods=('GET', 'POST'))
@@ -45,9 +47,21 @@ def registerpackage():
     if (g.user):
         if request.method == 'POST':           
             package_id = generate_packageid()
-            chip_type =  request.form['chip_type']
+            db = get_db()
+            cursor = db.cursor()
+
+            chip_type_list = []
+            chips = cursor.execute("SELECT * FROM Chip_expense").fetchall()
+            for i in range(len(chips)):
+                chip_type_list.append(i)
+            plant_id_list = []
+            plants = cursor.execute("SELECT * FROM OWn").fetchall()
+            for i in range(len(plants)):
+                plant_id_list.append(i)
+
+            chip_type =  request.form.get('chip_type')
             chip_number = request.form.get('chip_number')
-            plant_id = request.form['plant_id']
+            plant_id = request.form.get('plant_id')
 
             error = None
             if not chip_type:
@@ -55,8 +69,6 @@ def registerpackage():
             elif not chip_number:
                 error = "Chip number is required."
             elif not plant_id:
-                db = get_db()
-                cursor = db.cursor()
                 plant_id = cursor.execute("SELECT plant_id From Machine WHERE status = %s", "finished").fetchone()
             
             if error is not None:
@@ -70,8 +82,7 @@ def registerpackage():
                     ) 
                 db.commit()  
                 return redirect(url_for('consumer.payment'))
-                  
-        return render_template('consumer/registerpackage.html')
+
    
 @bp.route('/payment')
 @login_required
@@ -79,9 +90,6 @@ def payment():
     if (g.user):
         db = get_db()
         cursor = db.cursor()
-        cursor.execute("SELECT total_expense FROM Package WHERE package_id = %s", g.user['package_id'])
-        e = cursor.fetchone()
-        # for bank schema
         error = None
         cursor.execute("SELECT balance FROM Consumer WHERE consumer_id = %s", g.user["consumer_id"])
         balance = cursor.fetchone()
@@ -90,8 +98,8 @@ def payment():
         if balance - price > 0:
             cursor.execute("UPDATE FROM Consumer SET balance = %f WHERE consumer_id = %s", (balance-price, g.user["consumer_id"]))
             db.commit()
-            print("payment successful.")
-            return redirect(url_for('index_consumer'))
+            print("Payment is successful. Your package id is:",g.user["package_id"])
+            return redirect(url_for('consumer.index_consumer'))
         else: 
             error = "Your balance is not available, payment fails."
         print("Your payment error is:", error)

@@ -15,14 +15,14 @@ DROP TABLE IF EXISTS Chip_expense;
 DROP TABLE IF EXISTS Chip_requires_operation;
 
 CREATE TABLE `Consumer`(
-    `consumer_id` int(20) NOT NULL,
-    `password` varchar(50) NOT NULL,
+    `consumer_id` varchar(20) NOT NULL,
+    `password` varchar(1500) NOT NULL,
     `balance` float(10,2) DEFAULT 0.00,
     PRIMARY KEY (`consumer_id`)
 );
 CREATE TABLE `Plant_owner`(
     `owner_id` varchar(20) NOT NULL,
-    `password` varchar(50) NOT NULL,
+    `password` varchar(1500) NOT NULL,
     PRIMARY KEY (`owner_id`)
 );
 CREATE TABLE `Own`(
@@ -44,7 +44,7 @@ CREATE TABLE `Machine`(
 );
 CREATE TABLE `Operation_machine_cost`(
     `machine_id` INT NOT NULL,
-    `operation_type` varchar(20) DEFAULT NULL,
+    `operation_type` varchar(20) DEFAULT "None",
     `time` INT NOT NULL,
     `expense` float(8,2) NOT NULL,
     PRIMARY KEY (`machine_id`, `operation_type`)
@@ -63,7 +63,7 @@ CREATE TABLE `Packages`(
 );
 
 CREATE TABLE `Process_record`(
-    `package_id `INT NOT NULL,
+    `package_id` INT NOT NULL,
     `operation_type`varchar(20) NOT NULL,
     `machine_id` INT NOT NULL,
     `start_time` INT NOT NULL,
