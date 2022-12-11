@@ -74,11 +74,11 @@
 
   <!-- /w3l-banner-content-->
   <div class="register-package">
-  <div class="banner-w3l-main">
+  <div class="banner-w3l-main w3l-middle">
     <div class="w3l-banner-content">
       <div class="container">
         <div class="bannerhny-info text-center">
-          <h3 class="">Welcome to use our website.</h3>
+          <h3 class="">Pay</h3>
         </div>
       </div>
     </div>
@@ -86,56 +86,14 @@
 </div>
   <!--//w3l-banner-content -->
 
-  <!-- register package -->
-  <div class="w3l-content-2 w3l-progressblock py-5">
-    <div class="container py-lg-5 py-md-4 py-2">
-      <h6 class="title-subhny mb-2"><span></span></h6>
-        <h3 class="title-w3l mb-4">Register your package</h3>
-    <div class="form-inner-cont pt-lg-5">
-      <form action="{{  url_for('consumer.registerpackage')}}" method="post" class="signin-form">
-          <div class="form-grids">
-              <label>Chip type</label>
-              <br/>
-              <select name="chip_type" class="form-control" required>
-                <option  hidden>chip type</option>
-                {%- for i in chip_type %}
-                <option> i['chip_type']</option>
-                {%- endfor %}
-              </select>
-              <br/>
-              <label>Chip number</label>
-              <br/>
-              <input type="text" name="chip_number" class="form-control" placeholder="Enter number " required />
-              <br/>
-              <label for="">Plant</label>
-              <br/>
-              <select name="plant_id" class="form-control" required>
-                
-                <option value="1" hidden> Choose plant</option>
-                {%- for i in plant_id %}
-                <option> i['plant_id']</option>
-                {%- endfor %}
-              </select>
-              <br/>
-            <div class="text-right">
-              <button class="btn btn-style btn-effect">Register Package</button>
-            </div>
-          </div>
-      </form>
-    </div>
-  </div>
-  </div>
-<!-- //register pagkage -->
 
-
-<!--/w3l-content-->
+  <!--/w3l-content-->
 <div class="w3l-content-2 w3l-progressblock py-5">
   <div class="container py-lg-5 py-md-4 py-2">
     <div class="col-lg-12">
       <h6 class="title-subhny mb-2"><span></span></h6>
-      <h3 class="title-w3l mb-4">Package List</h3>
-      <p class="para-sub pr-lg-5 mt-md-4 mt-3 mx-auto">Here is the your package list.
-      </p>
+      <h3 class="title-w3l mb-4">Package Information</h3>
+      
       <br />
       <div class="table-responsive">
         <table class="table table-striped">
@@ -145,30 +103,37 @@
               <th>Chip Type</th>
               <th>Chip Number</th>
               <th>Plant</th>
-              <th>Start Time</th>
-              <th>Status</th>
+              <th>Price</th>
+              <th>Your Balance</th>
             </tr>
           </thead>
           <tbody>
-            {%- for package in package_list %}
+            
             <tr>
               <td>{{ package['package_id'] }}</td>
               <td>{{ package['chip_type'] }}</td>
               <td>{{ package['chip_number'] }}</td>
               <td>{{ package['plant_id'] }}</td>
-              <td>{{ package['start_time'] }}</td>
-              <td>{{ package['status'] }}</td>
+              <td>{{ price}}</td>
+              <td>{{ balance }}</td>
             </tr>
-            {%- endfor %}
+            
           </tbody>
         </table>
+
+        <form action="{{  url_for('consumer.payment')}}" method="post">
+          <div class="text-right">
+            <button class="btn btn-style btn-effect">Pay</button>
+            <button class="btn btn-style btn-effect" >Return</button>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
 </div>
 <!--//w3l-content-->
 
-  
   <!-- footer-28 block -->
   
    <footer class="footer-28  position-relative py-5">
@@ -275,91 +240,7 @@
   </footer>
 
   <!--//footer-->
-  <!-- Template JavaScript -->
-  <script src="assets/js/jquery-3.3.1.min.js"></script>
-  <script src="assets/js/theme-change.js"></script>
-  <!-- owl carousel -->
-  <script src="assets/js/owl.carousel.js"></script>
-  <!-- script for tesimonials carousel slider -->
-  <!-- script for owlcarousel -->
-  <script>
-    $(document).ready(function () {
-      $('.owl-testimonial').owlCarousel({
-        loop: true,
-        margin: 0,
-        nav: false,
-        responsiveClass: true,
-        autoplay: false,
-        autoplayTimeout: 5000,
-        autoplaySpeed: 1000,
-        autoplayHoverPause: false,
-        responsive: {
-          0: {
-            items: 1,
-            nav: false
-          },
-          480: {
-            items: 1,
-            nav: false
-          },
-          667: {
-            items: 1,
-            nav: false
-          },
-          1000: {
-            items: 1,
-            nav: false
-          }
-        }
-      })
-    })
-  </script>
-  <!-- //script for tesimonials carousel slider -->
-  <!-- stats number counter-->
-  <script src="assets/js/jquery.waypoints.min.js"></script>
-  <script src="assets/js/jquery.countup.js"></script>
-  <script>
-    $('.counter').countUp();
-  </script>
-  <!-- //stats number counter -->
-  <!-- disable body scroll which navbar is in active -->
-  <script>
-    $(function () {
-      $('.navbar-toggler').click(function () {
-        $('body').toggleClass('noscroll');
-      })
-    });
-  </script>
-  <!-- disable body scroll which navbar is in active -->
-
-  <!--/MENU-JS-->
-  <script>
-    $(window).on("scroll", function () {
-      var scroll = $(window).scrollTop();
-
-      if (scroll >= 80) {
-        $("#site-header").addClass("nav-fixed");
-      } else {
-        $("#site-header").removeClass("nav-fixed");
-      }
-    });
-
-    //Main navigation Active Class Add Remove
-    $(".navbar-toggler").on("click", function () {
-      $("header").toggleClass("active");
-    });
-    $(document).on("ready", function () {
-      if ($(window).width() > 991) {
-        $("header").removeClass("active");
-      }
-      $(window).on("resize", function () {
-        if ($(window).width() > 991) {
-          $("header").removeClass("active");
-        }
-      });
-    });
-  </script>
-  <!--//MENU-JS-->
+  
 
 
   <script src="assets/js/bootstrap.min.js"></script>
