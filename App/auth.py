@@ -30,7 +30,7 @@ def login():
             # user = cursor.fetchone()
 
             # if user is None:
-            #     error = 'Incorrect id.'
+            #     error = 'Incorrect username.'
             # elif not check_password_hash(user['password'], password):
             #     error = 'Incorrect password.'
 
@@ -63,8 +63,8 @@ def register():
         db = get_db()
         error = None
         cursor = db.cursor()
-        if not id:
-            error = 'Id is required.'
+        if not username:
+            error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
         elif not password2:
@@ -77,13 +77,13 @@ def register():
             elif plant is not None:
               cursor.execute("SELECT owner_id FROM Plant_owner WHERE owner_id = %s", (username))
             if cursor.fetchone() is not None:
-                error = 'User {} is already registered.'.format(id)
+                error = 'User {} is already registered.'.format(username)
 
         if error is None:
             if consumer is not None:
-               cursor.execute("INSERT INTO Consumer(consumer_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
+               cursor.execute("INSERT INTO Consumer(consumer_id, password, balance) VALUES (%s, %s, %s)", (username, generate_password_hash(password),0.00))
             elif plant is not None:
-               cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s, %s)", (id, generate_password_hash(password)))
+               cursor.execute("INSERT INTO Plant_owner(owner_id, password) VALUES (%s, %s, %s)", (username, generate_password_hash(password)))
             db.commit()
             return redirect(url_for('auth.login'))
 
