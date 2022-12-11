@@ -27,43 +27,43 @@ INSERT `Plant_owner`(`owner_id`,`password`) VALUES
 -- Dumping data for table `Own`
 --
 INSERT `Own`(`plant_id`,`owner_id`,`income`) VALUES
-("plant_1","Qin Lan",0),
-("plant_2","Qin Lan",0),
-("plant_3","Qin Lan",0),
-("plant_4","Qin Lan",0),
-("plant_5","Qin Lan",0),
-("plant_6","Qin Lan",0),
-("plant_7","Zhang Xinyu",0),
-("plant_8","Zhang Xinyu",0),
-("plant_9","Zhang Xinyu",0),
-("plant_10","Li Xianyi",0),
-("plant_11","Li Xianyi",0),
-("plant_12","Li Xianyi",0);
+(1,"Qin Lan",0),
+(2,"Qin Lan",0),
+(3,"Qin Lan",0),
+(4,"Qin Lan",0),
+(5,"Qin Lan",0),
+(6,"Qin Lan",0),
+(7,"Zhang Xinyu",0),
+(8,"Zhang Xinyu",0),
+(9,"Zhang Xinyu",0),
+(10,"Li Xianyi",0),
+(11,"Li Xianyi",0),
+(12,"Li Xianyi",0);
 -- -------------------------------------------------------
 
 --
 -- Dumping data for table `Machine`
 INSERT `Machine`(`machine_id`,`plant_id`,`operation_type`,`status`,`quota`) VALUES
-(1,"plant_1",NULL,"IDLE",10000),
-(2,"plant_4",NULL,"IDLE",20000),
-(3,"plant_5",NULL,"IDLE",30000),
-(4,"plant_8",NULL,"IDLE",50000),
-(5,"plant_10",NULL,"IDLE",10500),
-(6,"plant_12",NULL,"IDLE",26000),
-(7,"plant_1",NULL,"IDLE",20000),
-(8,"plant_2",NULL,"IDLE",18000),
-(9,"plant_3",NULL,"IDLE",16000),
-(10,"plant_3",NULL,"IDLE",20400),
-(11,"plant_5",NULL,"IDLE",20000),
-(12,"plant_4",NULL,"IDLE",20600),
-(13,"plant_6",NULL,"IDLE",10600),
-(14,"plant_7",NULL,"IDLE",10800),
-(15,"plant_11",NULL,"IDLE",19000),
-(16,"plant_1",NULL,"IDLE",18500),
-(17,"plant_3",NULL,"IDLE",17000),
-(18,"plant_11",NULL,"IDLE",14000),
-(19,"plant_12",NULL,"IDLE",16000),
-(20,"plant_6",NULL,"IDLE",20000);
+(1,1,NULL,"IDLE",10000),
+(2,12,NULL,"IDLE",20000),
+(3,10,NULL,"IDLE",30000),
+(4,7,NULL,"IDLE",50000),
+(5,6,NULL,"IDLE",10500),
+(6,4,NULL,"IDLE",26000),
+(7,2,NULL,"IDLE",20000),
+(8,4,NULL,"IDLE",18000),
+(9,3,NULL,"IDLE",16000),
+(10,2,NULL,"IDLE",20400),
+(11,5,NULL,"IDLE",20000),
+(12,8,NULL,"IDLE",20600),
+(13,9,NULL,"IDLE",10600),
+(14,1,NULL,"IDLE",10800),
+(15,2,NULL,"IDLE",19000),
+(16,6,NULL,"IDLE",18500),
+(17,11,NULL,"IDLE",17000),
+(18,9,NULL,"IDLE",14000),
+(19,8,NULL,"IDLE",16000),
+(20,7,NULL,"IDLE",20000);
 
 -- --------------------------------------------------------
 
