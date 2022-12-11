@@ -70,7 +70,6 @@ INSERT `Machine`(`machine_id`,`plant_id`,`operation_type`,`status`,`quota`) VALU
 --
 -- Dumping data for table `Operation_machine_cost`
 --
---['design-import', 'etch', 'bond', 'drill', 'test']
 INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) VALUES
 (1,"design-import",10,10),
 (1,"etch",15,15),
@@ -86,7 +85,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (1,"drill_A",12,12),
 (1,"drill_B",12,12),
 (1,"test",10,10),
------------------------
 (1,"design-import",10,10),
 (1,"etch",15,15),
 (1,"bond_A",13,15),
@@ -94,7 +92,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (1,"drill_A",12,12),
 (1,"drill_B",12,12),
 (1,"test",10,10),
------------------------
 (2,"design-import",5,5),
 (2,"etch",10,10),
 (2,"bond_A",8,8),
@@ -102,7 +99,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (2,"drill_A",12,12),
 (2,"drill_B",0,0),
 (2,"test",7,7),
------------------------
 (3,"design-import",8,8),
 (3,"etch",15,15),
 (3,"bond_A",20,20),
@@ -110,7 +106,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (3,"drill_A",18,18),
 (3,"drill_B",12,12),
 (3,"test",10,10),
------------------------
 (4,"design-import",7,7),
 (4,"etch",15,15),
 (4,"bond_A",10,10),
@@ -118,7 +113,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (4,"drill_A",12,12),
 (4,"drill_B",0,0),
 (4,"test",6,6),
-----------------------
 (5,"design-import",5,5),
 (5,"etch",15,15),
 (5,"bond_A",15,15),
@@ -126,7 +120,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (5,"drill_A",15,15),
 (5,"drill_B",12,12),
 (5,"test",10,10),
------------------------
 (6,"design-import",12,12),
 (6,"etch",15,15),
 (6,"bond_A",13,13),
@@ -134,7 +127,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (6,"drill_A",12,12),
 (6,"drill_B",0,0),
 (6,"test",10,10),
------------------------
 (7,"design-import",10,10),
 (7,"etch",15,15),
 (7,"bond_A",13,15),
@@ -142,7 +134,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (7,"drill_A",12,12),
 (7,"drill_B",12,12),
 (7,"test",10,10),
-----------------------
 (8,"design-import",10,10),
 (8,"etch",15,15),
 (8,"bond_A",13,15),
@@ -150,7 +141,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (8,"drill_A",12,12),
 (8,"drill_B",12,12),
 (8,"test",10,10),
------------------------
 (9,"design-import",10,10),
 (9,"etch",15,15),
 (9,"bond_A",13,15),
@@ -158,7 +148,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (9,"drill_A",12,12),
 (9,"drill_B",12,12),
 (9,"test",10,10),
------------------------
 (10,"design-import",10,10),
 (10,"etch",15,15),
 (10,"bond_A",13,15),
@@ -166,7 +155,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (10,"drill_A",12,12),
 (10,"drill_B",12,12),
 (10,"test",10,10),
------------------------
 (11,"design-import",10,10),
 (11,"etch",15,15),
 (11,"bond_A",13,15),
@@ -174,7 +162,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (11,"drill_A",12,12),
 (11,"drill_B",12,12),
 (11,"test",10,10),
------------------------
 (12,"design-import",10,10),
 (12,"etch",15,15),
 (12,"bond_A",13,15),
@@ -182,7 +169,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (12,"drill_A",12,12),
 (12,"drill_B",12,12),
 (12,"test",10,10),
------------------------
 (13,"design-import",10,10),
 (13,"etch",15,15),
 (13,"bond_A",13,15),
@@ -190,7 +176,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (13,"drill_A",12,12),
 (13,"drill_B",12,12),
 (13,"test",10,10),
------------------------
 (14,"design-import",10,10),
 (14,"etch",15,15),
 (14,"bond_A",13,15),
@@ -198,7 +183,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (14,"drill_A",12,12),
 (14,"drill_B",12,12),
 (14,"test",10,10),
------------------------
 (15,"design-import",10,10),
 (15,"etch",15,15),
 (15,"bond_A",13,15),
@@ -206,7 +190,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (15,"drill_A",12,12),
 (15,"drill_B",12,12),
 (15,"test",10,10),
------------------------
 (16,"design-import",10,10),
 (16,"etch",15,15),
 (16,"bond_A",13,15),
@@ -214,7 +197,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (16,"drill_A",12,12),
 (16,"drill_B",12,12),
 (16,"test",10,10),
------------------------
 (17,"design-import",10,10),
 (17,"etch",15,15),
 (17,"bond_A",13,15),
@@ -222,7 +204,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (17,"drill_A",12,12),
 (17,"drill_B",12,12),
 (17,"test",10,10),
------------------------
 (18,"design-import",10,10),
 (18,"etch",15,15),
 (18,"bond_A",13,15),
@@ -230,7 +211,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (18,"drill_A",12,12),
 (18,"drill_B",12,12),
 (18,"test",10,10),
------------------------
 (19,"design-import",10,10),
 (19,"etch",15,15),
 (19,"bond_A",13,15),
@@ -238,7 +218,6 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (19,"drill_A",12,12),
 (19,"drill_B",12,12),
 (19,"test",10,10),
---------------------------------
 (20,"design-import",10,10),
 (20,"etch",15,15),
 (20,"bond_A",13,15),
@@ -246,6 +225,7 @@ INSERT `Operation_machine_cost`(`machine_id`,`operation_type`,`time`,`expense`) 
 (20,"drill_A",12,12),
 (20,"drill_B",12,12),
 (20,"test",10,10);
+
 -- --------------------------------------------------------
 
 --
