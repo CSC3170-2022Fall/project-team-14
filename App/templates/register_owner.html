@@ -5,9 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="keywords"
-    content="Induz Responsive web template, Bootstrap Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-  <title>Chip Manufacture | Login</title>
+  <title>Chip Manufacture | Register As Plant Owner</title>
   <link href="http://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap"
     rel="stylesheet">
   <!-- Template CSS -->
@@ -23,24 +21,16 @@
               <div class="navbar-brand">
                 Chip Manufacture
               </div>
-              
-              <!-- <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
-                data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-                </span>
-              </button> -->
     
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mx-lg-auto">
-                   
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('auth.register_consumer') }}">Consumer Register</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="{{ url_for('auth.register_owner') }}">Plant Owner Register</a>
-                    </li>
+                    
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.register_consumer') }}">Consumer Register</a>
+                  </li>
                 </ul>
               </div>
              
@@ -50,30 +40,57 @@
     </div>
     <!-- header -->
 
-    <!-- login -->
+    <!-- register -->
     <div class="w3l-middle py-5">
         <div class="container py-lg-5 py-md-4">
         <div class="row no-gutters">
             <div class="welcome-left pr-lg-5">
             <h6 class="title-subhny two mb-2"><span></span></h6>
             <h3 class="title-w3l two mb-4">Welcome to use our website.</h3>
-            <p class="pr-lg-5">Login as a Consumer or Plant owner. </p>
+            <p class="pr-lg-5">Please register correctly.
+            
+            </p>
             
             </div>
             <div class="welcome-left-frm pr-lg-5 mt-lg-0 mt-5">
             <div class="w3request-form">
-                <form action="{{ url_for('auth.login') }}" method="POST">
+                <form action="register_owner" method="POST">
                 <h4 class="title-w3l">
-                    LOGIN</h4>
-    
+                    Register Information</h4>
+                
+                    
                 <div class="form-style-w3ls mt-4">
+    
                     <input type="text" name="username" placeholder="User name" required="required" id="username">
                     <input type="password" name="password" placeholder="password" id="password" required="required">
+                    <input type="password" name="password2" placeholder="confrim password" id="password2" required="required">
+                    <label for="plant_id">Select the Plant ID of your plant</label>
+                    <select multiple class="form-control">
+                      <option>Plant 1</option>
+                      <option>Plant 2</option>
+                      <option>Plant 3</option>
+                      <option>Plant 4</option>
+                      <option>Plant 5</option>
+                      <option>Plant 6</option>
+                      <option>Plant 7</option>
+                      <option>Plant 8</option>
+                      <option>Plant 9</option>
+                      <option>Plant 10</option>
+                      <option>Plant 11</option>
+                      <option>Plant 12</option>
+                    </select>
                     <p class="pr-lg-5" style="color:#f00">{{ error }}</p>
-                    <button type="submit" class="btn btn-style btn-primary w-100 mt-3" name="login_character" value="consumer">Login Consumer</button>
-                    <button type="submit" class="btn btn-style btn-primary w-100 mt-3" name="login_character" value="plant">Login Plant</button>
+                    <button class="btn btn-style btn-primary w-100 mt-3" type="submit" name="register_character" value="plant">Register</button>
+                    
+    
                 </div>
-                
+                <!--
+                <input type="checkbox" id="Plant 1" name="plant_id" value="Plant 1">
+                <label class="form-check-label" for="Plant 1">Plant 1</label>
+                <input type="checkbox" c id="Plant 2" name="plant_id" value="Plant 2">
+                <label class="form-check-label" for="Plant 2">Plant 2</label>
+                -->
+    
                 </form>
                 </div>
             </div>
@@ -81,7 +98,7 @@
 
         </div>
     </div>
-    <!-- //login -->
+    <!-- //register -->
 
     
 
@@ -109,6 +126,31 @@
           <p class="pr-lg-5">
             <a href="120090322@link.cuhk.edu.cn">120090322@link.cuhk.edu.cn</a> 
           </p>
+
+          <div class="main-social-footer-28 mt-4">
+            <ul class="social-icons">
+              <li class="facebook">
+                <a href="#link" title="Facebook">
+                  <span class="fa fa-facebook" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="twitter">
+                <a href="#link" title="Twitter">
+                  <span class="fa fa-twitter" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="dribbble">
+                <a href="#link" title="Dribbble">
+                  <span class="fa fa-dribbble" aria-hidden="true"></span>
+                </a>
+              </li>
+              <li class="google">
+                <a href="#link" title="Google">
+                  <span class="fa fa-google" aria-hidden="true"></span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="col-lg-7">
           <div class="row">

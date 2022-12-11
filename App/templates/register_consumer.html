@@ -5,9 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="keywords"
-    content="Induz Responsive web template, Bootstrap Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-  <title>Chip Manufacture | Login</title>
+  <title>Chip Manufacture | Register As Consumer</title>
   <link href="http://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap"
     rel="stylesheet">
   <!-- Template CSS -->
@@ -27,9 +25,12 @@
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mx-lg-auto">
                     
-                     <li class="nav-item">
+                  <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-                    </li>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.register_owner') }}">Plant Owner Register</a>
+                  </li>
                 </ul>
               </div>
              
@@ -44,7 +45,7 @@
         <div class="container py-lg-5 py-md-4">
         <div class="row no-gutters">
             <div class="welcome-left pr-lg-5">
-            <h6 class="title-subhny two mb-2"><span>More Info</span></h6>
+            <h6 class="title-subhny two mb-2"><span></span></h6>
             <h3 class="title-w3l two mb-4">Welcome to use our website.</h3>
             <p class="pr-lg-5">Please register correctly.
             
@@ -53,7 +54,7 @@
             </div>
             <div class="welcome-left-frm pr-lg-5 mt-lg-0 mt-5">
             <div class="w3request-form">
-                <form action="register" method="POST">
+                <form action="register_consumer" method="POST">
                 <h4 class="title-w3l">
                     Register Information</h4>
                 
@@ -64,8 +65,7 @@
                     <input type="password" name="password" placeholder="password" id="password" required="required">
                     <input type="password" name="password2" placeholder="confrim password" id="password2" required="required">
                     <p class="pr-lg-5" style="color:#f00">{{ error }}</p>
-                    <button class="btn btn-style btn-primary w-100 mt-3" type="submit" name="register_character" value="consumer">Register Consumer</button>
-                    <button class="btn btn-style btn-primary w-100 mt-3" type="submit" name="register_character" value="plant_owner">Register Plant Owner</button>
+                    <button class="btn btn-style btn-primary w-100 mt-3" type="submit" name="register_character" value="consumer">Register</button>
                     
     
                 </div>
