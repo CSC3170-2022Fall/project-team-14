@@ -28,7 +28,6 @@ CREATE TABLE `Plant_owner`(
 CREATE TABLE `Own`(
     `plant_id` INT NOT NULL,
     `owner_id` varchar(20) NOT NULL,
-    `type_name` varchar(50) NOT NULL,
     `income` float(8,2),
     PRIMARY KEY (`plant_id`)
 );
@@ -37,7 +36,7 @@ CREATE TABLE `Machine`(
     `machine_id` INT NOT NULL,
     `plant_id` INT NOT NULL,
     `operation_type` varchar(20) DEFAULT NULL,
-    `status` varchar(20) DEFAULT 'Idle',
+    `status` varchar(20) DEFAULT "IDLE",
     `quota` int NOT NULL,
     PRIMARY KEY (`machine_id`)
     -- FOREIGN KEY (plant_id) REFERENCES Own(plant_id)
@@ -85,3 +84,13 @@ CREATE TABLE `Chip_requires_operation`(
     PRIMARY KEY (`chip_type`, `operation_type`)
 );
                                         
+
+INSERT `Packages`(`package_id`,`chip_number`,`chip_type`,`plant_id`,`consumer_id`,`total_expense`,`price`) VALUES
+(1,3,"a",1,1,55,66),
+(2,3,"a",1,1,55,66),
+(3,3,"a",1,1,55,66);
+INSERT INTO `Process_record`(`package_id`, `operation_type`, `machine_id`, `start_time`, `end_time`, `plant_id`, `status`) VALUES
+(1,"IDLE",3,4,5,1,"IDLE"),
+(2,"IDLE",2,3,5,1,"IDLE"),
+(3,"IDLE",1,2,5,1,"IDLE");
+

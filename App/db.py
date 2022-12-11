@@ -68,11 +68,11 @@ def init_db():
         cursor.execute(stmt)
     db.commit()
 
-    # INSERTION = os.path.join(os.path.dirname(__file__), 'insert.sql')
-    # stmts = parse_sql(INSERTION)
-    # for stmt in stmts:
-    #     cursor.execute(stmt)
-    # db.commit()
+    INSERTION = os.path.join(os.path.dirname(__file__), 'insert.sql')
+    stmts = parse_sql(INSERTION)
+    for stmt in stmts:
+        cursor.execute(stmt)
+    db.commit()
 
 @click.command('init-db')
 @with_appcontext

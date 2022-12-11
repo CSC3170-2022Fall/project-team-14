@@ -159,8 +159,8 @@
               <label for="machine_id">Select Machine ID*</label>
               <br />
               <select class="form-control" name="machine_id">
-                {%- for status in machine_list %}
-                <option>{{ status['machine_id'] }}</option>
+                {%- for status in machine_list_2 %}
+                <option>{{ status[0] }}</option>
                 {%- endfor %}
               </select>
               <br />
@@ -174,7 +174,7 @@
               <br />
               <select class="form-control" name="operation_type">
                 {%- for operation in operation_list %}
-                <option>{{ operation_list['operation_type'] }}</option>
+                <option>{{ operation[1][0] }}</option>
                 {%- endfor %}
               </select>
             </div>

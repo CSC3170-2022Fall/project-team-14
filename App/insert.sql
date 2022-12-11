@@ -18,52 +18,52 @@ USE Chip;
 -- Dumping data for table `Plant_owner`
 -- WAIT FOR insertion
 INSERT `Plant_owner`(`owner_id`,`password`) VALUES
-("Qin Lan","123456"),
-("Zhang Xinyu","654321"),
-("Li Xianyi","123654");
+("Qin Lan","pbkdf2:sha256:260000$J24uhhdeJU5dWPIJ$e2a016e77754e6c63605ccd374cac64647c03fc85106c6d5f12a85c0fdec8481"),
+("Zhang Xinyu","pbkdf2:sha256:260000$McKlbkDRUGKilOQi$53d05419dfd16403b6707144760b8f1ec05120b8c139a995d5cd0fd37e817195"),
+("Li Xianyi","pbkdf2:sha256:260000$kpJCsW3L3MNoGKzn$2129a7298f590cb37e41e6bac5ba45875d8fe853aef9dd6d8134ea921ed06c74");
 -- --------------------------------------------------------
 
 --
 -- Dumping data for table `Own`
 --
 INSERT `Own`(`plant_id`,`owner_id`,`income`) VALUES
-("Plant 1","Qin Lan",0),
-("Plant 2","Qin Lan",0),
-("Plant 3","Qin Lan",0),
-("Plant 4","Qin Lan",0),
-("Plant 5","Qin Lan",0),
-("Plant 6","Qin Lan",0),
-("Plant 7","Zhang Xinyu",0),
-("Plant 8","Zhang Xinyu",0),
-("Plant 9","Zhang Xinyu",0),
-("Plant 10","Li Xianyi",0),
-("Plant 11","Li Xianyi",0),
-("Plant 12","Li Xianyi",0);
+(1,"Qin Lan",0),
+(2,"Qin Lan",0),
+(3,"Qin Lan",0),
+(4,"Qin Lan",0),
+(5,"Qin Lan",0),
+(6,"Qin Lan",0),
+(7,"Zhang Xinyu",0),
+(8,"Zhang Xinyu",0),
+(9,"Zhang Xinyu",0),
+(10,"Li Xianyi",0),
+(11,"Li Xianyi",0),
+(12,"Li Xianyi",0);
 -- -------------------------------------------------------
 
 --
 -- Dumping data for table `Machine`
 INSERT `Machine`(`machine_id`,`plant_id`,`operation_type`,`status`,`quota`) VALUES
-(1,"Plant 1",NULL,"IDLE",10000),
-(2,"Plant 12",NULL,"IDLE",20000),
-(3,"Plant 10",NULL,"IDLE",30000),
-(4,"Plant 7",NULL,"IDLE",50000),
-(5,"Plant 6",NULL,"IDLE",10500),
-(6,"Plant 4",NULL,"IDLE",26000),
-(7,"Plant 2",NULL,"IDLE",20000),
-(8,"Plant 4",NULL,"IDLE",18000),
-(9,"Plant 3",NULL,"IDLE",16000),
-(10,"Plant 2",NULL,"IDLE",20400),
-(11,"Plant 5",NULL,"IDLE",20000),
-(12,"Plant 8",NULL,"IDLE",20600),
-(13,"Plant 9",NULL,"IDLE",10600),
-(14,"Plant 1",NULL,"IDLE",10800),
-(15,"Plant 2",NULL,"IDLE",19000),
-(16,"Plant 6",NULL,"IDLE",18500),
-(17,"Plant 11",NULL,"IDLE",17000),
-(18,"Plant 9",NULL,"IDLE",14000),
-(19,"Plant 8",NULL,"IDLE",16000),
-(20,"Plant 7",NULL,"IDLE",20000);
+(1,1,NULL,"IDLE",10000),
+(2,12,NULL,"IDLE",20000),
+(3,10,NULL,"IDLE",30000),
+(4,7,NULL,"IDLE",50000),
+(5,6,NULL,"IDLE",10500),
+(6,4,NULL,"IDLE",26000),
+(7,2,NULL,"IDLE",20000),
+(8,4,NULL,"IDLE",18000),
+(9,3,NULL,"IDLE",16000),
+(10,2,NULL,"IDLE",20400),
+(11,5,NULL,"IDLE",20000),
+(12,8,NULL,"IDLE",20600),
+(13,9,NULL,"IDLE",10600),
+(14,1,NULL,"IDLE",10800),
+(15,2,NULL,"IDLE",19000),
+(16,6,NULL,"IDLE",18500),
+(17,11,NULL,"IDLE",17000),
+(18,9,NULL,"IDLE",14000),
+(19,8,NULL,"IDLE",16000),
+(20,7,NULL,"IDLE",20000);
 
 -- --------------------------------------------------------
 
