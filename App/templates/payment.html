@@ -30,22 +30,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('consumer.logout') }}">Log out</a>
               </li>
-              
-              <li class="nav-item mr-lg-3 mr-4" title="Search"><a href="#search" class="search-btn">
-                  <span class="fa fa-search" aria-hidden="true"></span></a></li>
-              <!--/search-right-->
-              <!-- search popup -->
-              <div id="search" class="pop-overlay">
-                <div class="popup">
-                  <form action="#" method="GET" class="w3l-hnyform d-sm-flex">
-                    <input type="search" placeholder="Search.." name="search" required="required" autofocus>
-                    <button type="submit">Search</button>
-                    <a class="close" href="#url">&times;</a>
-                  </form>
-                </div>
-              </div>
-              <!-- /search popup -->
-              <!--//search-right-->
 
             </ul>
 
@@ -91,7 +75,8 @@
 <div class="w3l-content-2 w3l-progressblock py-5">
   <div class="container py-lg-5 py-md-4 py-2">
     <div class="col-lg-12">
-      <h6 class="title-subhny mb-2"><span></span></h6>
+        
+      <h6 class="title-subhny mb-2"><span>Pay</span></h6>
       <h3 class="title-w3l mb-4">Package Information</h3>
       
       <br />
@@ -104,17 +89,17 @@
               <th>Chip Number</th>
               <th>Plant</th>
               <th>Price</th>
-              <th>Your Balance</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody>
             
             <tr>
-              <td>{{ package['package_id'] }}</td>
-              <td>{{ package['chip_type'] }}</td>
-              <td>{{ package['chip_number'] }}</td>
-              <td>{{ package['plant_id'] }}</td>
-              <td>{{ price}}</td>
+              <td>{{ package[0] }}</td>
+              <td>{{ package[1] }}</td>
+              <td>{{ package[2] }}</td>
+              <td>{{ package[3] }}</td>
+              <td>{{ price }}</td>
               <td>{{ balance }}</td>
             </tr>
             
@@ -124,6 +109,12 @@
         <form action="{{  url_for('consumer.payment')}}" method="post">
           <div class="text-right">
             <button class="btn btn-style btn-effect">Pay</button>
+            {% if success %}
+					  <p class="pr-lg-5" style="color:rgb(64, 209, 32)">Pay success!</p>
+				    {% endif %}
+            {% if not success %}
+					  <p class="pr-lg-5" style="color:#f00">{{error}}</p>
+				    {% endif %}
             <button class="btn btn-style btn-effect" >Return</button>
           </div>
         </form>
