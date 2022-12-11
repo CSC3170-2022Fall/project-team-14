@@ -87,53 +87,53 @@
   <!--//w3l-banner-content -->
 
 
-<!-- payment -->
- 
- <div class="w3l-content-2 w3l-progressblock py-5">
-    <div class="container py-lg-5 py-md-4 py-2">
-      <div class="col-lg-12">
-        <h6 class="title-subhny mb-2"><span></span></h6>
-        <h3 class="title-w3l mb-4">Package information</h3>
-        </p>
-        <div class="table-responsive">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Package ID</th>
-                <th>Chip Number</th>
-                <th>Chip Type</th>
-                <th>Plant</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                
-                <td>1</td>
-                <td>10</td>
-                <td>ipsum</td>
-                <td>Plant1</td>
-                <td>{{price['price']}}</td>
-              </tr>
-              
-                
-            </tbody>
-          </table>
-          <form action="#" method="post">
-            <div class="text-right">
-              <button class="btn btn-style btn-effect">Pay</button>
-            </div>
-          </form>
-        </div>
+  <!--/w3l-content-->
+<div class="w3l-content-2 w3l-progressblock py-5">
+  <div class="container py-lg-5 py-md-4 py-2">
+    <div class="col-lg-12">
+      <h6 class="title-subhny mb-2"><span></span></h6>
+      <h3 class="title-w3l mb-4">Package Information</h3>
+      
+      <br />
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Package ID</th>
+              <th>Chip Type</th>
+              <th>Chip Number</th>
+              <th>Plant</th>
+              <th>Price</th>
+              <th>Your Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+            <tr>
+              <td>{{ package['package_id'] }}</td>
+              <td>{{ package['chip_type'] }}</td>
+              <td>{{ package['chip_number'] }}</td>
+              <td>{{ package['plant_id'] }}</td>
+              <td>{{ price}}</td>
+              <td>{{ balance }}</td>
+            </tr>
+            
+          </tbody>
+        </table>
+
+        <form action="{{  url_for('consumer.payment')}}" method="post">
+          <div class="text-right">
+            <button class="btn btn-style btn-effect">Pay</button>
+            <button class="btn btn-style btn-effect" >Return</button>
+          </div>
+        </form>
+
       </div>
     </div>
   </div>
-  
+</div>
+<!--//w3l-content-->
 
-<!-- //payment -->
-  
- 
-  
   <!-- footer-28 block -->
   
    <footer class="footer-28  position-relative py-5">
