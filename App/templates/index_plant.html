@@ -95,12 +95,12 @@
             <tbody>
               {%- for package in package_list %}
               <tr>
-                <td>{{ package['package_id'] }}</td>
-                <td>{{ package['chip_type'] }}</td>
-                <td>{{ package['chip_number'] }}</td>
-                <td>{{ package['consumer_id'] }}</td>
-                <td>{{ package['start_time'] }}</td>
-                <td>{{ package['status'] }}</td>
+                <td>{{ package[0] }}</td>
+                <td>{{ package[1] }}</td>
+                <td>{{ package[2] }}</td>
+                <td>{{ package[3] }}</td>
+                <td>{{ package[4] }}</td>
+                <td>{{ package[5] }}</td>
               </tr>
               {%- endfor %}
             </tbody>
@@ -132,10 +132,10 @@
             <tbody>
               {%- for machine in machine_list %}
               <tr>
-                <td>{{ machine['machine_id'] }}</td>
-                <td>{{ machine['status'] }}</td>
-                <td>{{ machine['start_time'] }}</td>
-                <td>{{ machine['end_time'] }}</td>
+                <td>{{ machine[0] }}</td>
+                <td>{{ machine[1] }}</td>
+                <td>{{ machine[2] }}</td>
+                <td>{{ machine[3] }}</td>
               </tr>
               {%- endfor %}
             </tbody>
