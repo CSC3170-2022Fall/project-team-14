@@ -5,7 +5,9 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Chip Manufacture | Payment</title>
+  <meta name="keywords"
+    content="Induz Responsive web template, Bootstrap Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+  <title>Chip Manufacture | Home</title>
   <link href="http://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap"
     rel="stylesheet">
   <!-- Template CSS -->
@@ -90,21 +92,17 @@
               <th>Balance</th>
             </tr>
           </thead>
-          <tbody>
-            
+          <tbody name="package" class="form-control" required>
             <tr>
-              <td>{{ package[0] }}</td>
-              <td>{{ package[1] }}</td>
-              <td>{{ package[2] }}</td>
-              <td>{{ package[3] }}</td>
-              <td>{{ price }}</td>
-              <td>{{ balance }}</td>
+              {%- for i in package %}
+              <td> {{i}} </td>
+              {%- endfor %}
             </tr>
-            
+
           </tbody>
         </table>
 
-        <form action="{{  url_for('consumer.payment')}}" method="post">
+        <form action="{{  url_for('consumer.payment', package = package)}}" method="post" class = "signin-form">
           <div class="text-right">
             <button class="btn btn-style btn-effect">Pay</button>
             {% if success %}
@@ -113,7 +111,12 @@
             {% if not success %}
 					  <p class="pr-lg-5" style="color:#f00">{{error}}</p>
 				    {% endif %}
-            <button class="btn btn-style btn-effect" >Return</button>
+          </div>
+        </form>
+        
+        <form action="{{  url_for('consumer.payreturn')}}" method="post" class = "signin-form">
+          <div class="text-right">            
+            <button class="btn btn-style btn-effect">Return</button>
           </div>
         </form>
 
@@ -194,7 +197,7 @@
         </div>
       </div>
       <div class="midd-footer-28 align-center py-2 mt-5">
-        <p class="copy-footer-28 text-center">Copyright &copy; 2022.Chip Manufacture All rights reserved.
+        <p class="copy-footer-28 text-center">Copyright &copy; 2021.Company name All rights reserved.
             
         </p>
       </div>
