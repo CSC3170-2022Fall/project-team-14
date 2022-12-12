@@ -6,6 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from auth import login_required
 from db import get_db
+import alg
 
 
 bp = Blueprint('plant', __name__)
@@ -95,10 +96,15 @@ def change_start_operation():
             operation_type=request.form["operation_type"]
             
             # if operation_type in operation_list:
-            cursor.execute(
-                            "UPDATE Process_record SET operation_type=%s, start_time = %s WHERE machine_id = %s", (operation_type,start_time, machine_id)
-                            )    
-            db.commit()  
+            # cursor.execute(
+            #                 "UPDATE Process_record SET operation_type=%s, start_time = %s WHERE machine_id = %s", (operation_type,start_time, machine_id)
+            #                 )    
+            # db.commit()  
+
+            alg.change_start_call(machine_id,int(start_time),operation_type)
+
+
+
             # else:
             #     return redirect(url_for('plant.index_plant'))
             #     error="This operation_type is unavaliable, please choose again!"
