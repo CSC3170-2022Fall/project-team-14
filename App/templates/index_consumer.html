@@ -168,7 +168,7 @@
         <div class="form-grids">
             <select name="package_id" class="form-control" required>
               <option  hidden>Choose package ID</option>
-              {%- for package in package_list %}
+              {%- for package in consumer_list %}
               <option>{{ package[0] }}</option>
               {%- endfor %}
             </select>
