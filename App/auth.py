@@ -63,7 +63,7 @@ def register_consumer():
                 error = 'User {} is already registered.'.format(username)
 
         if error is None:
-            cursor.execute("INSERT INTO Consumer(consumer_id, password, balance) VALUES (%s, %s, %s)", (username, generate_password_hash(password),0))
+            cursor.execute("INSERT INTO Consumer(consumer_id, password, balance) VALUES (%s, %s, %s)", (username, generate_password_hash(password),1000000))
             db.commit()
             return redirect(url_for('auth.login'))
 
