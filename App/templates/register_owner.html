@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zxx">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Chip Manufacture | Register As Plant Owner</title>
+  <link href="http://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400&display=swap"
+    rel="stylesheet">
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style-starter.css')}}" type="text/css"/>
+</head>
+
+<body>
+    <!-- header -->
+    <div class="header-w3l">
+        <header id="site-header" class="header-w3l fixed-top">
+          <div class="container">
+            <nav class="navbar navbar-expand-lg stroke">
+              <div class="navbar-brand">
+                Chip Manufacture
+              </div>
+    
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mx-lg-auto">
+                    
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth.register_consumer') }}">Consumer Register</a>
+                  </li>
+                </ul>
+              </div>
+             
+            </nav>
+          </div>
+        </header>
+    </div>
+    <!-- header -->
+
+    <!-- register -->
+    <div class="w3l-middle py-5">
+        <div class="container py-lg-5 py-md-4">
+        <div class="row no-gutters">
+            <div class="welcome-left pr-lg-5">
+            <h6 class="title-subhny two mb-2"><span></span></h6>
+            <h3 class="title-w3l two mb-4">Welcome to use our website.</h3>
+            <p class="pr-lg-5">Please register correctly.
+            
+            </p>
+            
+            </div>
+            <div class="welcome-left-frm pr-lg-5 mt-lg-0 mt-5">
+            <div class="w3request-form">
+                <form action="register_owner" method="POST">
+                <h4 class="title-w3l">
+                    Register Information</h4>
+                
+                    
+                <div class="form-style-w3ls mt-4">
+    
+                    <input type="text" name="username" placeholder="User name" required="required" id="username">
+                    <input type="password" name="password" placeholder="password" id="password" required="required">
+                    <input type="password" name="password2" placeholder="confrim password" id="password2" required="required">
+                    <label for="plant_id">Select the Plant ID of your plant</label>
+                    <select multiple name="plant_id" class="form-control">
+                      <option> 1</option>
+                      <option> 2</option>
+                      <option> 3</option>
+                      <option> 4</option>
+                      <option> 5</option>
+                      <option> 6</option>
+                      <option> 7</option>
+                      <option> 8</option>
+                      <option> 9</option>
+                      <option> 10</option>
+                      <option> 11</option>
+                      <option> 12</option>
+                    </select>
+                    <p class="pr-lg-5" style="color:#f00">{{ error }}</p>
+                    <button class="btn btn-style btn-primary w-100 mt-3" type="submit" name="register_character" value="plant">Register</button>
+                    
+    
+                </div>
+                <!--
+                <input type="checkbox" id="Plant 1" name="plant_id" value="Plant 1">
+                <label class="form-check-label" for="Plant 1">Plant 1</label>
+                <input type="checkbox" c id="Plant 2" name="plant_id" value="Plant 2">
+                <label class="form-check-label" for="Plant 2">Plant 2</label>
+                -->
+    
+                </form>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </div>
+    <!-- //register -->
+
+    
+
+     <!-- footer-28 block -->
+    <footer class="footer-28  position-relative py-5">
+    <div class="container">
+      <div class="row footer-top-28">
+        <div class="col-lg-5 footer-list-28 pr-lg-5 mt-5">
+          <h6 class="footer-title-28">Quick Contact</h6>
+          <p class="pr-lg-5">
+            <a href="118010246@link.cuhk.edu.cn">118010246@link.cuhk.edu.cn</a> 
+          </p>
+          <p class="pr-lg-5">
+            <a href="120090564@link.cuhk.edu.cn">120090564@link.cuhk.edu.cn</a> 
+          </p>
+          <p class="pr-lg-5">
+            <a href="119010445@link.cuhk.edu.cn">119010445@link.cuhk.edu.cn</a> 
+          </p>
+          <p class="pr-lg-5">
+            <a href="120090171@link.cuhk.edu.cn">120090171@link.cuhk.edu.cn</a> 
+          </p>
+          <p class="pr-lg-5">
+            <a href="120090702@link.cuhk.edu.cn">120090702@link.cuhk.edu.cn</a> 
+          </p>
+          <p class="pr-lg-5">
+            <a href="120090322@link.cuhk.edu.cn">120090322@link.cuhk.edu.cn</a> 
+          </p>
+        </div>
+        <div class="col-lg-7">
+          <div class="row">
+            
+            <div class="col-md-5 col-sm-6 footer-list-28 mt-5">
+              <h6 class="footer-title-28">Our Services</h6>
+              <ul>
+                <li><a href="#reserch"><span class="fa fa-angle-double-right mr-2" aria-hidden="true"></span> Register packages</a></li>
+                <li><a href="#construction"><span class="fa fa-angle-double-right mr-2" aria-hidden="true"></span>
+                    Appoint plants</a></li>
+                <li><a href="#agricultural"><span class="fa fa-angle-double-right mr-2" aria-hidden="true"></span>
+                    Arrange packages</a></li>
+                
+              </ul>
+            </div>
+            
+
+          </div>
+        </div>
+      </div>
+      <div class="midd-footer-28 align-center py-2 mt-5">
+        <p class="copy-footer-28 text-center">Copyright &copy; 2022.Chip Manufacture All rights reserved.
+            
+        </p>
+      </div>
+    </div>
+
+
+     
+    <!-- //footer-28 block-->
+  </footer>
+  <!--//footer-->
+</body>
