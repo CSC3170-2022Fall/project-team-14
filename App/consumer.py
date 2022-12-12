@@ -10,7 +10,7 @@ import alg
 bp = Blueprint('consumer', __name__)
 
 @bp.route('/index_consumer')
-def index_consumer():
+def index_consumer():  # four parameters: consumetr_list: search下拉栏， package_list: 该用户所有已有订单， chip_type: 可用芯片类型， plant_id: 可用工厂类型
     if(g.user):
         db = get_db()
         cursor = db.cursor()
@@ -24,10 +24,15 @@ def index_consumer():
         for i in range(plants):
             ttt = cursor.fetchone()
             plant_id.append(ttt)
+        consumer_list = []
+        packages = cursor.execute("SELECT package_id FROM Packages WHERE consumer_id = %s", g.user)
+        for i in range(packages):
+            ttt = cursor.fetchone()
+            consumer_list.append(ttt)
         # display package list
         cursor.execute("SELECT package_id, chip_type, chip_number, plant_id, price FROM Packages WHERE consumer_id = %s", g.user)
         package_list = cursor.fetchall()
-        return render_template('index_consumer.html',  package_list = package_list, chip_type = chip_type, plant_id = plant_id)
+        return render_template('index_consumer.html',  consumer_list = consumer_list, package_list = package_list, chip_type = chip_type, plant_id = plant_id)
     # return redirect(url_for('auth.login'))
     return render_template('index_consumer.html')
 
@@ -37,13 +42,15 @@ def logout():
     return redirect(url_for('auth.login'))
 
 
-@bp.route('/searchpackage', methods=('GET', 'POST'))
+@bp.route('/searchpackage', methods=('GET', 'POST'))  # one more parameter: package_id_list: search后显示的数据
 def searchpackage():
     if (g.user):
-        package_list = []
         db = get_db()
         cursor = db.cursor()
+        cursor.execute("SELECT package_id, chip_type, chip_number, plant_id, price FROM Packages WHERE consumer_id = %s", g.user)
+        package_list = cursor.fetchall()
         chip_type = []
+
         chips = cursor.execute("SELECT DISTINCT chip_type FROM Chip_expense")
         for i in range(chips):
             ttt = cursor.fetchone()
@@ -53,15 +60,19 @@ def searchpackage():
         for i in range(plants):
             ttt = cursor.fetchone()
             plant_id.append(ttt)
+
+        consumer_list = []
         packages = cursor.execute("SELECT package_id FROM Packages WHERE consumer_id = %s", g.user)
         for i in range(packages):
             ttt = cursor.fetchone()
-            package_list.append(ttt)
+            consumer_list.append(ttt)
         if request.method == 'POST':           
             package_id = request.form.get('package_id')
             cursor.execute("SELECT package_id, start_time, status FROM Process_record WHERE package_id = %s", package_id)
             package_id_list = cursor.fetchall()
-        return render_template('index_consumer.html', package_list = package_list, chip_type = chip_type, plant_id = plant_id, package_id_list = package_id_list)
+            print(package_id_list)
+            return render_template('index_consumer.html', package_list = package_list, consumer_list = consumer_list, chip_type = chip_type, plant_id = plant_id, package_id_list = package_id_list)
+    return render_template('index_consumer.html', package_list = package_list, consumer_list = consumer_list, chip_type = chip_type, plant_id = plant_id, package_id_list = package_id_list)
 
 @bp.route('/registerpackage', methods=('GET', 'POST'))
 @login_required
@@ -123,7 +134,7 @@ def payment(package):
                 (int(info[0]),int(info[1]),info[2], int(info[3]),g.user, info[4], price*1.2))  
             cursor.execute("UPDATE Consumer SET balance = %s WHERE consumer_id = %s", (balance[0]-price, g.user))
             db.commit()
-            alg.allocate_package_call(int(info[0]),info[2],int(info[1]),int(info[3]))
+            # alg.allocate_package_call(int(info[0]),info[2],int(info[1]),int(info[3]))
             success = True
             print("Payment is successful. Your package id is:",package[0])
             if request.method == "POST":
