@@ -11,7 +11,7 @@ import alg
 
 bp = Blueprint('plant', __name__)
 
-@bp.route('/index_plant')
+@bp.route('/index_plant',methods=('GET', 'POST'))
 def index_plant():
     if(g.user):
         db = get_db()
@@ -50,15 +50,10 @@ def index_plant():
             cursor.execute("SELECT machine_id FROM Process_record WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
             machine_list_2 = cursor.fetchall()
             # print(machine_list_2)
-            temp_1=[]
-            for i in range(0,len(machine_list_2)):
+            operation_list_1=["design-import","etch_A","etch_B","bond_A","bond_B","drill","test"]
+            
 
-                cursor.execute("SELECT operation_type FROM Operation_machine_cost WHERE machine_id = %s",str(machine_list_2[i][0]))
-                operation_list_1 = cursor.fetchall()
-                temp_1.append(operation_list_1)
-            print(temp_1)
-
-            return render_template('index_plant.html', package_list=package_list, machine_list=machine_list, machine_list_2=machine_list_2,operation_list=temp_1)
+            return render_template('index_plant.html', package_list=package_list, machine_list=machine_list, machine_list_2=machine_list_2,operation_list_1=operation_list_1)
 
 
 # @bp.route('/index_plant', methods=('GET', 'POST'))
@@ -84,8 +79,11 @@ def index_plant():
 #             return render_template('/index_plant.html', package_list=package_list, machine_list=machine_list)
 
 
+        
+
 
 @bp.route('/change_start_operation', methods=('GET', 'POST'))
+
 def change_start_operation():
     if (g.user):
         if request.method == 'POST':
@@ -94,37 +92,22 @@ def change_start_operation():
             machine_id=request.form['machine_id']
             start_time = request.form["start_time"]
             operation_type=request.form["operation_type"]
+            cursor.execute("SELECT operation_type FROM Operation_machine_cost WHERE machine_id =%s",machine_id)
+            operation_list = cursor.fetchall()
+            temp=[]
+            for j in range(0,len(operation_list)):
+                ope=operation_list[j][0]
+                temp.append(ope)
+            print(temp)
+            if (operation_type in temp):
+                print("yes")
+                alg.change_start_call(machine_id,int(start_time),operation_type)
+                return redirect(url_for('plant.index_plant'))
+            else:
+                error = "The operation type is not avaliable, please choose again!"
+                print(error)
+                flash(error)
+                return render_template('index_plant.html',error = error)
             
-            # if operation_type in operation_list:
-            # cursor.execute(
-            #                 "UPDATE Process_record SET operation_type=%s, start_time = %s WHERE machine_id = %s", (operation_type,start_time, machine_id)
-            #                 )    
-            # db.commit()  
-
-            alg.change_start_call(machine_id,int(start_time),operation_type)
-
-
-
-            # else:
-            #     return redirect(url_for('plant.index_plant'))
-            #     error="This operation_type is unavaliable, please choose again!"
-            #     return render_template('/index_plant.html', error = error)
-                
-        #     # plant_id = request.form["plant_id"]
-        #     # db = get_db()
-        #     # error = None
-        #     # cursor = db.cursor()
-        #     # cursor.execute("SELECT package_id, chip_type, chip_number, customer_id, start_time, status FROM Packages WHERE plant_id = %s", plant_id)
-        #     # package_list = cursor.fetchall()
-
-
-        #     # machine_id = request.form["machine_id"]
-        #     # db = get_db()
-        #     # error = None
-        #     # cursor = db.cursor()
-        #     # cursor.execute("SELECT machine_id, status, start_time, end_time FROM Process_record WHERE machine_id = %s", (machine_id))
-        #     # machine_list = cursor.fetchone()
-        #     # return render_template('/index_plant.html', package_list=package_list, machine_list=machine_list)
-            return redirect(url_for('plant.index_plant'))
 
 
