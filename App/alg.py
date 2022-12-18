@@ -16,7 +16,7 @@ time_queue = queue.PriorityQueue()
 
 def search_call():
     cur_time = int((time.time() - global_start_time)*100)
-    print("enter search_call with ",cur_time)    
+    print("enter search_call with current time:",cur_time)    
     while (time_queue.empty() == False):
         next_exe = time_queue.get()
         print("next execution is ",next_exe)
@@ -131,8 +131,10 @@ def handle(next_exe):
         next_operation_type = next_operation_type_tuple[0][0]
 
         # select mac_id, quota from machine where plant_id, opr_type, status
-        cursor.execute("SELECT * FROM Machine WHERE (Machine.plant_id = %s and Machine.status = %s and (Machine.operation_type is Null or Machine.operation_type = %s))",
-        (package_info[0][3],'IDLE',next_operation_type))
+        #cursor.execute("SELECT * FROM Machine WHERE (Machine.plant_id = %s and Machine.status = %s and (Machine.operation_type is Null or Machine.operation_type = %s))",
+        #(package_info[0][3],'IDLE',next_operation_type))
+        cursor.execute("SELECT * FROM Machine join Operation_machine_cost WHERE (Operation_machine_cost.machine_id = Machine.machine_id and Machine.plant_id = %s and Operation_machine_cost.operation_type = %s  and Machine.status = 'IDLE' and (Machine.operation_type is Null or Machine.operation_type = %s))",
+        (package_info[0][3],next_operation_type,next_operation_type))
         machine_info = cursor.fetchall()
         print("machine_info",machine_info)
         sum = 0
@@ -146,34 +148,26 @@ def handle(next_exe):
             estimated_end_time = 0
 
             for i in range(len(machine_info)):
-                cursor.execute("SELECT * FROM Operation_machine_cost WHERE (Operation_machine_cost.machine_id = %s and Operation_machine_cost.operation_type = %s)",
-                (machine_info[i][0],next_operation_type))
-                mac_opr = cursor.fetchall()
-                print("mac_opr",mac_opr)
-                print("total_expense before",total_expense)
-                total_expense  = total_expense + mac_opr[0][3]*min(machine_info[i][4],remain_number)
-                print("total_expense after",total_expense)
+                total_expense  = total_expense + machine_info[i][8]*min(machine_info[i][4],remain_number)
                 cursor.execute("UPDATE Packages SET total_expense = %s WHERE  Packages.package_id = %s",
                 (total_expense,package_id))
                 cursor.execute("SELECT * from Packages where Packages.package_id = %s",package_id)
                 package_info = cursor.fetchall()
-                print("package_info after update total_expense",package_info)
-                estimated_end_time_machine = next_exe[0] + mac_opr[0][2]*min(machine_info[i][4],remain_number)
+                estimated_end_time_machine = next_exe[0] + machine_info[i][7]*min(machine_info[i][4],remain_number)
                 estimated_end_time = max(estimated_end_time,estimated_end_time_machine)
                 actual_end_time_machine = estimated_end_time_machine + random.randint(-5,5)
                 actual_end_time = max(actual_end_time_machine,actual_end_time)
                 # modify status from machine
                 cursor.execute("UPDATE Machine set Machine.status  = 'RUNNING' WHERE Machine.machine_id = %s",machine_info[i][0])
                 remain_number -= int(machine_info[i][4])
-                # modify status, expense, start_time, end_time in proc_record for a machine in proc_record!!!
+                # modify status, expense, start_time, end_time in proc_record for a machine in proc_record
                 cursor.execute("INSERT `Process_record`(`package_id`,`operation_type`,`machine_id` ,`start_time`,`end_time` ,`plant_id` ,`status` ) VALUES (%s,%s,%s,%s,%s,%s,%s)",
-                (package_id,next_operation_type,machine_info[i][0],next_exe[0],estimated_end_time,package_info[0][3],"RUNNING"))#mac_opr[0][3],
+                (package_id,next_operation_type,machine_info[i][0],next_exe[0],estimated_end_time,package_info[0][3],"RUNNING"))
                 time_queue.put([actual_end_time_machine,1,machine_info[i][0],package_id,next_operation_type])
-                print("begin to execute in  one machine")
                 if remain_number <= 0:
-                    print("finish allocate!") 
                     break
             time_queue.put([actual_end_time,2,package_id,pred])
+            db.commit()
 
         else:# not enough, busy waiting 
             next_exe[0] += 1
@@ -186,12 +180,12 @@ def handle(next_exe):
         cursor.execute("SELECT * FROM Machine WHERE Machine.machine_id = %s",next_exe[2])
         machine_status = cursor.fetchall()
         if(machine_status[0][3] == 'IDLE'):
-            print("suc change start time for %s, %s",(next_exe[3],next_exe[2]))
             cursor.execute("UPDATE Machine SET Machine.operation_type = %s WHERE Machine.machine_id = %s",(next_exe[3],next_exe[2]))
         else:
             #print("CANNOT change start time as expected!")
             next_exe[0] = -1
             time_queue.put(next_exe)
+        db.commit()
 
 
     if(next_exe[1] == 2):#package end one step
@@ -215,12 +209,14 @@ def handle(next_exe):
             next_exe[3] += 1 #pred
             next_exe[1] = 4 #allocate type
             time_queue.put(next_exe)
+        db.commit()
 
 
     if(next_exe[1] == 1):#machine end
-        print("one machine end named %d",next_exe[2])
         #modify machine's status and operation_type
         cursor.execute("UPDATE Machine SET Machine.status = 'IDLE' WHERE Machine.machine_id = %s",next_exe[2])
         cursor.execute("UPDATE Machine SET Machine.operation_type = NULL WHERE Machine.machine_id = %s",next_exe[2])
         #modify end time for process record
         cursor.execute("UPDATE Process_record set Process_record.end_time = %s WHERE (Process_record.package_id = %s and Process_record.operation_type = %s and Process_record.machine_id = %s)",(next_exe[0], next_exe[3],next_exe[4],next_exe[2]))
+        cursor.execute("UPDATE Process_record set Process_record.status = %s WHERE (Process_record.package_id = %s and Process_record.operation_type = %s and Process_record.machine_id = %s)",('FINISHED', next_exe[3],next_exe[4],next_exe[2]))
+        db.commit()
