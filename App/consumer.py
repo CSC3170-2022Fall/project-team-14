@@ -47,6 +47,7 @@ def searchpackage():
     if (g.user):
         db = get_db()
         cursor = db.cursor()
+        alg.search_call()
         cursor.execute("SELECT package_id, chip_type, chip_number, plant_id, price FROM Packages WHERE consumer_id = %s", g.user)
         package_list = cursor.fetchall()
         chip_type = []
@@ -92,10 +93,10 @@ def registerpackage():
                 error = "Chip type is required."
             elif not chip_number:
                 error = "Chip number is required."
-            elif not plant_id:
-                cursor.execute("SELECT plant_id From Machine WHERE status = %s", "finished")
-                plt =  cursor.fetchone()
-                plant_id = plt[0]
+            # elif not plant_id:
+            #     # cursor.execute("SELECT plant_id From Machine WHERE status = %s", "finished")
+            #     # plt =  cursor.fetchone()
+            #     # plant_id = plt[0]
             if error is not None:
                 flash(error)
             else:
@@ -127,14 +128,16 @@ def payment(package):
         package = package.replace('[', '')
         package = package.replace(']', '')
         info = package.split(',')
+        if(info[2][0] == ' '):
+            info[2] = info[2][1:]
         price = float(info[4])
         if balance[0] - price >= 0:      
             cursor.execute(
                 "INSERT INTO Packages(package_id, chip_number, chip_type, plant_id, consumer_id, total_expense, price) VALUES (%s, %s, %s, %s, %s, %s, %s)",
-                (int(info[0]),int(info[1]),info[2], int(info[3]),g.user, info[4], price*1.2))  
+                (int(info[0]),int(info[1]),info[2], int(info[3]),g.user, 0, price))  
             cursor.execute("UPDATE Consumer SET balance = %s WHERE consumer_id = %s", (balance[0]-price, g.user))
             db.commit()
-            # alg.allocate_package_call(int(info[0]),info[2],int(info[1]),int(info[3]))
+            alg.allocate_package_call(int(info[0]),info[2],int(info[1]),int(info[3]))
             success = True
             print("Payment is successful. Your package id is:",package[0])
             if request.method == "POST":

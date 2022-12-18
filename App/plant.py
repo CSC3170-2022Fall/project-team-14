@@ -17,6 +17,7 @@ def index_plant():
         db = get_db()
         error = None
         cursor = db.cursor()
+        alg.search_call()
         package_list=[]
         temp =[]
         cursor.execute("SELECT package_id, chip_type, chip_number, consumer_id FROM Packages WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
