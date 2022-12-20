@@ -16,7 +16,7 @@ time_queue = queue.PriorityQueue()
 
 def search_call():
     cur_time = int((time.time() - global_start_time)*100)
-    print("enter search_call with current time:",cur_time)    
+    #print("enter search_call with current time:",cur_time)    
     while (time_queue.empty() == False):
         next_exe = time_queue.get()
         print("next execution is ",next_exe)
@@ -35,7 +35,7 @@ def allocate_package_call(package_id, chip_type, chip_number, plant_id=-1):
     db = get_db()
     cursor = db.cursor()
     cur_time = int((time.time() - global_start_time)*100)
-    print("enter a new package with plant id %s",plant_id)
+    #print("enter a new package with plant id %s",plant_id)
 
     if(plant_id != -1 or plant_id != None):
         #modify package
@@ -123,11 +123,11 @@ def handle(next_exe):
         #select *  from package where package_id
         cursor.execute("SELECT * from Packages where Packages.package_id = %s",package_id)
         package_info = cursor.fetchall()
-        print("package_info",package_info)
+        #print("package_info",package_info)
         # select next_opr from c_r_o where chip_type and pred
         cursor.execute("SELECT operation_type FROM Chip_requires_operation WHERE (Chip_requires_operation.chip_type = %s and Chip_requires_operation.precedency  = %s)",(package_info[0][2],pred))
         next_operation_type_tuple = cursor.fetchall()
-        print("next_operation_type_tuple",next_operation_type_tuple)
+        #print("next_operation_type_tuple",next_operation_type_tuple)
         next_operation_type = next_operation_type_tuple[0][0]
 
         # select mac_id, quota from machine where plant_id, opr_type, status
@@ -136,7 +136,7 @@ def handle(next_exe):
         cursor.execute("SELECT * FROM Machine join Operation_machine_cost WHERE (Operation_machine_cost.machine_id = Machine.machine_id and Machine.plant_id = %s and Operation_machine_cost.operation_type = %s  and Machine.status = 'IDLE' and (Machine.operation_type is Null or Machine.operation_type = %s))",
         (package_info[0][3],next_operation_type,next_operation_type))
         machine_info = cursor.fetchall()
-        print("machine_info",machine_info)
+        #print("machine_info",machine_info)
         sum = 0
         for cd in range(len(machine_info)):# sum quota up to see if enough
             sum += int(machine_info[cd][4])
