@@ -90,7 +90,7 @@ INSERT `Packages`(`package_id`,`chip_number`,`chip_type`,`plant_id`,`consumer_id
 (2,3,"a",1,1,55,66),
 (3,3,"a",1,1,55,66);
 INSERT INTO `Process_record`(`package_id`, `operation_type`, `machine_id`, `start_time`, `end_time`, `plant_id`, `status`) VALUES
-(1,"IDLE",3,4,5,1,"IDLE"),
-(2,"IDLE",2,3,5,1,"IDLE"),
-(3,"IDLE",1,2,5,1,"IDLE");
+(1,"design-import",3,4,5,1,"OCCUPIED"),
+(2,"drill",2,3,5,1,"OCCUPIED"),
+(3,"bound_B",1,2,5,1,"OCCUPIED");
 

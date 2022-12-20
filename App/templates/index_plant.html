@@ -125,6 +125,7 @@
               <tr>
                 <th>Machine ID</th>
                 <th>Status</th>
+                <th>Operation Type</th>
                 <th>Start Time</th>
                 <th>Estimated End Time</th>
               </tr>
@@ -136,6 +137,7 @@
                 <td>{{ machine[1] }}</td>
                 <td>{{ machine[2] }}</td>
                 <td>{{ machine[3] }}</td>
+                <td>{{ machine[4] }}</td>
               </tr>
               {%- endfor %}
             </tbody>
@@ -181,6 +183,12 @@
             <br />
             <div class="text-left">
               <button class="btn btn-style btn-effect">Apply</button>
+              {% if success %}
+              <p class="pr-lg-5" style="color:rgb(64, 209, 32)">Changed success!</p>
+              {% endif %}
+              {% if not success %}
+              <p class="pr-lg-5" style="color:#f00">{{error}}</p>
+              {% endif %}
             </div>
           </form>
         </div>
