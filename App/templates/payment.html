@@ -85,26 +85,29 @@
           <thead>
             <tr>
               <th>Package ID</th>
-              <th>Chip Type</th>
               <th>Chip Number</th>
+              <th>Chip Type</th>
               <th>Plant</th>
               <th>Price</th>
               <th>Balance</th>
             </tr>
           </thead>
-          <tbody name="package" class="form-control" required>
+          <tbody name="package">
+            
             <tr>
-              {%- for i in package %}
-              <td> {{i}} </td>
-              {%- endfor %}
+              <th>{{package[0]}} </th>
+              <th>{{package[1]}} </th>
+              <th>{{package[2]}} </th>
+              <th>{{package[3]}} </th>
+              <th>{{package[4]}} </th>
+              <th>{{package[5]}} </th>
             </tr>
-
           </tbody>
         </table>
 
         <form action="{{  url_for('consumer.payment', package = package)}}" method="post" class = "signin-form">
-          <div class="text-right">
-            <button class="btn btn-style btn-effect">Pay</button>
+          <div >
+            <button class="btn btn-style btn-effect">Pay   </button>
             {% if success %}
 					  <p class="pr-lg-5" style="color:rgb(64, 209, 32)">Pay success!</p>
 				    {% endif %}
@@ -113,9 +116,9 @@
 				    {% endif %}
           </div>
         </form>
-        
+        <br />
         <form action="{{  url_for('consumer.payreturn')}}" method="post" class = "signin-form">
-          <div class="text-right">            
+          <div >            
             <button class="btn btn-style btn-effect">Return</button>
           </div>
         </form>
