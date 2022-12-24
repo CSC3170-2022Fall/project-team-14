@@ -102,61 +102,53 @@ have multiple plants.
 only one) bank account.
 <br></br>
 
-> <font size = 4>3. Schema Design: Chip Manufacture (__need to polish!!!__)</font>
-#### (i) Chip Manufacture (__need to polish!!!__)
+> <font size = 4>3. Schema Design:</font>
+#### (i) Chip Manufacture
 > Entity Sets
 
-+ __consumer__(<u>consumer_ID</u>, package_ID)
++ __consumer__(<u>consumer_ID</u>, password, balance)
 
-+ __plant__(<u>plant_ID</u>, plant_name, machine_ID)
++ __plant_owner__(<u>owner_ID</u>, password)
 
-+ __package__(<u>package_ID</u>, consumer_ID, plant_ID, chip_Type, 
-chip_Num, overall_time, expense_budget)
++ __owner__(<u>plant_ID</u>, owner_id, income)
 
-+ __operation_type__(operation_ID, precedency)
++ __packages__(<u>package_ID</u>, consumer_ID, plant_ID, chip_Type, 
+chip_Num, total_expense, price)
+
++ __operation__(operation_Type, feasibility)
 
 + __machine__(<u>machine_ID</u>, machine_Type, plant_ID, feasibility)
 
-+ __chip_type__(<u>chip_Type</u>, operation_id)
++ __chip__(<u>chip_Type</u>, precedency)
 
-+ *__handle_record__*(<u>package_ID</u>, start_Time, end_Time, 
-expense)
-
-+ *__proc_record__*(<u>package_ID</u>, <u>operation_Type</u>, 
-<u>machine_ID</u>, start_time, end_time, expense)
++ __proc_record__(<u>package_ID</u>, <u>operation_Type</u>, 
+<u>machine_ID</u>, start_time, end_time, plant_id, status)
 <br></br>
 
 
 > Relationship
 
-+ __consumer_appoint_plant__(<u>consumer_ID</u>, 
-<u>package_ID</u>)
++ __operation_machine_cost__(<u>machine_ID</u>,<u>operation_Type</u>, time, expense)
 
-+ __plant_pocess_machine__(<u>plant_ID</u>,
-<u>machine_ID</u>)
++ __chip_require_operation__(<u>chip_Type</u>, <u>operation_Type</u>, precedency)
 
-+ __machine_on_operation__(<u>machine_ID</u>,<u>operation_ID</u>, 
-feasibility, running_time, expense)
-
-+ __chip_require_operation__(<u>chip_Type</u>, <u>operation_id</u>)
-
-<br></br>
 
 #### (ii) Bank System
 
-+ Entity
+> Entity
 
-    __consumer__(account_ID, passward, balance)
-    __plant_owner__(account_ID, passward, balance)
++ __consumer__(account_ID, passward, balance)
++ __plant_owner__(account_ID, passward, balance)
 
-+ Relationship
+> Relationship
 
-    __Payment__(<u>consumer.account_ID</u>,<u>plant_owner.account_ID</u>)
++ __Payment__(<u>consumer.account_ID</u>,<u>plant_owner.account_ID</u>)
 
 <br></br>
 
 ## 5. ER Diagram(need be replaced soon later)
-![屏幕截图_20221220_182037](https://user-images.githubusercontent.com/83419532/208643957-750c2a44-b084-466d-9a76-95b8a61f04fa.png)
+![image](https://user-images.githubusercontent.com/83419532/209425047-a1aea5ea-92dc-4076-82ae-605aaf9657d2.png)
+
 <br></br>
 
 
