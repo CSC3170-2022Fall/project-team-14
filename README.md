@@ -147,7 +147,7 @@ chip_Num, total_expense, price)
 <br></br>
 
 ## 5. ER Diagram(need be replaced soon later)
- ![屏幕截图_20221224_061008](https://user-images.githubusercontent.com/83419532/209411179-60f2c90c-b5f5-42af-8752-2f58b7a2691a.png)
+![image](https://user-images.githubusercontent.com/83419532/209425047-a1aea5ea-92dc-4076-82ae-605aaf9657d2.png)
 
 <br></br>
 
