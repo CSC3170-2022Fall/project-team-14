@@ -69,7 +69,7 @@ def searchpackage():
             consumer_list.append(ttt)
         if request.method == 'POST':           
             package_id = request.form.get('package_id')
-            cursor.execute("SELECT package_id, start_time, status FROM Process_record WHERE package_id = %s", package_id)
+            cursor.execute("SELECT package_id, start_time, operation_type, status FROM Process_record WHERE package_id = %s", package_id)
             package_id_list = cursor.fetchall()
             print(package_id_list)
             return render_template('index_consumer.html', package_list = package_list, consumer_list = consumer_list, chip_type = chip_type, plant_id = plant_id, package_id_list = package_id_list)
