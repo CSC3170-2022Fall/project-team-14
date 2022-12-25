@@ -48,7 +48,7 @@ def index_plant():
             cursor.execute("SELECT machine_id,status,operation_type, start_time, end_time FROM Process_record WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
             machine_list = cursor.fetchall()
             # print(machine_list)
-            cursor.execute("SELECT machine_id FROM Process_record WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
+            cursor.execute("SELECT DISTINCT machine_id FROM Process_record WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
             machine_list_2 = cursor.fetchall()
             # print(machine_list_2)
             operation_list_1=["design-import","etch_A","etch_B","bond_A","bond_B","drill","test"]
@@ -110,7 +110,7 @@ def change_start_operation():
                 package_list.append(package_list_11)
             cursor.execute("SELECT machine_id,status,operation_type, start_time, end_time FROM Process_record WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
             machine_list = cursor.fetchall()
-            cursor.execute("SELECT machine_id FROM Process_record WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
+            cursor.execute("SELECT DISTINCT machine_id FROM Process_record WHERE plant_id in (SELECT plant_id FROM `Own` WHERE owner_id=%s)",g.user)
             machine_list_2 = cursor.fetchall()
             operation_list_1=["design-import","etch_A","etch_B","bond_A","bond_B","drill","test"]
             machine_id=request.form['machine_id']
