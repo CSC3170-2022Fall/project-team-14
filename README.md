@@ -184,7 +184,9 @@ All the tasks will be put into a priority queue with timestamps indicating when 
 
 > ### 5.5 Functionality implementation
 > Consumer
+
 When registering as a consumer, the consumer needs to enter the username, password and enter password a second time to check the correctness. The username and password are stored as consumer id in the “Consumer” table. 
+
 ![image](pics/image/%E5%9B%BE%E7%89%87%201.png)
 ![image](pics/image/%E5%9B%BE%E7%89%87%202.png)
 
