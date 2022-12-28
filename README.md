@@ -38,11 +38,15 @@ After thorough discussion, our team made the choice and the specification inform
 ## 4. Repository Structure
 
 - .github
-- .venv is the 
-- App (contains our main project files)
-- material (contains our to-do list and project details)
-- project-description.md (shows details of every option, you can find Option1-Branch1-Normal)
-Our project structure and implementation can be found in [material/todo-list.md](./material/todo-list.md).
+- .venv (the virtual environment for flask running)
+- .vscode (connects the VScode)
+- App (contains our project code, the compile instruction is in the [App/readme.md](./App/readme.md))
+- material (contains outline, to-do list and page_structure)
+    - [Chip Manufacture.xmind](./material/Chip%20Manufactuer.xmind): outline
+    - [material/todo-list.md](./material/todo-list.md):our work distribution and implementation.
+    - [page_structure.md](./material/page_structure.md): the name of values in the form, through which connect the frond end and back end.
+- [project-description.md](project-description.md) (shows details of every option, you can see Option1-Branch1-Normal for details)
+
 ## 4. Project Abstract
 > <font size = 4>Here is the main structure of our designed database：</font>
 ### (1). Major Functionalities
