@@ -152,9 +152,10 @@ chip_Num, total_expense, price)
 <br></br>
 
 
-# 6. How to run
+## 6. How to run
 In VScode terminal, under directory App:
 `set FLASK_APP=App`
 `flask run`
 
-
+## 7. Presentation Video Link
+https://www.bilibili.com/video/BV1rK411B7DX/?vd_source=3bfc39e790a51878aa96168dedff4ebf
