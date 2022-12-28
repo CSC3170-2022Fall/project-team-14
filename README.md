@@ -189,6 +189,7 @@ When registering as a consumer, the consumer needs to enter the username, passwo
 ![image](pics/image/%E5%9B%BE%E7%89%87%202.png)
 
 After registering, the webpage will redirect to the login page. After log in, the home page of a new consumer will display a module for ordering new packages, a package list showing all packages for the consumer but empty for new consumers(Notice that for a new consumer after registering, he or she should have no packages), and a module for searching the condition of a certain package.
+
 ![image](pics/image/%E5%9B%BE%E7%89%87%203.png)
 
 For the “Register your package” module, the consumer can choose a chip type for his or her package, and then enter a chip number. The consumer can either choose a certain available plant or does not choose it, which will be allocated by our system automatically. For chip number, the consumer should type it manually. For chip type and plant id, we display available ones in drop-down box form.
@@ -197,16 +198,20 @@ For the “Register your package” module, the consumer can choose a chip type 
 ![image](pics/image/%E5%9B%BE%E7%89%87%205.png)
 
 After choosing those three info, by clicking the “Register package” button, the consumer will be redirected to the payment page. 
+
 ![image](pics/image/%E5%9B%BE%E7%89%876.png)
 
 The payment page will display the generated package id for this newly ordered package, the chip type, chip number, plant id and the price for this package. Also, it will show the balance for the consumer. The consumer should be able to find that his or her balance is not enough for paying this package if “price” is larger than “balance”. After that, the consumer can click the “Pay” button to finish the payment. If the payment is successful, the page will show a green warning: “Pay Success!” and the consumer will find that the balance has been updated. If the payment fails, the page will show a red warning: “Your balance is not available, payment fails.” The consumer can click the “Return” button to redirect back to the home page.
+
 ![image](pics/image/%E5%9B%BE%E7%89%87%207.png)
 ![image](pics/image/%E5%9B%BE%E7%89%87%208.png)
 
 For the “Package List” module, it shows all the packages of a consumer by presenting their package id, chip type, chip number, plant id and price.
+
 ![image](pics/image/%E5%9B%BE%E7%89%87%2010.png)
 
 For the “Package Details” module, it offers all the package ids in a drop-down box form as well, and the consumer can choose one package to check its detailed information, like the start time and status of each operation in this package.
+
 ![image](pics/image/%E5%9B%BE%E7%89%87%2011.png)
 ![image](pics/image/%E5%9B%BE%E7%89%87%2012.png)
 ![image](pics/image/%E5%9B%BE%E7%89%87%2013.png)
