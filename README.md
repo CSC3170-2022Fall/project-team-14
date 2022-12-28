@@ -47,8 +47,8 @@ After thorough discussion, our team made the choice and the specification inform
     - [page_structure.md](./material/page_structure.md): the name of values in the form, through which connect the frond end and back end.
 - [project-description.md](project-description.md) (shows details of every option, you can see Option1-Branch1-Normal for details)
 
-## 4. Project
-> ### Project abstract
+## 5. Project
+> ### 5.1 Project abstract
 The main goal of our project is to implement an application with a database system, which aims to assign chip manufacturing orders to different plants in real time. We predefined and randomly created some data types to simulate the realistic order information. Our implementation consists of transferring input data into the database, designing data storage modules, designing order distribution algorithms and creating web pages to realize user interaction and display production states for both order holders and plant owners. The final achievements is that:
 
 For plant owners, after logging into the home page, he has access to the production information of plants he manages, information consisting of plant_id, order_id, start_production_time, expected_end_time which belongs to the order on process,etc.
@@ -57,7 +57,7 @@ For order holders, after logging into the home page, he can visit the production
 
 The highlights of our project is that, besides the complete front and back-end data updating system and intuitive web design, we also have a set of distribution algorithms to manage the input orders in real time, for example, creating a waiting space when orders overflow. 
 
-> ### Introduction
+> ### 5.2 Introduction
 ### (1) Major Functionalities
 - Register the package information that is 
 released by some consumer
@@ -121,7 +121,7 @@ have multiple plants.
 only one) bank account.
 <br></br>
 
-> ### Schema Design
+> ### 5.3 Schema Design
 We design our database structure from two aspects: consumer and plant owner. The consumer registers packages and can see the process record. The plant owner owns plants, has machines, and can see process record. Relating to the machine entity, it has one to many relation with operation, and the operation has many to one relation with chip.
 #### (i) Chip Manufacture
 > Entity Sets
@@ -173,7 +173,7 @@ They are machine information,containing the number of machines and their maximum
 chip types along with their selling prices and full operation steps,
 the operation steps to produce a certain type of chip along with the spent time and expenses. 
 
-> ### Algorithm
+> ### 5.4 Algorithm
 [App/alg.py](./App/alg.py) is about algorithms to handle tasks. There are four kinds of tasks. 
 (1) Allocating one operation of a package: It will choose machines to handle the package, change machines’ working status, package record and calculate expense, estimated end time and actual end time. 
 (2) Changing operation type: It will change one machine’s operation type at the time set by the plant owner if the machine is idle or as soon as it becomes idle.  
@@ -182,7 +182,7 @@ the operation steps to produce a certain type of chip along with the spent time 
 All the tasks will be put into a priority queue with timestamps indicating when to handle them. When the function "search_call" is called, the program will execute tasks and update the database in the queue whose timestamps are smaller than the current time’s timestamp.
 <br></br>
 
-> ### Functionality implementation
+> ### 5.5 Functionality implementation
 > Consumer
 When registering as a consumer, the consumer needs to enter the username, password and enter password a second time to check the correctness. The username and password are stored as consumer id in the “Consumer” table. 
 ![image](pics/image/%E5%9B%BE%E7%89%87%201.png)
@@ -239,7 +239,6 @@ The second method is that the operation type option displays all the operation t
 
 ![image](pics/image/%E5%9B%BE%E7%89%87%2021.png)
 ![image](pics/image/%E5%9B%BE%E7%89%87%2022.png)
-
 
 
 ## 6. How to run
