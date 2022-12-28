@@ -35,7 +35,13 @@ After thorough discussion, our team made the choice and the specification inform
 - Our branch choice is: **Branch 1**
 - The difficulty level is: **Normal**
 
+## 4. Repository Structure
 
+- .github
+- .venv is the 
+- App (contains our main project files)
+- material (contains our to-do list and project details)
+- project-description.md (shows details of every option, you can find Option1-Branch1-Normal)
 Our project structure and implementation can be found in [material/todo-list.md](./material/todo-list.md).
 ## 4. Project Abstract
 > <font size = 4>Here is the main structure of our designed database：</font>
