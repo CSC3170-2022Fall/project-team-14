@@ -168,6 +168,11 @@ Here is our ER-diagram:
 ![image](https://user-images.githubusercontent.com/83419532/209425047-a1aea5ea-92dc-4076-82ae-605aaf9657d2.png)
 <br></br>
 
+we also completed some predefined data into [App/insert.sql](./App/insert.sql) . 
+They are machine information,containing the number of machines and their maximum production quota,
+chip types along with their selling prices and full operation steps,
+the operation steps to produce a certain type of chip along with the spent time and expenses. 
+
 > ### Algorithm
 [App/alg.py](./App/alg.py) is about algorithms to handle tasks. There are four kinds of tasks. 
 (1) Allocating one operation of a package: It will choose machines to handle the package, change machines’ working status, package record and calculate expense, estimated end time and actual end time. 
