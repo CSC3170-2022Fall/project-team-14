@@ -43,13 +43,22 @@ After thorough discussion, our team made the choice and the specification inform
 - App (contains our project code, the compile instruction is in the [App/readme.md](./App/readme.md))
 - material (contains outline, to-do list and page_structure)
     - [Chip Manufacture.xmind](./material/Chip%20Manufactuer.xmind): outline
-    - [material/todo-list.md](./material/todo-list.md):our work distribution and implementation.
+    - [material/todo-list.md](./material/todo-list.md): our work distribution and implementation.
     - [page_structure.md](./material/page_structure.md): the name of values in the form, through which connect the frond end and back end.
 - [project-description.md](project-description.md) (shows details of every option, you can see Option1-Branch1-Normal for details)
 
-## 4. Project Abstract
-> <font size = 4>Here is the main structure of our designed database：</font>
-### (1). Major Functionalities
+## 4. Project
+> ### Project abstract
+The main goal of our project is to implement an application with a database system, which aims to assign chip manufacturing orders to different plants in real time. We predefined and randomly created some data types to simulate the realistic order information. Our implementation consists of transferring input data into the database, designing data storage modules, designing order distribution algorithms and creating web pages to realize user interaction and display production states for both order holders and plant owners. The final achievements is that:
+
+For plant owners, after logging into the home page, he has access to the production information of plants he manages, information consisting of plant_id, order_id, start_production_time, expected_end_time which belongs to the order on process,etc.
+
+For order holders, after logging into the home page, he can visit the production information of his own order, information consisting of plant_id which this order belongs to,  start_time and expected_end_time if this order is under production, the total prices he needs to pay,etc.
+
+The highlights of our project is that, besides the complete front and back-end data updating system and intuitive web design, we also have a set of distribution algorithms to manage the input orders in real time, for example, creating a waiting space when orders overflow. 
+
+> ### Introduction
+### (1) Major Functionalities
 - Register the package information that is 
 released by some consumer
 - Allow the consumer to appoint some plant for 
@@ -67,7 +76,7 @@ calculated.
 - Construct a bank system for consumers to complete their payments to the plant owner. Meanwhile, both consumers and plant owners can check their account balance through system websites.
 <br></br>
 
-### (2). Function Assumption
+### (2) Function Assumption
 > <font size = 3.5>Request:</font>
 - Relation between consumer and package possession:  
 one-to-many relation  
@@ -112,7 +121,8 @@ have multiple plants.
 only one) bank account.
 <br></br>
 
-> <font size = 4>3. Schema Design:</font>
+> ### Schema Design
+We design our database structure from two aspects: consumer and plant owner. The consumer registers packages and can see the process record. The plant owner owns plants, has machines, and can see process record. Relating to the machine entity, it has one to many relation with operation, and the operation has many to one relation with chip.
 #### (i) Chip Manufacture
 > Entity Sets
 
@@ -154,12 +164,72 @@ chip_Num, total_expense, price)
 
 + __Payment__(<u>consumer.account_ID</u>,<u>plant_owner.account_ID</u>)
 
-<br></br>
-
-## 5. ER Diagram(need be replaced soon later)
+Here is our ER-diagram: 
 ![image](https://user-images.githubusercontent.com/83419532/209425047-a1aea5ea-92dc-4076-82ae-605aaf9657d2.png)
-
 <br></br>
+
+> ### Algorithm
+[App/alg.py](./App/alg.py) is about algorithms to handle tasks. There are four kinds of tasks. 
+(1) Allocating one operation of a package: It will choose machines to handle the package, change machines’ working status, package record and calculate expense, estimated end time and actual end time. 
+(2) Changing operation type: It will change one machine’s operation type at the time set by the plant owner if the machine is idle or as soon as it becomes idle.  
+(3) Terminating one operation of a package: It will then calculate total income if the whole package is ended or put the package into queue again for next operation. 
+(4) Terminating one operation of a machine: It will change process record to actual end time and machine’s status to idle .
+All the tasks will be put into a priority queue with timestamps indicating when to handle them. When the function "search_call" is called, the program will execute tasks and update the database in the queue whose timestamps are smaller than the current time’s timestamp.
+<br></br>
+
+> ### Functionality implementation
+> Consumer
+When registering as a consumer, the consumer needs to enter the username, password and enter password a second time to check the correctness. The username and password are stored as consumer id in the “Consumer” table. 
+![image](pics/image/%E5%9B%BE%E7%89%87%201.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%202.png)
+
+After registering, the webpage will redirect to the login page. After log in, the home page of a new consumer will display a module for ordering new packages, a package list showing all packages for the consumer but empty for new consumers(Notice that for a new consumer after registering, he or she should have no packages), and a module for searching the condition of a certain package.
+![image](pics/image/%E5%9B%BE%E7%89%87%203.png)
+
+For the “Register your package” module, the consumer can choose a chip type for his or her package, and then enter a chip number. The consumer can either choose a certain available plant or does not choose it, which will be allocated by our system automatically. For chip number, the consumer should type it manually. For chip type and plant id, we display available ones in drop-down box form.
+
+![image](pics/image/%E5%9B%BE%E7%89%87%204.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%205.png)
+
+After choosing those three info, by clicking the “Register package” button, the consumer will be redirected to the payment page. 
+![image](pics/image/%E5%9B%BE%E7%89%876.png)
+
+The payment page will display the generated package id for this newly ordered package, the chip type, chip number, plant id and the price for this package. Also, it will show the balance for the consumer. The consumer should be able to find that his or her balance is not enough for paying this package if “price” is larger than “balance”. After that, the consumer can click the “Pay” button to finish the payment. If the payment is successful, the page will show a green warning: “Pay Success!” and the consumer will find that the balance has been updated. If the payment fails, the page will show a red warning: “Your balance is not available, payment fails.” The consumer can click the “Return” button to redirect back to the home page.
+![image](pics/image/%E5%9B%BE%E7%89%87%207.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%208.png)
+
+For the “Package List” module, it shows all the packages of a consumer by presenting their package id, chip type, chip number, plant id and price.
+![image](pics/image/%E5%9B%BE%E7%89%87%2010.png)
+
+For the “Package Details” module, it offers all the package ids in a drop-down box form as well, and the consumer can choose one package to check its detailed information, like the start time and status of each operation in this package.
+![image](pics/image/%E5%9B%BE%E7%89%87%2011.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2012.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2013.png)
+</br>
+
+> Plant owner
+
+When registering as a plant owner, the plant owner needs to enter the username, password and then select the plant id of his plant. The username is stored as plant owner id in the “Plant_owner” table, and the plant id chosen is stored as plant id in the “Own” table in the database. In our project, we assume the number of plants is specified in advance. When a plant owner registers, he needs to choose among those plant-ids. Therefore, we don’t need to deal with the problem that we need to specify the machines and operation types information of that plant. 
+
+After registering, the web page will redirect to the login page. And after login in, the home page of the new registered plant owner displays all empty for package list, machine status, and change start time/operation type.
+
+![image](pics/image/%E5%9B%BE%E7%89%87%2014.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2015.png)
+
+When loging in as a plant owner, the plant owner needs to enter his username, password and then clicks “Login Plant” button. The homepage of the plant owner shows the package list, machine status, and change of start time and operation type. In the package list, there are package id, chip type, chip number, consumer, start time, and status. Its primary key is package id. The machine status displays the machine id, status, operation type, start time, and estimated end time. Its primary key is the joint of package id, operation type, and machine id. In the “change start time/operation type” module, it provides the machine id, start time, and operation type for the plant owner to choose a specific machine the plant owner wants to change. The machines are all from the owner’s plant and are displayed in the drop-down box form. The start time means the delayed time the owner wants to apply to the original start time. The operation type displays so in a drop-down box form.
+
+![image](pics/image/%E5%9B%BE%E7%89%87%2016.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2017.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2018.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2019.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2020.png)
+
+There are two ways to realize the change of operation type. The first method is a dynamic drop-down box, which means after choosing the machine id, the available operation type will be displayed in the operation type option. However, the web page will only be refreshed after the plant owner clicks the “Apply” button. If using this method, the pure usage of HTML code is not enough and routing to the HTML web page in the python scripts also needs to be modified. Therefore this method is given up.
+The second method is that the operation type option displays all the operation types available for all machines. Then after the plant owner chooses the operation type, and clicks the “Apply” button, the request will be left to the back end. The back end will decide whether the operation type the plant owner chooses is available for the specific machine. If available, it will post success “Changed success” and redirect to the home page. If not, it will post an error "The operation type is not available, please choose again!" and redirect to the home page.
+
+![image](pics/image/%E5%9B%BE%E7%89%87%2021.png)
+![image](pics/image/%E5%9B%BE%E7%89%87%2022.png)
+
 
 
 ## 6. How to run
@@ -167,3 +237,6 @@ see [App/readme.md](./App/readme.md)
 
 ## 7. Presentation Video Link
 https://www.bilibili.com/video/BV1rK411B7DX/?vd_source=3bfc39e790a51878aa96168dedff4ebf
+
+## 8. Presentation slides
+see [CSC3170_group14_slides.pdf](./CSC3170_group14_slides.pdf)
